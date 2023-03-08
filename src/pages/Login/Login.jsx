@@ -21,7 +21,7 @@ function Login() {
     try {
       const response = await api.post("/auth/login", user);
 
-      storeToken(response.data.token);
+      storeToken(response.data.authToken);
       await authenticateUser();
     } catch (error) {
       console.log(error);
