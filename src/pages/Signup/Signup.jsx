@@ -79,7 +79,7 @@ function Signup() {
     if (user.image) form.append("image", user.image);
 
     const signupResult = await api.signupUser(user);
-    if (!signupResult.errors) return navigate("/");
+    if (!signupResult.errors) return navigate("/login");
     setDisplayForm(true);
     setErrors(signupResult.errors);
   }
