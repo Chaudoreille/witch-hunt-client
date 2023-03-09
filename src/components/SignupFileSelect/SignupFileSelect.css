@@ -1,0 +1,15 @@
+.SignupFileSelect label {
+  width: 20ch;
+  height: 3rem;
+  background-color: antiquewhite;
+  display: inline-block;
+}
+
+/* .SignupFileSelect input[type="file"] {
+  display: none;
+} */
+
+.SignupFileSelect label div {
+  font-size: 0.8rem;
+  font-style: italic;
+}

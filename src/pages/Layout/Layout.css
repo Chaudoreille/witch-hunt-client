@@ -1,0 +1,22 @@
+nav {
+  margin: 0;
+  padding: 0;
+  background-color: black;
+  height: 5rem;
+  width: 100vw;
+}
+
+nav > ul {
+  display: flex;
+  gap: 1rem;
+}
+
+nav > ul a {
+  color: white;
+  text-decoration: none;
+}
+
+nav > ul a.active {
+  color: rgb(250, 196, 196);
+  text-decoration: underline;
+}

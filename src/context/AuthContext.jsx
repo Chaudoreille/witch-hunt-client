@@ -27,7 +27,6 @@ function AuthContextWrapper(props) {
 
     // if there is no current token set, no need to try to authenticate
     if (!currentToken) {
-      console.log("no token set, skipping authentication attempt");
       setUser(null);
       setIsLoading(false);
       return false;
@@ -47,7 +46,7 @@ function AuthContextWrapper(props) {
         setIsLoading(false);
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
       setUser(null);
       setIsLoading(false);
     }

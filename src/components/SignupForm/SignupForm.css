@@ -1,0 +1,8 @@
+.SignupForm label {
+  width: 10ch;
+  display: inline-block;
+}
+
+.SignupForm .input-error {
+  background-color: rgba(210, 63, 63, 0.349);
+}

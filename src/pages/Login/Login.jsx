@@ -1,14 +1,18 @@
 import { useState, useContext } from "react";
 import api from "../../service/service";
 import { AuthContext } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./Login.css";
 
+/**
+ * Login Page
+ * Will display the form for a user to sign up
+ * @returns
+ */
 function Login() {
   const [user, setUser] = useState({ email: "", password: "" });
   const [errorMessage, setErrorMessage] = useState("");
   const { storeToken, authenticateUser } = useContext(AuthContext);
-  console.log("rendering login, user:", user);
 
   // TODO do we actually need to navigate manually after successful login,
   // or will the route protection trigger and move us away from login screen?
@@ -24,7 +28,7 @@ function Login() {
       storeToken(response.data.authToken);
       await authenticateUser();
     } catch (error) {
-      console.log(error);
+      console.error(error);
       setErrorMessage(error.response.data.message);
     }
   }
@@ -59,6 +63,9 @@ function Login() {
         </div>
         <button>Login</button>
       </form>
+      <div>
+        <Link to="/signup">Don't have an account yet?</Link>
+      </div>
     </>
   );
 }
