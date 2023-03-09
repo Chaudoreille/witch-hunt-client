@@ -11,6 +11,13 @@ const errorsFieldToMessage = {
   confirmation: "Your password and password confirmation need to be identical!",
 };
 
+/**
+ * Signup Page
+ * Will display the form for user registration, divided in two parts
+ * At first it will show the form for user data, after data is entered
+ * the user can switch to next page, showing the option for a profile picture
+ * @returns
+ */
 function Signup() {
   const [user, setUser] = useState({
     username: "",
@@ -27,6 +34,13 @@ function Signup() {
     setUser({ ...user, [event.target.id]: event.target.value });
   }
 
+  /**
+   * Event Handler that will handle the first form submission
+   * validates the entered data, and depending on result either
+   * displays error messages or switches over to the second form
+   * @param {Event} event
+   * @returns
+   */
   function handleFormSubmit(event) {
     const { username, email, password, confirmation } = user;
 
@@ -47,6 +61,13 @@ function Signup() {
     setErrors([]);
   }
 
+  /**
+   * Event Handler that will handle the second form submission
+   * Creates a FormData object with the entered information and
+   * uses the api to send that to the backend for user account creation
+   * @param {Event} event
+   * @returns
+   */
   async function handleFileSubmit(event) {
     event.preventDefault();
 
@@ -63,10 +84,17 @@ function Signup() {
     setErrors(signupResult.errors);
   }
 
+  /**
+   * Event Handler that triggers whenever a file is selected in the file input
+   * @param {Event} event
+   */
   function handleFileSelect(event) {
     setUser({ ...user, [event.target.id]: event.target.files[0] });
   }
 
+  /**
+   * Event Handler that allows the user to move from the second form back to first one
+   */
   function handleGoBack() {
     setDisplayForm(true);
     setErrors([]);

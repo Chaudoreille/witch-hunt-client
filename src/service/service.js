@@ -12,7 +12,6 @@ const api = axios.create({
  * FormData for the user to be created and file to be uploaded
  */
 api.signupUser = async function signupUser(userFormData) {
-  console.log("trying to sign up user", userFormData);
   try {
     const response = await api.post("/auth/signup", userFormData, {
       headers: {
