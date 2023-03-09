@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import api from "../../service/service";
 import { AuthContext } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./Login.css";
 
 function Login() {
@@ -59,6 +59,9 @@ function Login() {
         </div>
         <button>Login</button>
       </form>
+      <div>
+        <Link to="/signup">Don't have an account yet?</Link>
+      </div>
     </>
   );
 }
