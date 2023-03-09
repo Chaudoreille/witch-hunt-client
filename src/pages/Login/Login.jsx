@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
 function Login() {
-  const [user, setUser] = useState({ username: "", password: "" });
+  const [user, setUser] = useState({ email: "", password: "" });
   const [errorMessage, setErrorMessage] = useState("");
   const { storeToken, authenticateUser } = useContext(AuthContext);
   console.log("rendering login, user:", user);
@@ -40,12 +40,12 @@ function Login() {
       )}
       <form onSubmit={handleLogin} className="Login">
         <div>
-          <label htmlFor="username">Username:</label>
+          <label htmlFor="email">Email:</label>
           <input
-            id="username"
-            type="text"
-            value={user.username}
-            onChange={(event) => updateUser({ username: event.target.value })}
+            id="email"
+            type="email"
+            value={user.email}
+            onChange={(event) => updateUser({ email: event.target.value })}
           />
         </div>
         <div>
