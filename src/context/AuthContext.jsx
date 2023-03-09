@@ -58,7 +58,14 @@ function AuthContextWrapper(props) {
 
   return (
     <AuthContext.Provider
-      value={{ storeToken, removeToken, user, authenticateUser }}
+      value={{
+        storeToken,
+        removeToken,
+        user,
+        authenticateUser,
+        isLoading,
+        token,
+      }}
     >
       {props.children}
     </AuthContext.Provider>
