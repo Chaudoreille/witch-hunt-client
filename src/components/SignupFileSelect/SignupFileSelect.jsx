@@ -2,26 +2,26 @@ import React from "react";
 import "./SignupFileSelect.css";
 
 function SignupFileSelect({
-  username,
-  handleFileSubmit,
   handleFileSelect,
-  handleGoBack,
+  cancel,
+  submit,
 }) {
   return (
     <>
-      <h4>Welcome {username}</h4>
-      <div>Select a profile picture: </div>
-      <form className="SignupFileSelect" onSubmit={handleFileSubmit}>
+      <form className="SignupFileSelect" onSubmit={submit.action}>
         <div>
           <label htmlFor="image">
             Profile Picture
             <input type="file" id="image" onChange={handleFileSelect} />
           </label>
         </div>
-        <button type="submit">Create Account</button>
-        <button type="button" onClick={handleGoBack}>
-          Back
-        </button>
+        <button type="submit">{submit.label || "Submit"}</button>
+        {cancel && (
+          <button type="button" onClick={cancel.action}>
+            {cancel.label}
+          </button>
+
+        )}
       </form>
     </>
   );

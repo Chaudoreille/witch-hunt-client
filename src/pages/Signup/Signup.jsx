@@ -118,13 +118,20 @@ function Signup() {
           errors={errors}
         />
       ) : (
-        <SignupFileSelect
-          username={user.username}
-          image={user.image}
-          handleFileSubmit={handleFileSubmit}
-          handleFileSelect={handleFileSelect}
-          handleGoBack={handleGoBack}
-        />
+        <>
+          <h4>Welcome {user.username}</h4>
+          <div>Select a profile picture: </div>
+          {user.image && (
+            <div>
+              <img src={user.image} alt="" />
+            </div>
+          )}
+          <SignupFileSelect
+            handleFileSelect={handleFileSelect}
+            cancel={{ label: "Back", action: handleGoBack }}
+            submit={{ label: "Create Account", action: handleFileSubmit }}
+          />
+        </>
       )}
       <div>
         <Link to="/login">Already have an account?</Link>
