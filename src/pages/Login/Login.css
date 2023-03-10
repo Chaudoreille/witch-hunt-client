@@ -26,10 +26,7 @@
 .Form{
   display: flex;
   flex-direction: column;
-<<<<<<< HEAD
   align-items: center;
-=======
->>>>>>> 1673f3b (style + cleanup Login page)
 }
 
 .Form div {
@@ -37,7 +34,6 @@
   flex-direction: column;
 }
 
-<<<<<<< HEAD
 .error-message{
   color: var(--errorsRed);
   align-self: center;
@@ -52,6 +48,3 @@
   font-size: .7rem;
   margin-top: 1rem;
 }
-
-=======
->>>>>>> 1673f3b (style + cleanup Login page)
