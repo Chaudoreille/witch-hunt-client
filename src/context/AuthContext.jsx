@@ -12,7 +12,7 @@ function AuthContextWrapper(props) {
     setToken(token);
   }
 
-  function getToken() {
+  function retrieveToken() {
     return localStorage.getItem("token");
   }
 
@@ -21,7 +21,7 @@ function AuthContextWrapper(props) {
   }
 
   async function authenticateUser() {
-    const currentToken = getToken();
+    const currentToken = retrieveToken();
 
     setToken(currentToken);
 
@@ -33,11 +33,8 @@ function AuthContextWrapper(props) {
     }
 
     try {
-      const response = await api.get("/auth/me", {
-        headers: {
-          Authorization: `Bearer ${currentToken}`,
-        },
-      });
+      const response = await api.user();
+
       if (response.status === 200) {
         setUser(response.data);
         setIsLoading(false);
@@ -62,6 +59,7 @@ function AuthContextWrapper(props) {
         storeToken,
         removeToken,
         user,
+        setUser,
         authenticateUser,
         isLoading,
         token,

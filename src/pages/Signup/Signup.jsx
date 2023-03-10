@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import SignupFileSelect from "../../components/SignupFileSelect/SignupFileSelect";
+import SelectImage from "../../components/SelectImage/SelectImage";
 import SignupForm from "../../components/SignupForm/SignupForm";
 import api from "../../service/service";
 
@@ -31,7 +31,7 @@ function Signup() {
   const navigate = useNavigate();
 
   function updateForm(event) {
-    setUser({ ...user, [event.target.id]: event.target.value });
+    setUser(userState => ({ ...userState, [event.target.id]: event.target.value }));
   }
 
   /**
@@ -78,7 +78,7 @@ function Signup() {
     form.append("password", user.password);
     if (user.image) form.append("image", user.image);
 
-    const signupResult = await api.signupUser(user);
+    const signupResult = await api.signup(user);
     if (!signupResult.errors) return navigate("/login");
     setDisplayForm(true);
     setErrors(signupResult.errors);
@@ -89,7 +89,7 @@ function Signup() {
    * @param {Event} event
    */
   function handleFileSelect(event) {
-    setUser({ ...user, [event.target.id]: event.target.files[0] });
+    setUser(userState => ({ ...userState, [event.target.id]: event.target.files[0] }));
   }
 
   /**
@@ -118,13 +118,20 @@ function Signup() {
           errors={errors}
         />
       ) : (
-        <SignupFileSelect
-          username={user.username}
-          image={user.image}
-          handleFileSubmit={handleFileSubmit}
-          handleFileSelect={handleFileSelect}
-          handleGoBack={handleGoBack}
-        />
+        <>
+          <h4>Welcome {user.username}</h4>
+          <div>Select a profile picture: </div>
+          {user.image && (
+            <div>
+              <img src={user.image} alt="" />
+            </div>
+          )}
+          <SelectImage
+            handleFileSelect={handleFileSelect}
+            cancel={{ label: "Back", action: handleGoBack }}
+            submit={{ label: "Create Account", action: handleFileSubmit }}
+          />
+        </>
       )}
       <div>
         <Link to="/login">Already have an account?</Link>
