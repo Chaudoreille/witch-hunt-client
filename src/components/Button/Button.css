@@ -1,4 +1,4 @@
-.primary, .secondary, .small {
+.Button.primary, .Button.secondary, .small {
     all: unset;
     border-radius: var(--radius);
     color: var(--white);
@@ -14,27 +14,27 @@
     justify-content: center;
 }
 
-.primary, .small{
+.Button.primary, .small{
     background: var(--gradientBlue);
     box-shadow: var(--buttonShadow);  
 }
 
-.secondary {
+.Button.secondary {
     background: transparent;
     outline: 3px solid var(--borderButton);
     outline-offset: -3px;
 }
 
-.primary:hover, .small:hover{
+.Button.primary:hover, .small:hover{
     background: var(--gradientBlueHover);
 }
 
-.secondary:hover{
+.Button.secondary:hover{
     outline: 3px solid var(--borderButtonHover);
     outline-offset: -3px;
 }
 
-.small{
+.Button.small{
     text-transform: none;
     padding: 0.5rem 2rem;
     height: 100%;
