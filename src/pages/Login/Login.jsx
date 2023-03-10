@@ -4,6 +4,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
 import Input from "../../components/Input/Input"
 import "./Login.css";
+import Button from "../../components/Button/Button";
 
 /**
  * Login Page
@@ -42,42 +43,32 @@ function Login() {
     <section className="flex-center-section">
       <div className="window-center-grey">
         <img src="images/witch-run_logo.png" />
-        {errorMessage && (
-          <div className="error-message">Error: {errorMessage}</div>
-        )}
         <form onSubmit={handleLogin} className="Login Form">
-          <div>
-            <label htmlFor="email">Email</label>
-            <input
-              id="email"
-              type="email"
-              value={user.email}
-              onChange={(event) => updateUser({ email: event.target.value })}
-            />
-          </div>
-          {/* <Input type="email"
-          name="email"
-          action={(event) => updateUser({ email: event.target.value })}
-          className="email"
-          label="Email"
-          value={user.email}
-          placeholder="Your email"
+          {errorMessage && (
+            <div className="error-message">{errorMessage}</div>
+          )}
+          <Input type="email"
+            name="email"
+            action={(event) => updateUser({ email: event.target.value })}
+            className="email"
+            label="Email"
+            value={user.email}
+            placeholder="Your email"
 
-        /> */}
-          <div>
-            <label htmlFor="password">Password</label>
-            <input
-              id="password"
-              type="password"
-              value={user.password}
-              onChange={(event) => updateUser({ password: event.target.value })}
-            />
+          />
+          <Input type="password"
+            name="password"
+            action={(event) => updateUser({ password: event.target.value })}
+            className="password"
+            label="Password"
+            value={user.password}
+            placeholder="Your password"
+          />
+          <Button type={"submit"} variant={"primary"}>Login</Button>
+          <div className="form-small-link">
+            <Link to="/signup">You don’t have an account ?</Link>
           </div>
-          <button>Login</button>
         </form>
-        <div>
-          <Link to="/signup">Don't have an account yet?</Link>
-        </div>
       </div>
     </section>
   );

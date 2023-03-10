@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Button from "../../components/Button/Button";
+import ButtonLink from "../../components/Button/ButtonLink";
 import GameCardList from "../../components/GameCardList/GameCardList";
 import "./Welcome.css";
 
@@ -81,8 +81,8 @@ function Welcome() {
       <div className="left">
         <img src="images/witch-run_logo.png" />
         <div className="buttons">
-          <Button variant={"primary"} link={"/login"}>Login</Button>
-          <Button variant={"secondary"} link={"/signup"}>Signup</Button>
+          <ButtonLink variant={"primary"} link={"/login"}>Login</ButtonLink>
+          <ButtonLink variant={"secondary"} link={"/signup"}>Signup</ButtonLink>
         </div>
       </div>
       <div className="right">

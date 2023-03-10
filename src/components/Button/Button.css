@@ -6,12 +6,13 @@
     text-transform: uppercase;
     padding: .5rem 2rem;
     height: 3.1rem;
-    width: 17rem;
+    width: 25vmax;
     font-family: var(--font);
     font-weight: 600;
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 
 .Button.primary, .small{
