@@ -6,12 +6,19 @@ const api = axios.create({
   baseURL: BACKEND_URL,
 });
 
+api.interceptors.request.use((request) => {
+  const token = localStorage.getItem("token");
+  request.headers.Authorization = token ? `Bearer ${token}` : null;
+
+  return request;
+});
+
 /**
  * Signup - receives an object with the user information as FormData
  * Contacts the signup route on the server and submits the
  * FormData for the user to be created and file to be uploaded
  */
-api.signupUser = async function signupUser(userFormData) {
+api.signup = async function (userFormData) {
   try {
     const response = await api.post("/auth/signup", userFormData, {
       headers: {
@@ -32,6 +39,13 @@ api.signupUser = async function signupUser(userFormData) {
  */
 api.login = async function (user) {
   return api.post("/auth/login", user);
+};
+
+/**
+ * getUser - gets the currentUSer based on authentication token
+ */
+api.user = async function () {
+  return api.get("/auth/me");
 };
 
 export default api;

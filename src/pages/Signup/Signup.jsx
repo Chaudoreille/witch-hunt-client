@@ -78,7 +78,7 @@ function Signup() {
     form.append("password", user.password);
     if (user.image) form.append("image", user.image);
 
-    const signupResult = await api.signupUser(user);
+    const signupResult = await api.signup(user);
     if (!signupResult.errors) return navigate("/login");
     setDisplayForm(true);
     setErrors(signupResult.errors);
