@@ -5,7 +5,8 @@ import "./Welcome.css";
 
 function Welcome() {
 
-  // TODO 10 current rooms
+  // TODO: replace with 10 most recent active game room
+  //for testing purpose
   const data = [
     {
       name: "Arthur's room",
