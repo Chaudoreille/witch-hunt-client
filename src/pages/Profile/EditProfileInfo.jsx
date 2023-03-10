@@ -14,10 +14,6 @@ function EditProfileInfo({ setEdit }) {
 
   console.log(user);
 
-  // function updateUser(inputData) {
-  //   setUser({ ...user, ...inputData });
-  // }
-
   return (
     <div className="EditProfileInfo">
       <div className="text-wrapper">

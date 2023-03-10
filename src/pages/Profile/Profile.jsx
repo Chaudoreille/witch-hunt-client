@@ -3,6 +3,7 @@ import { AuthContext } from "../../context/AuthContext";
 import api from "../../service/service";
 import EditProfileInfo from "./EditProfileInfo";
 import SelectImage from "../../components/SelectImage/SelectImage";
+import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import "./Profile.css";
 
@@ -20,18 +21,33 @@ function Profile() {
     setUserInfo({ ...userInfo, image: event.target.files[0] });
   }
 
-  async function submitImage(event) {
+  function updateInput(event) {
+    const field = event.target.name;
+    const value = event.target.value;
+    setUserInfo(info => ({ ...info, [field]: value }));
+  }
+
+  async function submitUser(event) {
     event.preventDefault();
 
     // To upload file, we have to dress up the entered data as FormData
     const form = new FormData();
-    if (userInfo.image) form.append("image", userInfo.image);
-
+    for (key in userInfo) {
+      if (userInfo[key]) form.append(key, userInfo[key]);
+    }
     const response = await api.updateProfile(form);
 
-    setUser(response.data);
+    if (response.status === 400) {
+      // message: "Invalid email address"
+      return;
+    }
 
-    // if (!signupResult.errors) return 
+    if (response.status === 401) {
+      // message: "Invalid password"
+      return;
+    }
+
+    setUser(response.data);
     setEdit();
   }
 
@@ -46,7 +62,7 @@ function Profile() {
           }}
           submit={{
             label: "Change profile picture",
-            action: submitImage
+            action: submitUser
           }}
         />
       ) : (
@@ -59,7 +75,48 @@ function Profile() {
       )}
 
       {edit === "info" ? (
-        <EditProfileInfo setEdit />
+        <form action="">
+          <Input
+            type="text"
+            name="username"
+            action={updateInput}
+            label="Username"
+            value={userInfo.username}
+            placeholder="Username"
+          />
+          <Input
+            type="email"
+            name="email"
+            action={updateInput}
+            label="Email"
+            value={userInfo.email}
+            placeholder="Email"
+          />
+          <Input
+            type="password"
+            name="password"
+            action={updateInput}
+            label="Password"
+            value={userInfo.password}
+            placeholder="*********"
+          />
+          <Input
+            type="password"
+            name="newPassword"
+            action={updateInput}
+            label="New Password"
+            value={userInfo.newPassword}
+            placeholder="*********"
+          />
+          <Input
+            type="password"
+            name="repeatPassword"
+            action={updateInput}
+            label="Repeat Password"
+            value={userInfo.repeatPassword}
+            placeholder="*********"
+          />
+        </form>
       ) : (
         <div className="user-info-wrapper">
           <div className="username-wrapper">
