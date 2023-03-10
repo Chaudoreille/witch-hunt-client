@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:900,800,700,600,500,400,300,200,100&subset=latin,latin-ext');
+
+:root{
+    /*colors*/
+    --grey:#282D35;
+    --darkGrey: #1C1E26;
+    --gradientBlue:linear-gradient(180deg, #546AE9 0%, #405DF5 100%);
+    --gradientBlueHover: linear-gradient(180deg, #3A4FCA 0%, #405DF5 100%);
+    --blue:#405DF5;
+    --white: white;
+    --errorsRed:rgba(164, 54, 44, 1);
+    --buttonShadow: 0 10px 12px 4px rgba(26, 32, 40, 0.210);
+    /*borders*/
+    --borderButton : 3px solid rgba(64, 93, 245, 1);
+    --borderButtonHover: 3px solid rgba(36, 54, 161, 1);
+    --borderGrey: 1px solid rgba(255, 255, 255, 0.06);
+    --windowRadius:20px;
+    --radius:14px;
+    --smallRadius:6px;
+    /*font*/
+    --font : "Poppins";
+    
+}
+
+/*Some basic reset*/
+html {
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+  
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+  
+  body, h1, h2, h3, h4, h5, h6, p, ol, ul, nav {
+    margin: 0;
+    padding: 0;
+  }
+  
+  ol, ul {
+    list-style: none;
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  input, textarea, select {
+    font: inherit;
+  }
+
+
+
+  /*Global*/
+  body{
+    background-color: var(--darkGrey);
+  }

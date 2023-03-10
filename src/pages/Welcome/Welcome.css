@@ -1,0 +1,31 @@
+section {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30vw;
+}
+
+section .left{
+    background-color: var(--grey);
+    border-radius: var(--windowRadius);
+    height: 80vh;
+    width: 40vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5rem;
+    border: var(--borderGrey);
+}
+
+section .left img {
+    width: 30%;
+}
+
+.buttons{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
