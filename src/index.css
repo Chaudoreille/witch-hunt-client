@@ -11,9 +11,9 @@
     --errorsRed:rgba(164, 54, 44, 1);
     --buttonShadow: 0 10px 12px 4px rgba(26, 32, 40, 0.210);
     /*borders*/
-    --borderButton : 3px solid rgba(64, 93, 245, 1);
-    --borderButtonHover: 3px solid rgba(36, 54, 161, 1);
-    --borderGrey: 1px solid rgba(255, 255, 255, 0.06);
+    --borderButton : rgba(64, 93, 245, 1);
+    --borderButtonHover: rgba(36, 54, 161, 1);
+    --borderGrey: (255, 255, 255, 0.06);
     --windowRadius:20px;
     --radius:14px;
     --smallRadius:6px;
