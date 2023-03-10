@@ -1,6 +1,5 @@
-button {
+.primary, .secondary, .small {
     all: unset;
-    background: var(--gradientBlue);
     border-radius: var(--radius);
     color: var(--white);
     text-align: center;
@@ -10,8 +9,35 @@ button {
     width: 17rem;
     font-family: var(--font);
     font-weight: 600;
-    box-shadow: var(--buttonShadow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-button:hover{
+
+.primary, .small{
+    background: var(--gradientBlue);
+    box-shadow: var(--buttonShadow);  
+}
+
+.secondary {
+    background: transparent;
+    outline: 3px solid var(--borderButton);
+    outline-offset: -3px;
+}
+
+.primary:hover, .small:hover{
     background: var(--gradientBlueHover);
+}
+
+.secondary:hover{
+    outline: 3px solid var(--borderButtonHover);
+    outline-offset: -3px;
+}
+
+.small{
+    text-transform: none;
+    padding: 0.5rem 2rem;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
 }

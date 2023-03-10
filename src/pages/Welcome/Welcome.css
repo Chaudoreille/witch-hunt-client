@@ -1,12 +1,12 @@
-section {
+.Welcome {
     height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 30vw;
+    justify-content: space-around;
+    overflow: hidden;
 }
 
-section .left{
+.Welcome .left{
     background-color: var(--grey);
     border-radius: var(--windowRadius);
     height: 80vh;
@@ -19,7 +19,7 @@ section .left{
     border: var(--borderGrey);
 }
 
-section .left img {
+.Welcome .left img {
     width: 30%;
 }
 
@@ -27,5 +27,15 @@ section .left img {
     display: flex;
     flex-direction: column;
     gap: 2rem;
+}
+.Welcome .right{
+   position: relative;
+}
+.Welcome .right::before{
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 20%, #1c1e26 99%);
+    content: "\00a0";
+    height: 100%;
+    position: absolute;
+    width: 100%;
 }
 

@@ -1,0 +1,42 @@
+
+.GameCard {
+    background-color: var(--grey) ;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    width: 30vw;
+    color: var(--white);
+    margin-bottom: 2rem;
+}
+.GameCard .card-left{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.GameCard .card-right{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    height: 100%;
+    gap: 2rem;
+}
+
+.GameCard h3 {
+    font-weight: 400;
+    display: flex;
+    gap: 0.5rem;
+    font-size: .8rem;
+    display: flex;
+    align-items: center;
+}
+
+.icon-user{
+    font-size: .8rem;
+   
+}
+

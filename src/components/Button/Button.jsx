@@ -2,12 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Button.css";
 
-function Button({children}) {
+function Button({ children, variant, link }) {
   return (
-        <>
-        <button type="button">{children}</button>
-        </>
-      
+    <>
+      <Link className={variant} to={link}>{children}</Link>
+    </>
+
   )
 }
 
