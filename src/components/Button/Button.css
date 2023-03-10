@@ -1,0 +1,17 @@
+button {
+    all: unset;
+    background: var(--gradientBlue);
+    border-radius: var(--radius);
+    color: var(--white);
+    text-align: center;
+    text-transform: uppercase;
+    padding: .5rem 2rem;
+    height: 3.1rem;
+    width: 17rem;
+    font-family: var(--font);
+    font-weight: 600;
+    box-shadow: var(--buttonShadow);
+}
+button:hover{
+    background: var(--gradientBlueHover);
+}
