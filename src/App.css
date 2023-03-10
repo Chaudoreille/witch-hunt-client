@@ -1,9 +1,32 @@
-
-/* main {
+.window-center-grey {
+  border-radius: var(--windowRadius);
+  width: 40vmax;
+  max-height: 95vh;
+  min-height: 80vh;
+  background-color: var(--grey);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 600px;
-} */
+  gap: .5rem;
+  border: 1px solid var(--borderGrey);
+  padding: 1rem;
+}
 
+.flex-center-section{
+height: 100vh;
+max-height: 100vh;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.window-center-grey img {
+width: 35%;
+}
+
+.error-message{
+  color: var(--errorsRed);
+  align-self: center;
+  font-size: .8rem;
+}
