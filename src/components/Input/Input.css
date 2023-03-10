@@ -6,8 +6,13 @@
     height: 3rem;
     padding: 1rem;
     margin: 0.4rem 0 .8rem 0;
+    color: var(--white);
 }
 
 .Input label{
     color: var(--white);
+}
+
+.input-error input {
+    border: 2px solid var(--errorsRed);
 }

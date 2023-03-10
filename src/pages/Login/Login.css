@@ -1,27 +1,4 @@
-.window-center-grey {
-    border-radius: var(--windowRadius);
-    width: 40vmax;
-    height: 80vh;
-    background-color: var(--grey);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    border: 1px solid var(--borderGrey);
-}
 
-.flex-center-section{
-  height: 100vh;
-  max-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.window-center-grey img {
-  width: 40%;
-}
 
 .Form{
   display: flex;
@@ -34,10 +11,7 @@
   flex-direction: column;
 }
 
-.error-message{
-  color: var(--errorsRed);
-  align-self: center;
-}
+
 
 .Login #password{
   margin-bottom: 2rem;
@@ -48,4 +22,3 @@
   font-size: .7rem;
   margin-top: 1rem;
 }
-

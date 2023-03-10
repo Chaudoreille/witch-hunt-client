@@ -3,12 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import SelectImage from "../../components/SelectImage/SelectImage";
 import SignupForm from "../../components/SignupForm/SignupForm";
 import api from "../../service/service";
+import "./Signup.css"
 
 const errorsFieldToMessage = {
   username: "Please enter a username!",
   email: "Please enter a valid email address!",
   password: "Please enter a password!",
-  confirmation: "Your password and password confirmation need to be identical!",
+  confirmation: "Your passwords are not identical!",
 };
 
 /**
@@ -101,42 +102,44 @@ function Signup() {
   }
 
   return (
-    <div>
-      {errors.length > 0 && (
-        <div>
-          Errors:{" "}
-          {errors.map((error) => (
-            <li>{errorsFieldToMessage[error]}</li>
-          ))}
-        </div>
-      )}
-      {displayForm ? (
-        <SignupForm
-          handleChange={updateForm}
-          handleSubmit={handleFormSubmit}
-          user={user}
-          errors={errors}
-        />
-      ) : (
-        <>
-          <h4>Welcome {user.username}</h4>
-          <div>Select a profile picture: </div>
-          {user.image && (
-            <div>
-              <img src={user.image} alt="" />
-            </div>
-          )}
-          <SelectImage
-            handleFileSelect={handleFileSelect}
-            cancel={{ label: "Back", action: handleGoBack }}
-            submit={{ label: "Create Account", action: handleFileSubmit }}
+    <section className="flex-center-section">
+      <div className="window-center-grey">
+        <img src="images/witch-run_logo.png" id="img-signup" />
+
+        {errors.length > 0 && (
+          <ul>
+            {errors.map((error) => (
+              <li className="error-message">{errorsFieldToMessage[error]}</li>
+            ))}
+          </ul>
+        )}
+
+        {displayForm ? (
+          <SignupForm
+            handleChange={updateForm}
+            handleSubmit={handleFormSubmit}
+            user={user}
+            errors={errors}
           />
-        </>
-      )}
-      <div>
-        <Link to="/login">Already have an account?</Link>
+        ) : (
+          <>
+            <h4>Welcome {user.username}</h4>
+            <div>Select a profile picture: </div>
+            {user.image && (
+              <div>
+                <img src={user.image} alt="" />
+              </div>
+            )}
+            <SelectImage
+              handleFileSelect={handleFileSelect}
+              cancel={{ label: "Back", action: handleGoBack }}
+              submit={{ label: "Create Account", action: handleFileSubmit }}
+            />
+          </>
+        )}
+
       </div>
-    </div>
+    </section>
   );
 }
 
