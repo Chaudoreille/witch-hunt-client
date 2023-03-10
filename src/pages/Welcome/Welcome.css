@@ -16,7 +16,7 @@
     align-items: center;
     justify-content: center;
     gap: 5rem;
-    border: var(--borderGrey);
+    border:1px solid var(--borderGrey);
 }
 
 .Welcome .left img {

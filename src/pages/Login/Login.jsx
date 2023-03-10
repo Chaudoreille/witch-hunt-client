@@ -2,7 +2,9 @@ import { useState, useContext } from "react";
 import api from "../../service/service";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
+import Input from "../../components/Input/Input"
 import "./Login.css";
+import Button from "../../components/Button/Button";
 
 /**
  * Login Page
@@ -38,35 +40,37 @@ function Login() {
   }
 
   return (
-    <>
-      {errorMessage && (
-        <div className="error-message">Error: {errorMessage}</div>
-      )}
-      <form onSubmit={handleLogin} className="Login">
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            id="email"
-            type="email"
+    <section className="flex-center-section">
+      <div className="window-center-grey">
+        <img src="images/witch-run_logo.png" />
+        <form onSubmit={handleLogin} className="Login Form">
+          {errorMessage && (
+            <div className="error-message">{errorMessage}</div>
+          )}
+          <Input type="email"
+            name="email"
+            action={(event) => updateUser({ email: event.target.value })}
+            className="email"
+            label="Email"
             value={user.email}
-            onChange={(event) => updateUser({ email: event.target.value })}
+            placeholder="Your email"
+
           />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            id="password"
-            type="password"
+          <Input type="password"
+            name="password"
+            action={(event) => updateUser({ password: event.target.value })}
+            className="password"
+            label="Password"
             value={user.password}
-            onChange={(event) => updateUser({ password: event.target.value })}
+            placeholder="Your password"
           />
-        </div>
-        <button>Login</button>
-      </form>
-      <div>
-        <Link to="/signup">Don't have an account yet?</Link>
+          <Button type={"submit"} variant={"primary"}>Login</Button>
+          <div className="form-small-link">
+            <Link to="/signup">You don’t have an account ?</Link>
+          </div>
+        </form>
       </div>
-    </>
+    </section>
   );
 }
 
