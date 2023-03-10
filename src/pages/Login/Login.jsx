@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import api from "../../service/service";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
+import Input from "../../components/Input/Input"
 import "./Login.css";
 
 /**
@@ -38,35 +39,47 @@ function Login() {
   }
 
   return (
-    <>
-      {errorMessage && (
-        <div className="error-message">Error: {errorMessage}</div>
-      )}
-      <form onSubmit={handleLogin} className="Login">
+    <section className="flex-center-section">
+      <div className="window-center-grey">
+        <img src="images/witch-run_logo.png" />
+        {errorMessage && (
+          <div className="error-message">Error: {errorMessage}</div>
+        )}
+        <form onSubmit={handleLogin} className="Login Form">
+          <div>
+            <label htmlFor="email">Email</label>
+            <input
+              id="email"
+              type="email"
+              value={user.email}
+              onChange={(event) => updateUser({ email: event.target.value })}
+            />
+          </div>
+          {/* <Input type="email"
+          name="email"
+          action={(event) => updateUser({ email: event.target.value })}
+          className="email"
+          label="Email"
+          value={user.email}
+          placeholder="Your email"
+
+        /> */}
+          <div>
+            <label htmlFor="password">Password</label>
+            <input
+              id="password"
+              type="password"
+              value={user.password}
+              onChange={(event) => updateUser({ password: event.target.value })}
+            />
+          </div>
+          <button>Login</button>
+        </form>
         <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            id="email"
-            type="email"
-            value={user.email}
-            onChange={(event) => updateUser({ email: event.target.value })}
-          />
+          <Link to="/signup">Don't have an account yet?</Link>
         </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            id="password"
-            type="password"
-            value={user.password}
-            onChange={(event) => updateUser({ password: event.target.value })}
-          />
-        </div>
-        <button>Login</button>
-      </form>
-      <div>
-        <Link to="/signup">Don't have an account yet?</Link>
       </div>
-    </>
+    </section>
   );
 }
 

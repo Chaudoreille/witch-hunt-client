@@ -13,7 +13,7 @@
     /*borders*/
     --borderButton : rgba(64, 93, 245, 1);
     --borderButtonHover: rgba(36, 54, 161, 1);
-    --borderGrey: (255, 255, 255, 0.06);
+    --borderGrey: rgba(255, 255, 255, 0.06);
     --windowRadius:20px;
     --radius:14px;
     --smallRadius:6px;
