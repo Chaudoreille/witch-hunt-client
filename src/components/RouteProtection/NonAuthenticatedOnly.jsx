@@ -10,7 +10,7 @@ function NonAuthenticatedOnly() {
   }
 
   if (user) {
-    return <Navigate to="/" />;
+    return <Navigate to="/home" />;
   }
   return <Outlet />;
 }

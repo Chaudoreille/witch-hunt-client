@@ -5,7 +5,7 @@ import "./Button.css";
 function Button({ children, variant, link }) {
   return (
     <>
-      <a className={variant} href={link}>{children}</a>
+      <Link className={variant} to={link}>{children}</Link>
     </>
 
   )

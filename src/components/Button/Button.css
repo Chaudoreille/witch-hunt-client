@@ -1,4 +1,4 @@
-.primary, .secondary {
+.primary, .secondary, .small {
     all: unset;
     border-radius: var(--radius);
     color: var(--white);
@@ -11,9 +11,10 @@
     font-weight: 600;
     display: flex;
     align-items: center;
-    justify-content: center;}
+    justify-content: center;
+}
 
-.primary{
+.primary, .small{
     background: var(--gradientBlue);
     box-shadow: var(--buttonShadow);  
 }
@@ -24,11 +25,19 @@
     outline-offset: -3px;
 }
 
-.primary:hover{
+.primary:hover, .small:hover{
     background: var(--gradientBlueHover);
 }
 
 .secondary:hover{
     outline: 3px solid var(--borderButtonHover);
     outline-offset: -3px;
+}
+
+.small{
+    text-transform: none;
+    padding: 0.5rem 2rem;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
 }
