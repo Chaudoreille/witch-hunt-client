@@ -27,4 +27,11 @@ api.signupUser = async function signupUser(userFormData) {
   }
 };
 
+/**
+ * login - receives an object with the user information as FormData
+ */
+api.login = async function (user) {
+  return api.post("/auth/login", user);
+};
+
 export default api;

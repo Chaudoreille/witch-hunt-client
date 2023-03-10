@@ -23,7 +23,7 @@ function Login() {
     event.preventDefault();
 
     try {
-      const response = await api.post("/auth/login", user);
+      const response = await api.login(user);
 
       storeToken(response.data.authToken);
       await authenticateUser();
