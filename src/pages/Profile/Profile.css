@@ -1,0 +1,8 @@
+.Profile label {
+  width: 10ch;
+  display: inline-block;
+}
+
+.Profile {
+  color: var(--white);
+}
