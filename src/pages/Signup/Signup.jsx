@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import SignupFileSelect from "../../components/SignupFileSelect/SignupFileSelect";
+import SelectImage from "../../components/SelectImage/SelectImage";
 import SignupForm from "../../components/SignupForm/SignupForm";
 import api from "../../service/service";
 
@@ -31,7 +31,7 @@ function Signup() {
   const navigate = useNavigate();
 
   function updateForm(event) {
-    setUser({ ...user, [event.target.id]: event.target.value });
+    setUser(userState => ({ ...userState, [event.target.id]: event.target.value }));
   }
 
   /**
@@ -89,7 +89,7 @@ function Signup() {
    * @param {Event} event
    */
   function handleFileSelect(event) {
-    setUser({ ...user, [event.target.id]: event.target.files[0] });
+    setUser(userState => ({ ...userState, [event.target.id]: event.target.files[0] }));
   }
 
   /**
@@ -126,7 +126,7 @@ function Signup() {
               <img src={user.image} alt="" />
             </div>
           )}
-          <SignupFileSelect
+          <SelectImage
             handleFileSelect={handleFileSelect}
             cancel={{ label: "Back", action: handleGoBack }}
             submit={{ label: "Create Account", action: handleFileSubmit }}
