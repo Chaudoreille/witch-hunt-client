@@ -12,7 +12,7 @@ import "./Profile.css";
  * @returns
  */
 function Profile() {
-  const { user } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
   const [userInfo, setUserInfo] = useState({});
   const [edit, setEdit] = useState(null);
 
@@ -27,7 +27,9 @@ function Profile() {
     const form = new FormData();
     if (userInfo.image) form.append("image", userInfo.image);
 
-    const signupResult = await api.updateProfile(form);
+    const response = await api.updateProfile(form);
+
+    setUser(response.data);
 
     // if (!signupResult.errors) return 
     setEdit();
