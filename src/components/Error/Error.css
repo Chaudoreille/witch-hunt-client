@@ -1,0 +1,5 @@
+.Error {
+  width: 100%;
+  color: var(--errorsRed);
+  border: 1px solid red;
+}
