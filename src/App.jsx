@@ -12,7 +12,6 @@ import Logout from "./pages/Logout/Logout";
 import Lobbies from "./pages/Lobbies/Lobbies";
 import CreateGame from "./pages/CreateGame/CreateGame";
 import JoinPrivateGame from "./pages/JoinPrivateGame/JoinPrivateGame";
-import WaitingRoom from "./pages/WaitingRoom/WaitingRoom";
 import GameRoom from "./pages/GameRoom/GameRoom";
 
 function App() {
@@ -34,8 +33,7 @@ function App() {
               <Route path="" element={<Lobbies />} />
               <Route path="create" element={<CreateGame />} />
               <Route path="private" element={<JoinPrivateGame />} />
-              <Route path=":roomId" element={<WaitingRoom />} />
-              <Route path=":roomId/match" element={<GameRoom />} />
+              <Route path=":roomId" element={<GameRoom />} />
             </Route>
 
             <Route path="/logout" element={<Logout />} />
