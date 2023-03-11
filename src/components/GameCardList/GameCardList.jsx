@@ -2,20 +2,13 @@ import React from "react";
 import GameCard from "../GameCard/GameCard";
 import "./GameCardList.css";
 
-function GameCardList({ list }) {
+function GameCardList({ list, displayLink }) {
   return (
     <ul className="GameCardList">
-      {list.map((card) => {
+      {list.map((game) => {
         return (
-          <li key={card.id}>
-            <GameCard
-              name={card.name}
-              language={card.language}
-              participants={card.participants}
-              totalParticipants={card.totalParticipants}
-              creationTime={card.creationTime}
-              link={card.link}
-            />
+          <li key={game._id}>
+            <GameCard game={game} displayLink={displayLink} />
           </li>
         );
       })}

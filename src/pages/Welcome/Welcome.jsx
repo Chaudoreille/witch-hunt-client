@@ -11,23 +11,11 @@ function Welcome() {
     api
       .getRooms()
       .then((rooms) => {
+        // TODO We probably will want to move the sorting and the slicing/limit to the route
         rooms.sort((a, b) => {
           return b.createdAt.localeCompare(a.createdAt);
         });
         rooms = rooms.slice(0, 10);
-        rooms = rooms.map((room) => {
-          const time = new Date();
-          return {
-            id: room._id,
-            name: room.name,
-            language: room.spokenLanguage,
-            participants: room.state.players.length,
-            totalParticipants: room.maxPlayers,
-            creationTime: Math.round(
-              (time - new Date(room.createdAt)) / (1000 * 60)
-            ),
-          };
-        });
         setRooms(rooms);
       })
       .catch((error) => console.log(error));
