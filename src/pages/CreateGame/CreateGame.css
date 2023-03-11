@@ -1,0 +1,18 @@
+.CreateGame {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 30%;
+}
+
+.CreateGame .header-row {
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.CreateGame img {
+    border-radius: 100%;
+    width: 50px;
+}

@@ -22,10 +22,13 @@ function Layout() {
       <header>
         <nav>
           <NavLink to="/home" className="logo-nav">
-            <img src="images/witch-run_logo.png" />
+            <img src="/images/witch-run_logo.png" />
           </NavLink>
-          <NavLink to="/profile" className="pp-nav"> {/**ADD link to user profile */}
-            <img src="images/avatar.png" />{/*ADD user profile picture*/}
+          <NavLink to="/profile" className="pp-nav">
+            {" "}
+            {/**ADD link to user profile */}
+            <img src="/images/avatar.png" />
+            {/*ADD user profile picture*/}
           </NavLink>
         </nav>
       </header>

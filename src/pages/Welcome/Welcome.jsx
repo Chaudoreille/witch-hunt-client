@@ -1,95 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ButtonLink from "../../components/Button/ButtonLink";
 import GameCardList from "../../components/GameCardList/GameCardList";
+import api from "../../service/service";
 import "./Welcome.css";
 
 function Welcome() {
+  const [rooms, setRooms] = useState([]);
 
-  // TODO: replace with 10 most recent active game room
-  //for testing purpose
-  const data = [
-    {
-      name: "Arthur's room",
-      language: "French",
-      participants: 5,
-      totalParticipants: 7,
-      creationTime: 10,
-      link: "#"
-    },
-    {
-      name: "Another room",
-      language: "Italian",
-      participants: 10,
-      totalParticipants: 20,
-      creationTime: 30,
-      link: "#"
-    },
-    {
-      name: "Arthur's room",
-      language: "French",
-      participants: 5,
-      totalParticipants: 7,
-      creationTime: 10,
-      link: "#"
-    },
-    {
-      name: "Another room",
-      language: "Italian",
-      participants: 10,
-      totalParticipants: 20,
-      creationTime: 30,
-      link: "#"
-    },
-    {
-      name: "Arthur's room",
-      language: "French",
-      participants: 5,
-      totalParticipants: 7,
-      creationTime: 10,
-      link: "#"
-    },
-    {
-      name: "Another room",
-      language: "Italian",
-      participants: 10,
-      totalParticipants: 20,
-      creationTime: 30,
-      link: "#"
-    },
-    {
-      name: "Arthur's room",
-      language: "French",
-      participants: 5,
-      totalParticipants: 7,
-      creationTime: 10,
-      link: "#"
-    },
-    {
-      name: "Another room",
-      language: "Italian",
-      participants: 10,
-      totalParticipants: 20,
-      creationTime: 30,
-      link: "#"
-    }
-  ]
-  const [list, setList] = useState(data)
+  useEffect(() => {
+    api
+      .getRooms()
+      .then((rooms) => {
+        // TODO We probably will want to move the sorting and the slicing/limit to the route
+        rooms.sort((a, b) => {
+          return b.createdAt.localeCompare(a.createdAt);
+        });
+        rooms = rooms.slice(0, 10);
+        setRooms(rooms);
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
   return (
-
     <section className="Welcome">
       <div className="left">
         <img src="images/witch-run_logo.png" />
         <div className="buttons">
-          <ButtonLink variant={"primary"} link={"/login"}>Login</ButtonLink>
-          <ButtonLink variant={"secondary"} link={"/signup"}>Signup</ButtonLink>
+          <ButtonLink variant={"primary"} link={"/login"}>
+            Login
+          </ButtonLink>
+          <ButtonLink variant={"secondary"} link={"/signup"}>
+            Signup
+          </ButtonLink>
         </div>
       </div>
       <div className="right">
-        <GameCardList list={list} />
+        <GameCardList list={rooms} />
       </div>
     </section>
-  )
+  );
 }
 
 export default Welcome;
