@@ -10,6 +10,10 @@ import NonAuthenticatedOnly from "./components/RouteProtection/NonAuthenticatedO
 import AuthenticatedOnly from "./components/RouteProtection/AuthenticatedOnly";
 import Logout from "./pages/Logout/Logout";
 import Lobbies from "./pages/Lobbies/Lobbies";
+import CreateGame from "./pages/CreateGame/CreateGame";
+import JoinPrivateGame from "./pages/JoinPrivateGame/JoinPrivateGame";
+import WaitingRoom from "./pages/WaitingRoom/WaitingRoom";
+import GameRoom from "./pages/GameRoom/GameRoom";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -26,7 +30,14 @@ function App() {
         <Route element={<AuthenticatedOnly />}>
           <Route element={<Layout />}>
             <Route path="/home" element={<Home />} />
-            <Route path="/lobbies" element={<Lobbies />} />
+            <Route path="/lobbies">
+              <Route path="" element={<Lobbies />} />
+              <Route path="create" element={<CreateGame />} />
+              <Route path="private" element={<JoinPrivateGame />} />
+              <Route path=":roomId" element={<WaitingRoom />} />
+              <Route path=":roomId/match" element={<GameRoom />} />
+            </Route>
+
             <Route path="/logout" element={<Logout />} />
           </Route>
         </Route>
