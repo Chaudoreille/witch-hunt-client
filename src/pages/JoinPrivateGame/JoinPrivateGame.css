@@ -1,0 +1,13 @@
+.JoinPrivateGame{
+    display: flex;
+    justify-content: center;
+    width: 90vh;
+}
+
+.JoinPrivateGame .column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 10rem
+}
