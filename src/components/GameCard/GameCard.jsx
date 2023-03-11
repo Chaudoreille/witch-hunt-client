@@ -1,6 +1,6 @@
 import React from "react";
 import "./GameCard.css";
-import Button from "../Button/Button";
+import ButtonLink from "../Button/ButtonLink";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 
 function GameCard({ game, displayLink }) {
@@ -28,9 +28,9 @@ function GameCard({ game, displayLink }) {
         <small>{creationTime} min ago</small>
         <div>
           {link && (
-            <Button variant={"small"} link={"/gameroomId"}>
+            <ButtonLink variant={"small"} link={link}>
               Join
-            </Button>
+            </ButtonLink>
           )}
         </div>
       </div>
