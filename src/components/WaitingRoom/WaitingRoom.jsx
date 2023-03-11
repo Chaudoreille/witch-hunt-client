@@ -30,6 +30,7 @@ function WaitingRoom({ room, createGameActionHandler }) {
         <div className="owner-options">
           Change Settings Options to be added here. Feel free to move div
           around...
+          <h2>PIN: {room.pin}</h2>
           <Button variant="primary" action={createGameActionHandler("start")}>
             Start Game
           </Button>

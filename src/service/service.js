@@ -87,7 +87,7 @@ api.createRoom = async function (room) {
     return response.data;
   } catch (error) {
     if (error.response) throw Error(error.response.data.message);
-    throw Error('Error when trying to retreive gameroom data:', error.message);
+    throw Error('Error when trying to create gameroom:', error.message);
   }
 }
 

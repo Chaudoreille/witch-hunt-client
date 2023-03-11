@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import WaitingRoom from "../../components/WaitingRoom/WaitingRoom";
 import ActiveRoom from "../../components/ActiveRoom/ActiveRoom";
@@ -12,23 +12,26 @@ import api from "../../service/service";
 function GameRoom() {
   const [room, setRoom] = useState(null);
   const { roomId } = useParams();
+  const navigate = useNavigate();
 
-  useEffect(() => {
+  async function loadRoom() {
     api
       .getRoom(roomId)
       .then((room) => {
         setRoom(room);
       })
-      .catch((error) => alert(error.message));
+      .catch((error) => {
+        console.error(error.message);
+        alert("game room no longer exists");
+        navigate("/lobbies");
+      });
+  }
+
+  useEffect(() => {
+    loadRoom();
 
     const intervalId = setInterval(() => {
-      api
-        .getRoom(roomId)
-        .then((room) => {
-          console.log("updating room");
-          setRoom(room);
-        })
-        .catch((error) => alert(error.message));
+      loadRoom();
     }, 1000);
 
     return () => {
@@ -36,14 +39,29 @@ function GameRoom() {
     };
   }, [roomId]);
 
+  function createGameActionHandler(action) {
+    return () => {
+      api
+        .takeAction(room._id, action)
+        .then((response) => console.log(`${action} response`, response))
+        .catch((error) => console.log(`${action} error`, error));
+    };
+  }
+
   if (!room) return <section className="GameRoom">Loading...</section>;
 
   return (
     <section className="GameRoom">
       {room.state.status === "Lobby" ? (
-        <WaitingRoom room={room} />
+        <WaitingRoom
+          room={room}
+          createGameActionHandler={createGameActionHandler}
+        />
       ) : (
-        <ActiveRoom room={room} />
+        <ActiveRoom
+          room={room}
+          createGameActionHandler={createGameActionHandler}
+        />
       )}
     </section>
   );
