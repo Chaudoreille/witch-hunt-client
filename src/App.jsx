@@ -9,6 +9,7 @@ import Home from "./pages/Home/Home";
 import NonAuthenticatedOnly from "./components/RouteProtection/NonAuthenticatedOnly";
 import AuthenticatedOnly from "./components/RouteProtection/AuthenticatedOnly";
 import Logout from "./pages/Logout/Logout";
+import Lobbies from "./pages/Lobbies/Lobbies";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -25,6 +26,7 @@ function App() {
         <Route element={<AuthenticatedOnly />}>
           <Route element={<Layout />}>
             <Route path="/home" element={<Home />} />
+            <Route path="/lobbies" element={<Lobbies />} />
             <Route path="/logout" element={<Logout />} />
           </Route>
         </Route>

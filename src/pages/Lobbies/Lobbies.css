@@ -1,0 +1,19 @@
+.Lobbies {
+    display: flex;
+    justify-content: center;
+}
+
+.Lobbies ul {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 2rem;
+    justify-content: center;
+}
+
+.Lobbies li {
+    margin: 1rem;
+}
+
+.Lobbies h2 {
+    color: white
+}

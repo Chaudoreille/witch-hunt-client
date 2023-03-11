@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import ButtonLink from "../../components/Button/ButtonLink";
-import GameCardList from "../../components/GameCardList/GameCardList";
+import React, { useEffect, useState } from "react";
 import api from "../../service/service";
-import "./Welcome.css";
 
-function Welcome() {
+import GameCardList from "../../components/GameCardList/GameCardList";
+import "./Lobbies.css";
+
+function Lobbies() {
   const [rooms, setRooms] = useState([]);
 
   useEffect(() => {
@@ -14,7 +14,6 @@ function Welcome() {
         rooms.sort((a, b) => {
           return b.createdAt.localeCompare(a.createdAt);
         });
-        rooms = rooms.slice(0, 10);
         rooms = rooms.map((room) => {
           const time = new Date();
           return {
@@ -26,6 +25,7 @@ function Welcome() {
             creationTime: Math.round(
               (time - new Date(room.createdAt)) / (1000 * 60)
             ),
+            link: `/lobbies/:${room._id}`,
           };
         });
         setRooms(rooms);
@@ -34,23 +34,16 @@ function Welcome() {
   }, []);
 
   return (
-    <section className="Welcome">
-      <div className="left">
-        <img src="images/witch-run_logo.png" />
-        <div className="buttons">
-          <ButtonLink variant={"primary"} link={"/login"}>
-            Login
-          </ButtonLink>
-          <ButtonLink variant={"secondary"} link={"/signup"}>
-            Signup
-          </ButtonLink>
-        </div>
-      </div>
-      <div className="right">
+    <section className="Lobbies">
+      {rooms.length ? (
         <GameCardList list={rooms} />
-      </div>
+      ) : (
+        <h2>
+          There are currently no active lobbies. Would you like to create one?
+        </h2>
+      )}
     </section>
   );
 }
 
-export default Welcome;
+export default Lobbies;
