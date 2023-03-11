@@ -48,4 +48,12 @@ api.user = async function () {
   return api.get("/auth/me");
 };
 
+
+// Game Room Routes
+
+api.getRooms = async function () {
+  const response = await api.get('/api/game-rooms')
+  return response.data;
+}
+
 export default api;
