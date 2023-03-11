@@ -9,13 +9,13 @@ function Home() {
       <div className="column">
         {" "}
         <ButtonLink variant={"primary"} link={"/lobbies/create"}>
-          CREATE A GAME
+          Create a game
         </ButtonLink>
         <ButtonLink variant={"secondary"} link={"/lobbies"}>
-          FIND A GAME
+          Find a game
         </ButtonLink>
         <ButtonLink variant={"secondary"} link={"/lobbies/private"}>
-          JOIN A GAME PRIVATE GAME
+          Join a private game
         </ButtonLink>
       </div>
     </section>
