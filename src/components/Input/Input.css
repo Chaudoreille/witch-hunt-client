@@ -1,18 +1,18 @@
-.Input input{
-    background: #363E4B;
-    border: 2px solid #526788;
-    border-radius: 12px;
-    width: 30vmax;
-    height: 3rem;
-    padding: 1rem;
-    margin: 0.4rem 0 .8rem 0;
-    color: var(--white);
+.Input input {
+  background: #363E4B;
+  border: 2px solid #526788;
+  border-radius: 12px;
+  width: 30vmax;
+  height: 3rem;
+  padding: 1rem;
+  margin: 0.4rem 0 .8rem 0;
+  color: var(--white);
 }
 
-.Input label{
-    color: var(--white);
+.Input label {
+  color: var(--white);
 }
 
 .input-error input {
-    border: 2px solid var(--errorsRed);
+  border: 2px solid var(--errorsRed);
 }

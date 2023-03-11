@@ -1,15 +1,34 @@
-.FileSelect label {
-  width: 20ch;
-  height: 3rem;
-  background-color: antiquewhite;
-  display: inline-block;
+.FileSelect {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  gap: 1rem;
 }
 
-/* .SignupFileSelect input[type="file"] {
-  display: none;
-} */
+.FileSelect .wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed var(--white);
+  height: 7rem;
+  width: 100%;
+  position: relative;
+}
 
-.SignupFileSelect label div {
-  font-size: 0.8rem;
-  font-style: italic;
+.FileSelect .absolute {
+  position: absolute;
+}
+
+.FileSelect .attach-file {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.FileSelect .input-select {
+  opacity: 0;
+  width: 100%;
+  height: 100%;
 }

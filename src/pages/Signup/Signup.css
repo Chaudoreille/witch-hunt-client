@@ -1,7 +1,19 @@
-#img-signup{
+#img-signup {
     width: 20%;
 }
 
-.SignupForm .Button  {
+.SignupForm .Button {
     margin-top: 2rem;
+}
+
+.image-select {
+    color: var(--white);
+}
+
+.image-select h4 {
+    font-weight: 300;
+}
+
+.image-select h3 {
+    font-weight: 500;
 }

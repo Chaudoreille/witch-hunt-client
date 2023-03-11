@@ -102,7 +102,7 @@ function Signup() {
   }
 
   return (
-    <section className="flex-center-section">
+    <section className="flex-center-section image-select">
       <div className="window-center-grey">
         <img src="images/witch-run_logo.png" id="img-signup" />
 
@@ -123,17 +123,18 @@ function Signup() {
           />
         ) : (
           <>
-            <h4>Welcome {user.username}</h4>
-            <div>Select a profile picture: </div>
+            <h4>Welcome @{user.username}</h4>
+            <h3>Choose your favorite avatar</h3>
             {user.image && (
               <div>
                 <img src={user.image} alt="" />
               </div>
+
             )}
             <SelectImage
               handleFileSelect={handleFileSelect}
               cancel={{ label: "Back", action: handleGoBack }}
-              submit={{ label: "Create Account", action: handleFileSubmit }}
+              submit={{ label: "Create account", action: handleFileSubmit }}
             />
           </>
         )}
