@@ -1,13 +1,3 @@
-.ActiveRoom {
-    margin: 3rem 10rem;
-}
-
-.ActiveRoom .room-header{
-    display: flex;
-    justify-content: space-between;
-    color: white;   
-}
-
 .ActiveRoom .playerlist{
     display: flex;
     flex-wrap: wrap;
@@ -23,7 +13,6 @@
 .ActiveRoom .PlayerCard {
     width: 10rem;
     height: 20rem;
-    background-color: antiquewhite;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -35,6 +24,26 @@
 .ActiveRoom .PlayerCard img {
     border-radius: 100%;
     margin: 0.2rem;
-
+    width: 8rem;
 }
 
+.ActiveRoom .alive {
+    background-color: rgb(114, 247, 114);
+}
+
+.ActiveRoom .dead {
+    background-color: rgba(179, 68, 68, 0.755);
+}
+
+.ActiveRoom .PlayerCard img.vote {
+    width: 2.5rem;
+    border: 3px solid;
+}
+
+.ActiveRoom .PlayerCard img.locked {
+    border-color: red;
+}
+
+.ActiveRoom .PlayerCard img.cast {
+    border-color: green;
+}

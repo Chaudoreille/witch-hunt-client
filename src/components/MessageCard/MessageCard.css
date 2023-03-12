@@ -1,0 +1,25 @@
+.MessageCard {
+    display: flex;
+    width: 70%;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    color: black
+}
+
+.MessageCard img {
+    width: 5rem;
+    border-radius: 100%;
+}
+
+
+
+.MessageCard.sent {
+    background-color: darkturquoise;
+    align-self: end;
+}
+
+.MessageCard.received {
+    background-color: greenyellow;
+    align-self: start;
+}
