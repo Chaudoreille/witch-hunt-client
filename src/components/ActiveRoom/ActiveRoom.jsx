@@ -21,6 +21,10 @@ function ActiveRoom({ room, createGameActionHandler, displaySettings }) {
             key={player.user._id}
             player={player}
             onClick={createGameActionHandler("castVote", player.user._id)}
+            className={player.status.toLowerCase()}
+            votes={room.state.players.filter(
+              (p) => p.vote.target === player.user._id
+            )}
           />
         ))}
       </div>
@@ -35,9 +39,12 @@ function ActiveRoom({ room, createGameActionHandler, displaySettings }) {
         </div>
       ) : (
         <div className="player-options">
-          {isSignedUp && !isOwner && (
-            <Button variant="primary" action={createGameActionHandler("leave")}>
-              Leave Game
+          {isSignedUp && (
+            <Button
+              variant="primary"
+              action={createGameActionHandler("lockVote")}
+            >
+              Lock Your Vote
             </Button>
           )}
         </div>

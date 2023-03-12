@@ -3,10 +3,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import WaitingRoom from "../../components/WaitingRoom/WaitingRoom";
 import ActiveRoom from "../../components/ActiveRoom/ActiveRoom";
-import Button from "../../components/Button/Button";
 import api from "../../service/service";
 
 import "./GameRoom.css";
+import GameCompletedroom from "../../components/GameCompletedRoom/GameCompletedroom";
 
 /**
  * Will get the room data and then display either the active gameroom or the waiting room, depending on
@@ -91,14 +91,22 @@ function GameRoom() {
 
   return (
     <section className="GameRoom">
-      {room.state.status === "Lobby" ? (
+      {room.state.status === "Lobby" && (
         <WaitingRoom
           room={room}
           createGameActionHandler={createGameActionHandler}
           displaySettings={displaySettings}
         />
-      ) : (
+      )}
+      {room.state.status === "Started" && (
         <ActiveRoom
+          room={room}
+          createGameActionHandler={createGameActionHandler}
+          displaySettings={displaySettings}
+        />
+      )}
+      {room.state.status === "Completed" && (
+        <GameCompletedroom
           room={room}
           createGameActionHandler={createGameActionHandler}
           displaySettings={displaySettings}
