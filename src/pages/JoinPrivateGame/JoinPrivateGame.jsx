@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 function JoinPrivateGame() {
   const [pin, setPin] = useState("");
-
+  const errors = [];
   function handleInputChange(event) {
     setPin(event.target.value);
   }
@@ -16,12 +16,13 @@ function JoinPrivateGame() {
 
   function handleSubmit(event) {
     event.preventDefault();
-
     if (pin.length !== 6) {
-      // TODO display error message about invalid pin length
-      alert("invalid pin length");
+      errors.push("Pin must be 6 characters long and alphanumeric")
       return;
     }
+
+
+
 
     api
       .getRooms({ pin: pin })
@@ -32,17 +33,27 @@ function JoinPrivateGame() {
       .catch((error) => {
         // TODO error message display
         alert(error.message);
+        errors.push(error.message)
+        console.log(errors)
       });
   }
 
+  { console.log(errors) }
   return (
-    <section className="JoinPrivateGame">
-      <div className="column">
+    <section className="flex-center-section auth JoinPrivateGame">
+      <div className="window-center-grey auth">
         <form>
+          {errors.length > 0 && (
+            <ul>
+              ciao
+
+            </ul>
+          )}
           <Input
             type="text"
             name="pin"
             action={handleInputChange}
+            className="pin"
             label="Pin"
             value={pin}
             placeholder="Insert pin"

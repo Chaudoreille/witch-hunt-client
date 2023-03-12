@@ -1,13 +1,13 @@
-.JoinPrivateGame{
-    display: flex;
-    justify-content: center;
-    width: 90vh;
+.pin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.JoinPrivateGame .column {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 2rem;
-    margin-top: 10rem
+.pin label {
+  font-size: 3rem;
+  text-transform: uppercase;
+  font-weight: 600;
+
 }
