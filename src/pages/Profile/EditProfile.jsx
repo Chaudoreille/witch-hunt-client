@@ -89,11 +89,6 @@ const EditProfile = ({ mode, setMode }) => {
       .then(response => {
         setUser(response.data);
         setMode(null);
-        // Testing for mode change
-        setMode(m => {
-          console.log(m);
-          return m;
-        });
       })
       .catch(error => {
         if (error.response.status === 400) {
@@ -103,7 +98,6 @@ const EditProfile = ({ mode, setMode }) => {
         if (error.response.status === 401) {
           setErrors(err => ({ ...err, password: { message: error.response.data.message } }));
         }
-        console.log(errors);
       });
   };
 
