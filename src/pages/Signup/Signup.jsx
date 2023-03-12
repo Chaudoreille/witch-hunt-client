@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import SelectImage from "../../components/SelectImage/SelectImage";
 import SignupForm from "../../components/SignupForm/SignupForm";
 import api from "../../service/service";
-import "./Signup.css"
+import "./Signup.css";
 
 const errorsFieldToMessage = {
   username: "Please enter a username!",
@@ -89,8 +89,8 @@ function Signup() {
    * Event Handler that triggers whenever a file is selected in the file input
    * @param {Event} event
    */
-  function handleFileSelect(event) {
-    setUser(userState => ({ ...userState, [event.target.id]: event.target.files[0] }));
+  function handleImageSelect(image) {
+    setUser(userState => ({ ...userState, "image": image }));
   }
 
   /**
@@ -102,7 +102,8 @@ function Signup() {
   }
 
   return (
-    <section className="flex-center-section">
+    <section className="flex-center-section image-select">
+
       <div className="window-center-grey">
         <img src="images/witch-run_logo.png" id="img-signup" />
 
@@ -123,17 +124,11 @@ function Signup() {
           />
         ) : (
           <>
-            <h4>Welcome {user.username}</h4>
-            <div>Select a profile picture: </div>
-            {user.image && (
-              <div>
-                <img src={user.image} alt="" />
-              </div>
-            )}
+            <h4>Welcome @{user.username}</h4>
             <SelectImage
-              handleFileSelect={handleFileSelect}
+              onChange={handleImageSelect}
               cancel={{ label: "Back", action: handleGoBack }}
-              submit={{ label: "Create Account", action: handleFileSubmit }}
+              submit={{ label: "Create account", action: handleFileSubmit }}
             />
           </>
         )}

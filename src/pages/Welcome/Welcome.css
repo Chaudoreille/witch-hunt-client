@@ -6,7 +6,7 @@
     overflow: hidden;
 }
 
-.Welcome .left{
+.Welcome .left {
     background-color: var(--grey);
     border-radius: var(--windowRadius);
     height: 80vh;
@@ -16,26 +16,27 @@
     align-items: center;
     justify-content: center;
     gap: 5rem;
-    border:1px solid var(--borderGrey);
+    border: 1px solid var(--borderGrey);
 }
 
 .Welcome .left img {
     width: 30%;
 }
 
-.buttons{
+.buttons {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
 }
-.Welcome .right{
-   position: relative;
+
+.Welcome .right {
+    position: relative;
 }
-.Welcome .right::before{
+
+.Welcome .right::before {
     background: linear-gradient(180deg, rgba(0, 0, 0, 0) 20%, #1c1e26 99%);
     content: "\00a0";
     height: 100%;
     position: absolute;
     width: 100%;
 }
-

@@ -13,19 +13,19 @@
   padding: 1rem;
 }
 
-.flex-center-section{
-height: 100vh;
-max-height: 100vh;
-display: flex;
-align-items: center;
-justify-content: center;
+.flex-center-section {
+  height: 100vh;
+  max-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .window-center-grey img {
-width: 35%;
+  width: 35%;
 }
 
-.error-message{
+.error-message {
   color: var(--errorsRed);
   align-self: center;
   font-size: .8rem;

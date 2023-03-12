@@ -2,9 +2,12 @@ import React, { useContext } from "react";
 import { Outlet, NavLink, Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import "./Layout.css";
+import api from "../../service/service";
 
 function Layout() {
   const { isLoading, user } = useContext(AuthContext);
+
+  console.log(user)
   if (isLoading)
     return (
       <>
@@ -26,9 +29,7 @@ function Layout() {
           </NavLink>
           <NavLink to="/profile" className="pp-nav">
             {" "}
-            {/**ADD link to user profile */}
-            <img src="/images/avatar.png" />
-            {/*ADD user profile picture*/}
+            <img src={user.image} />
           </NavLink>
         </nav>
       </header>
