@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const AvatarSelection = ({ count, onChange, className }) => {
+const AvatarSelection = ({ count, handleChange, className }) => {
   const [avatarList, setAvatarList] = useState([]);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ const AvatarSelection = ({ count, onChange, className }) => {
 
 
   return (
-    <div className={`AvatarSelection ${className}`} onChange={onChange}>
+    <div className={`AvatarSelection ${className}`} onChange={handleChange}>
       {avatarList.map((imageUri) => (
         <div key={imageUri} className="avatar">
           <input

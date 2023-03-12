@@ -19,34 +19,29 @@ function Profile() {
       <div className="window-center-grey">
         {editMode === "image" ? (
           <EditProfile mode="image" setMode={setEditMode} />
-        ) : (
-          <div className="profile-pic-wrapper">
-            <div className="image-wrapper">
-              <img src={user.image} alt="avatar" />
-            </div>
-            <button className="image-edit" onClick={() => setEditMode("image")}>
-              <EditIcon />
-            </button>
-          </div>
-        )}
-        {editMode === "info" ? (
+        ) : editMode === "info" ? (
           <EditProfile mode="info" setMode={setEditMode} />
         ) : (
-          <div className="user-info-wrapper">
-            <div className="username-wrapper">
+          <>
+            <div className="profile-pic-wrapper">
+              <div className="image-wrapper">
+                <img src={user.image} alt="avatar" />
+              </div>
+              <button className="image-edit" onClick={() => setEditMode("image")}>
+                <EditIcon />
+              </button>
+            </div>
+            <div className="user-info-wrapper">
               <label>Username</label>
               <span>{user.username}</span>
-            </div>
-            <div className="email-wrapper">
               <label>Email</label>
               <span>{user.email}</span>
-            </div>
+            </div >
             <Button variant="small" action={() => setEditMode("info")}>
-              Edit
+              Edit user info
             </Button>
-          </div >
-        )
-        }
+          </>
+        )}
       </div >
     </section >
   );

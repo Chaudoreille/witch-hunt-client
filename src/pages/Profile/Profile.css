@@ -29,6 +29,21 @@
   width: 100%;
 }
 
+.Profile .user-info-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 1rem 0;
+  font-size: 1.2em;
+}
+
+.Profile .user-info-wrapper label {
+  margin-right: 2ch;
+}
+
+.Profile .Button.small {
+  width: fit-content;
+}
+
 .Profile .image-wrapper {
   border-radius: 100vw;
 }

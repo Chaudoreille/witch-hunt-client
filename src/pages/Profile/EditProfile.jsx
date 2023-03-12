@@ -30,8 +30,8 @@ const EditProfile = ({ mode, setMode }) => {
     setUserData(data => ({ ...data, [id]: value }));
   };
 
-  const handleImageChange = (event) => {
-    setUserData(data => ({ ...data, image: event.target.files[0] }));
+  const handleImageChange = (image) => {
+    setUserData(data => ({ ...data, "image": image }));
   };
 
   const validateData = () => {
@@ -101,7 +101,7 @@ const EditProfile = ({ mode, setMode }) => {
   if (mode === "image") {
     return (
       <div className="EditProfile">
-        <SelectImage handleFileSelect={handleImageChange}
+        <SelectImage updateImage={handleImageChange}
           cancel={{
             label: "Cancel",
             action: discardChanges
@@ -128,35 +128,38 @@ const EditProfile = ({ mode, setMode }) => {
   };
 
   return (
-    <form className='EditProfile' onSubmit={submitUser}>
-      {displayErrors()}
-      <Input
-        type="text" name="username" label="Username" placeholder="Username"
-        action={handleChange} value={userData.username}
-      />
+    <>
+      <h3>User Information</h3>
+      <form className='EditProfile' onSubmit={submitUser}>
+        {displayErrors()}
+        <Input
+          type="text" name="username" label="Username" placeholder="Username"
+          action={handleChange} value={userData.username}
+        />
 
-      <Input
-        type="email" name="email" label="Email" placeholder="Email"
-        action={handleChange} value={userData.email}
-      />
+        <Input
+          type="email" name="email" label="Email" placeholder="Email"
+          action={handleChange} value={userData.email}
+        />
 
-      <Input type="password" name="password" label="Password" placeholder="*********"
-        action={handleChange} value={userData.password}
-      />
+        <Input type="password" name="password" label="Password" placeholder="*********"
+          action={handleChange} value={userData.password}
+        />
 
-      <Input type="password" name="newPassword" label="New Password" placeholder="*********"
-        action={handleChange} value={userData.newPassword}
-      />
+        <Input type="password" name="newPassword" label="New Password" placeholder="*********"
+          action={handleChange} value={userData.newPassword}
+        />
 
-      <Input type="password" name="repeatPassword" label="Repeat Password" placeholder="*********"
-        action={handleChange} value={userData.repeatPassword}
-      />
+        <Input type="password" name="repeatPassword" label="Repeat Password" placeholder="*********"
+          action={handleChange} value={userData.repeatPassword}
+        />
 
-      <div className="btn-container">
-        <Button type="submit" variant="primary">Save</Button>
-        <Button type="button" variant="secondary" action={discardChanges}>Cancel</Button>
-      </div>
-    </form>
+        <div className="btn-container">
+          <Button type="submit" variant="primary">Save</Button>
+          <Button type="button" variant="secondary" action={discardChanges}>Cancel</Button>
+        </div>
+      </form>
+    </>
   );
 };
 
