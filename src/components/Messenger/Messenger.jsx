@@ -26,6 +26,7 @@ function Messenger({ room }) {
   }
 
   useEffect(() => {
+    loadMessages();
     const intervalId = setInterval(() => {
       loadMessages();
     }, 1000);
