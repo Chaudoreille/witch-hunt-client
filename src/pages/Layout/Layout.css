@@ -8,20 +8,26 @@ nav {
   position: relative;
 }
 
-.logo-nav img{
+.logo-nav img {
   position: absolute;
-   height: 8vh;
-   width: auto;
-   left: 50%;
-   top: 1vh;
-   content: "";
-
-} 
-.pp-nav{
-  height: 6vh;
+  height: 8vh;
+  width: auto;
+  left: 50%;
+  transform: translate(-50%, 0);
+  top: 1vh;
+  content: "";
 
 }
-.pp-nav img{
-  height: 100%;
+
+.pp-nav {
+  height: 6vh;
+  aspect-ratio: 1;
   margin-right: 1rem;
+}
+
+.pp-nav img {
+  border-radius: 50%;
+  height: 100%;
+  object-fit: cover;
+
 }
