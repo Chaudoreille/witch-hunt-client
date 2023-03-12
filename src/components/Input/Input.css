@@ -13,6 +13,6 @@
   color: var(--white);
 }
 
-.input-error input {
+.Input.input-error input {
   border: 2px solid var(--errorsRed);
 }
