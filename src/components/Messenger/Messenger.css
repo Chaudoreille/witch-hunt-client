@@ -31,4 +31,6 @@
     flex-direction: column;
     justify-content: space-between;
     gap: 0.5rem;
+    max-height: 60vh;
+    overflow-x:auto;
 }
