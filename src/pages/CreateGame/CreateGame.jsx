@@ -36,17 +36,19 @@ function CreateGame() {
   }
 
   return (
-    <section className="CreateGame">
-      <div className="header-row">
-        <img src={user.image} alt={user.username} />
-        <div>@{user.username}, let's create your game! </div>
+    <section className="flex-center-section auth">
+      <div className="window-center-grey auth CreateGame">
+        <div className="header-row">
+          <img src={user.image} alt={user.username} />
+          <div>@{user.username}, let's create your game! </div>
+        </div>
+        <GameRoomForm
+          handleSubmit={handleSubmit}
+          room={room}
+          submitButtonLabel="Create"
+          dispatchRoomChanges={dispatchRoom}
+        />
       </div>
-      <GameRoomForm
-        handleSubmit={handleSubmit}
-        room={room}
-        submitButtonLabel="Create"
-        dispatchRoomChanges={dispatchRoom}
-      />
     </section>
   );
 }

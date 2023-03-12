@@ -1,5 +1,5 @@
 .Error {
-  width: 100%;
+  width: 30vmax;
   color: var(--errorsRed);
   padding: 1rem;
   margin: 1rem 0;
@@ -20,5 +20,5 @@
 }
 
 .Error .error-wrapper .error-message {
-  font-size: 1rem;
+  font-size: .8rem;
 }

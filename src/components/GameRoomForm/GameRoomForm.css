@@ -1,0 +1,24 @@
+.visib-toggle {
+  background-color: #3FAED7;
+  padding: 14px 5px;
+  border-radius: 30px;
+  display: inline-block
+}
+
+.visib-toggle [name="visib"] {
+  display: none
+}
+
+.visib-toggle input[type="radio"]+label {
+  background-color: #3FAED7;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.visib-toggle input[type="radio"]:checked+label {
+  background-color: white;
+  color: #00008B;
+}

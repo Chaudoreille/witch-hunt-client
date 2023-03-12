@@ -1,18 +1,39 @@
 .CreateGame {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 30%;
+    color: var(--white);
 }
 
 .CreateGame .header-row {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    color: white;
+    gap: 1rem;
+    font-weight: 700;
+    text-align: center;
 }
 
-.CreateGame img {
+.CreateGame div img {
     border-radius: 100%;
-    width: 50px;
+    width: 5rem;
+}
+
+.CreateGame form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.CreateGame .Input input {
+    margin-left: 1rem;
+    width: 20vmax;
+}
+
+.CreateGame .Input label {
+    display: inline-block;
+    width: 8ch;
+    text-align: right;
+}
+
+.CreateGame .Button {
+    margin-top: 2rem;
+
 }

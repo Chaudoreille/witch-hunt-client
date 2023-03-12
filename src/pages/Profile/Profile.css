@@ -2,6 +2,10 @@
   color: var(--white);
 }
 
+.Profile .window-center-grey.auth {
+  gap: 1rem;
+}
+
 .Profile label {
   display: inline-block;
   text-align: right;
@@ -84,7 +88,7 @@
 
 .Profile .btn-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin-top: 2rem;
   gap: 1rem;
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
+import "./GameRoomForm.css"
 
 function GameRoomForm({
   handleSubmit,
@@ -36,6 +37,17 @@ function GameRoomForm({
           dispatchRoomChanges({ isPublished: event.target.checked })
         }
       />
+      {/* TODO WIP toggle */}
+
+      {/* <div class="visib-toggle" onChange={(event) => dispatchRoomChanges({ isPublished: event.target.checked })}>
+        <input type="radio" id="visib-toggle-public" name="visib" value={room.isPublished} checked></input>
+        <label className="radio-button" htmlFor="visib-toggle-public">Public</label>
+
+        <input type="radio" id="visib-toggle-private" name="visib" value={room.isPublished}></input>
+        <label className="radio-button" htmlFor="visib-toggle-private">Private</label>
+      </div> */}
+
+
       <Input
         name="spokenLanguage"
         type="text"
