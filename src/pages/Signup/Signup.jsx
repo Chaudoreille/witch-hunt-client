@@ -5,6 +5,7 @@ import SignupForm from "../../components/SignupForm/SignupForm";
 import api from "../../service/service";
 import "./Signup.css"
 
+
 const errorsFieldToMessage = {
   username: "Please enter a username!",
   email: "Please enter a valid email address!",
@@ -62,6 +63,8 @@ function Signup() {
     setErrors([]);
   }
 
+
+
   /**
    * Event Handler that will handle the second form submission
    * Creates a FormData object with the entered information and
@@ -101,8 +104,15 @@ function Signup() {
     setErrors([]);
   }
 
+  function handleAvatar(event) {
+    const newImage = `https://api.dicebear.com/5.x/bottts/svg?seed=${user.email}${event.target.value}`
+    setUser(userState => ({ ...userState, image: newImage }));
+  }
+
+
   return (
     <section className="flex-center-section image-select">
+
       <div className="window-center-grey">
         <img src="images/witch-run_logo.png" id="img-signup" />
 
@@ -123,14 +133,104 @@ function Signup() {
           />
         ) : (
           <>
+
             <h4>Welcome @{user.username}</h4>
             <h3>Choose your favorite avatar</h3>
-            {user.image && (
-              <div>
-                <img src={user.image} alt="" />
+
+
+            <div className="random-avatars" onChange={handleAvatar}>
+              <div className="avatar">
+                <input
+                  type="radio" name="avatar" value="0" className="input-hidden" />
+                <label htmlFor="avatar0">
+                  <img
+                    src={`https://api.dicebear.com/5.x/bottts/svg?seed=${user.email}${Math.random()}
+  `}
+                    alt="avatar" />
+                </label>
+              </div>
+              <div className="avatar">
+                <input
+                  type="radio" name="avatar" value="1" className="input-hidden" />
+                <label htmlFor="avatar1">
+                  <img
+                    src={`https://api.dicebear.com/5.x/bottts/svg?seed=${user.email}1
+  `}
+                    alt="avatar" />
+                </label>
+              </div>
+              <div className="avatar">
+                <input
+                  type="radio" name="avatar" value="2" className="input-hidden" />
+                <label htmlFor="avatar2">
+                  <img
+                    src={`https://api.dicebear.com/5.x/bottts/svg?seed=${user.email}2
+  `}
+                    alt="avatar" />
+                </label>
+              </div>
+              <div className="avatar">
+                <input
+                  type="radio" name="avatar" value="3" className="input-hidden" />
+                <label htmlFor="avatar3">
+                  <img
+                    src={`https://api.dicebear.com/5.x/bottts/svg?seed=${user.email}3
+  `}
+                    alt="avatar" />
+                </label>
+              </div>
+              <div className="avatar">
+                <input
+                  type="radio" name="avatar" value="4" className="input-hidden" />
+                <label htmlFor="avatar4">
+                  <img
+                    src={`https://api.dicebear.com/5.x/bottts/svg?seed=${user.email}4
+  `}
+                    alt="avatar" />
+                </label>
+              </div>
+              <div className="avatar">
+                <input
+                  type="radio" name="avatar" value="5" className="input-hidden" />
+                <label htmlFor="avatar5">
+                  <img
+                    src={`https://api.dicebear.com/5.x/bottts/svg?seed=${user.email}5
+  `}
+                    alt="avatar" />
+                </label>
+              </div>
+              <div className="avatar">
+                <input
+                  type="radio" name="avatar" value="6" className="input-hidden" />
+                <label htmlFor="avatar6">
+                  <img
+                    src={`https://api.dicebear.com/5.x/bottts/svg?seed=${user.email}6
+  `}
+                    alt="avatar" />
+                </label>
+              </div>
+              <div className="avatar">
+                <input
+                  type="radio" name="avatar" value="7" className="input-hidden" />
+                <label htmlFor="avatar7">
+                  <img
+                    src={`https://api.dicebear.com/5.x/bottts/svg?seed=${user.email}7
+  `}
+                    alt="avatar" />
+                </label>
               </div>
 
-            )}
+
+
+            </div>
+
+
+
+            <h3>or</h3>
+
+
+
+
             <SelectImage
               handleFileSelect={handleFileSelect}
               cancel={{ label: "Back", action: handleGoBack }}
