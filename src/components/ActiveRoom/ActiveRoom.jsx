@@ -5,7 +5,7 @@ import { AuthContext } from "../../context/AuthContext";
 import api from "../../service/service";
 import "./ActiveRoom.css";
 
-function ActiveRoom({ room, createGameActionHandler }) {
+function ActiveRoom({ room, createGameActionHandler, displaySettings }) {
   const { user } = useContext(AuthContext);
 
   const isOwner = user._id === room.owner;
@@ -15,32 +15,27 @@ function ActiveRoom({ room, createGameActionHandler }) {
 
   return (
     <div className="ActiveRoom">
-      <div className="room-header">
-        <h2>Active Game! {room.name}</h2>
-        <div>
-          {
-            room.state.players.filter((player) => player.status === "Alive")
-              .length
-          }
-          /{room.maxPlayers}
-        </div>
-      </div>
       <div className="playerlist">
         {room.state.players.map((player) => (
-          <PlayerCard key={player.user._id} player={player} />
+          <PlayerCard
+            key={player.user._id}
+            player={player}
+            onClick={createGameActionHandler("castVote", player.user._id)}
+          />
         ))}
       </div>
-      {isOwner ? (
+      {displaySettings ? (
         <div className="owner-options">
           Change Settings Options to be added here. Feel free to move div
-          around...
+          around... During Live Game, we probably don't want to allow any change
+          except Deletion?
           <Button variant="secondary" action={() => api.deleteRoom(room._id)}>
             Close Game and Delete Game Room
           </Button>
         </div>
       ) : (
         <div className="player-options">
-          {isSignedUp && (
+          {isSignedUp && !isOwner && (
             <Button variant="primary" action={createGameActionHandler("leave")}>
               Leave Game
             </Button>

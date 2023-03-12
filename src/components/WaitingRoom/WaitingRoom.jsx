@@ -6,6 +6,8 @@ import Button from "../Button/Button";
 import api from "../../service/service";
 import FilterNoneOutlinedIcon from "@mui/icons-material/FilterNoneOutlined";
 import GameRoomForm from "../GameRoomForm/GameRoomForm";
+import PermIdentityIcon from "@mui/icons-material/PermIdentity";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 
 function reducer(state, action) {
   return { ...state, ...action };
@@ -36,6 +38,26 @@ function WaitingRoom({ room, createGameActionHandler, displaySettings }) {
 
   return (
     <div className="WaitingRoom">
+      <div className="room-header">
+        <div className="row">
+          {isOwner && (
+            <SettingsOutlinedIcon
+              className="clickable-icon"
+              onClick={() => setDisplaySettings(!displaySettings)}
+            />
+          )}
+          <h2>{room.name}</h2>
+        </div>
+        <div className="row">
+          <PermIdentityIcon className="icon-user" />
+          {room.state.players.length}/{room.maxPlayers}
+          {isOwner && (
+            <Button variant="primary" action={createGameActionHandler("start")}>
+              Start Game
+            </Button>
+          )}
+        </div>
+      </div>
       <div className="playerlist">
         {room.state.players.map((player) => (
           <PlayerCard key={player.user._id} player={player} />

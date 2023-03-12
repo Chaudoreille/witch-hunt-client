@@ -5,8 +5,6 @@ import WaitingRoom from "../../components/WaitingRoom/WaitingRoom";
 import ActiveRoom from "../../components/ActiveRoom/ActiveRoom";
 import Button from "../../components/Button/Button";
 import api from "../../service/service";
-import PermIdentityIcon from "@mui/icons-material/PermIdentity";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 
 import "./GameRoom.css";
 
@@ -28,8 +26,6 @@ function GameRoom() {
 
   const { roomId } = useParams();
   const navigate = useNavigate();
-
-  const isOwner = user._id === room?.owner;
 
   if (room === null) console.log("FIRST LOAD");
 
@@ -74,10 +70,10 @@ function GameRoom() {
     };
   }, [roomId]);
 
-  function createGameActionHandler(action) {
+  function createGameActionHandler(action, ...parameters) {
     return () => {
       api
-        .takeAction(room._id, action)
+        .takeAction(room._id, action, parameters)
         .then((response) => console.log(`${action} response`, response))
         .catch((error) => console.log(`${action} error`, error));
     };
@@ -85,28 +81,16 @@ function GameRoom() {
 
   if (!room) return <section className="GameRoom">Loading...</section>;
 
+  const isOwner = user._id === room.owner;
+  const currentPlayercount =
+    room.state.status === "Lobby"
+      ? room.state.players.length
+      : room.state.players.filter((player) => player.status === "Alive").length;
+  const maxPlayerCount =
+    room.state.status === "Lobby" ? room.maxPlayers : room.state.players.length;
+
   return (
     <section className="GameRoom">
-      <div className="room-header">
-        <div className="row">
-          {isOwner && (
-            <SettingsOutlinedIcon
-              className="clickable-icon"
-              onClick={() => setDisplaySettings(!displaySettings)}
-            />
-          )}
-          <h2>{room.name}</h2>
-        </div>
-        <div className="row">
-          <PermIdentityIcon className="icon-user" />
-          {room.state.players.length}/{room.maxPlayers}
-          {isOwner && (
-            <Button variant="primary" action={createGameActionHandler("start")}>
-              Start Game
-            </Button>
-          )}
-        </div>
-      </div>
       {room.state.status === "Lobby" ? (
         <WaitingRoom
           room={room}
@@ -117,6 +101,7 @@ function GameRoom() {
         <ActiveRoom
           room={room}
           createGameActionHandler={createGameActionHandler}
+          displaySettings={displaySettings}
         />
       )}
     </section>
