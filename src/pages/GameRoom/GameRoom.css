@@ -1,0 +1,19 @@
+.clickable-icon {
+    cursor: pointer;
+}
+
+.GameRoom {
+    margin: 3rem 10rem;
+}
+
+.GameRoom .room-header{
+    display: flex;
+    justify-content: space-between;
+    color: white;   
+}
+
+.GameRoom .row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}

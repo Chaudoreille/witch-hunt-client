@@ -4,7 +4,6 @@ import PlayerCard from "../PlayerCard/PlayerCard";
 import { AuthContext } from "../../context/AuthContext";
 import Button from "../Button/Button";
 import api from "../../service/service";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import FilterNoneOutlinedIcon from "@mui/icons-material/FilterNoneOutlined";
 import GameRoomForm from "../GameRoomForm/GameRoomForm";
 
@@ -12,9 +11,8 @@ function reducer(state, action) {
   return { ...state, ...action };
 }
 
-function WaitingRoom({ room, createGameActionHandler }) {
+function WaitingRoom({ room, createGameActionHandler, displaySettings }) {
   const { user } = useContext(AuthContext);
-  const [displaySettings, setDisplaySettings] = useState(false);
   const [roomEditFormValues, dispatchRoomEditFormValues] = useReducer(
     reducer,
     room
@@ -38,25 +36,6 @@ function WaitingRoom({ room, createGameActionHandler }) {
 
   return (
     <div className="WaitingRoom">
-      <div className="room-header">
-        <div className="row">
-          {isOwner && (
-            <SettingsOutlinedIcon
-              className="clickable-icon"
-              onClick={() => setDisplaySettings(!displaySettings)}
-            />
-          )}
-          <h2>WaitingRoom for {room.name}</h2>
-        </div>
-        <div className="row">
-          {room.state.players.length}/{room.maxPlayers}
-          {isOwner && (
-            <Button variant="primary" action={createGameActionHandler("start")}>
-              Start Game
-            </Button>
-          )}
-        </div>
-      </div>
       <div className="playerlist">
         {room.state.players.map((player) => (
           <PlayerCard key={player.user._id} player={player} />

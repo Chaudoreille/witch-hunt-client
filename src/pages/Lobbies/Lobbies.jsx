@@ -5,6 +5,7 @@ import GameCardList from "../../components/GameCardList/GameCardList";
 import "./Lobbies.css";
 import { Link } from "react-router-dom";
 import Input from "../../components/Input/Input";
+import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 
 function Lobbies() {
   const [rooms, setRooms] = useState([]);

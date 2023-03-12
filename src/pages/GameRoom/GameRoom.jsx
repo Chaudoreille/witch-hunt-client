@@ -1,9 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
+import { AuthContext } from "../../context/AuthContext";
 import WaitingRoom from "../../components/WaitingRoom/WaitingRoom";
 import ActiveRoom from "../../components/ActiveRoom/ActiveRoom";
+import Button from "../../components/Button/Button";
 import api from "../../service/service";
+import PermIdentityIcon from "@mui/icons-material/PermIdentity";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+
+import "./GameRoom.css";
 
 /**
  * Will get the room data and then display either the active gameroom or the waiting room, depending on
@@ -11,12 +16,20 @@ import api from "../../service/service";
  */
 function GameRoom() {
   const [room, setRoom] = useState(null);
-  const [roomLastUpdated, setRoomLastUpdated] = useState({
+  const [displaySettings, setDisplaySettings] = useState(false);
+  // The below state is used specifically without using the setter
+  // we just need a reference object that we can update without the reference changing
+  // so that we can access the current value from the loadroom function which
+  // has its values set in stone on interval creation
+  const [roomLastUpdated] = useState({
     at: "never",
   });
+  const { user } = useContext(AuthContext);
 
   const { roomId } = useParams();
   const navigate = useNavigate();
+
+  const isOwner = user._id === room?.owner;
 
   if (room === null) console.log("FIRST LOAD");
 
@@ -74,10 +87,31 @@ function GameRoom() {
 
   return (
     <section className="GameRoom">
+      <div className="room-header">
+        <div className="row">
+          {isOwner && (
+            <SettingsOutlinedIcon
+              className="clickable-icon"
+              onClick={() => setDisplaySettings(!displaySettings)}
+            />
+          )}
+          <h2>{room.name}</h2>
+        </div>
+        <div className="row">
+          <PermIdentityIcon className="icon-user" />
+          {room.state.players.length}/{room.maxPlayers}
+          {isOwner && (
+            <Button variant="primary" action={createGameActionHandler("start")}>
+              Start Game
+            </Button>
+          )}
+        </div>
+      </div>
       {room.state.status === "Lobby" ? (
         <WaitingRoom
           room={room}
           createGameActionHandler={createGameActionHandler}
+          displaySettings={displaySettings}
         />
       ) : (
         <ActiveRoom
