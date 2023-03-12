@@ -11,14 +11,34 @@ import api from "../../service/service";
  */
 function GameRoom() {
   const [room, setRoom] = useState(null);
+  const [roomLastUpdated, setRoomLastUpdated] = useState({
+    at: "never",
+  });
+
   const { roomId } = useParams();
   const navigate = useNavigate();
+
+  if (room === null) console.log("FIRST LOAD");
 
   async function loadRoom() {
     api
       .getRoom(roomId)
-      .then((room) => {
-        setRoom(room);
+      .then((fetchedRoom) => {
+        console.log(
+          "fetching room updates " + new Date().toISOString().slice(11, 19)
+        );
+
+        if (fetchedRoom.updatedAt !== roomLastUpdated.at) {
+          console.log("SETTING NEW ROOM");
+          console.log(
+            "previously last updated at",
+            roomLastUpdated.at,
+            "new updatedate",
+            fetchedRoom.updatedAt
+          );
+          setRoom(fetchedRoom);
+          roomLastUpdated.at = fetchedRoom.updatedAt;
+        }
       })
       .catch((error) => {
         console.error(error.message);
@@ -28,6 +48,7 @@ function GameRoom() {
   }
 
   useEffect(() => {
+    console.log("setting new interval");
     loadRoom();
 
     const intervalId = setInterval(() => {
@@ -35,6 +56,7 @@ function GameRoom() {
     }, 1000);
 
     return () => {
+      console.log("clearing old interval");
       clearInterval(intervalId);
     };
   }, [roomId]);
