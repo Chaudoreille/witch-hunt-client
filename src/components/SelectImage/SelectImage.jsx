@@ -1,21 +1,20 @@
 import React, { useState } from "react";
 import "./SelectImage.css";
 import Button from "../Button/Button";
-import user from "../../pages/Signup/Signup";
 import AvatarSelection from "../../components/AvatarSelection/AvatarSelection";
 
 import CloudUploadOutlinedIcon from '@mui/icons-material/CloudUploadOutlined';
 
-function FileSelect({ onChange, cancel, submit, }) {
+function FileSelect({ updateImage, cancel, submit, }) {
   const [file, setFile] = useState(false);
 
   function handleFile(event) {
-    onChange(event.target.file[0]);
+    updateImage(event.target.files[0]);
     setFile(true);
   }
 
   function handleAvatar(event) {
-    onChange(event.target.value);
+    updateImage(event.target.value);
     setFile(false);
   }
 
@@ -24,7 +23,7 @@ function FileSelect({ onChange, cancel, submit, }) {
 
       <form className="FileSelect" onSubmit={submit.action}>
         <h3>Choose your favorite avatar</h3>
-        <AvatarSelection className="random-avatars" count={8} onChange={handleAvatar} />
+        <AvatarSelection className="random-avatars" count={8} handleChange={handleAvatar} />
         <h3>or</h3>
         <div className="wrapper">
           <div className="absolute">

@@ -126,7 +126,7 @@ function Signup() {
           <>
             <h4>Welcome @{user.username}</h4>
             <SelectImage
-              onChange={handleImageSelect}
+              updateImage={handleImageSelect}
               cancel={{ label: "Back", action: handleGoBack }}
               submit={{ label: "Create account", action: handleFileSubmit }}
             />

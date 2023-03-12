@@ -1,0 +1,99 @@
+.Profile {
+  color: var(--white);
+}
+
+.Profile .window-center-grey {
+  justify-content: space-evenly;
+}
+
+.Profile label {
+  display: inline-block;
+}
+
+.Profile .profile-pic-wrapper {
+  position: relative;
+  margin: 3rem;
+}
+
+.Profile .image-wrapper {
+  border-radius: 100vw;
+  width: 100px;
+  aspect-ratio: 1;
+  outline: 5px solid var(--white);
+  display: flex;
+  overflow: hidden;
+}
+
+.Profile .image-wrapper img {
+  object-fit: cover;
+  width: 100%;
+}
+
+.Profile .user-info-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 1rem 0;
+  font-size: 1.2em;
+}
+
+.Profile .user-info-wrapper label {
+  margin-right: 2ch;
+}
+
+.Profile .Button.small {
+  width: fit-content;
+}
+
+.Profile .image-wrapper {
+  border-radius: 100vw;
+}
+
+.Profile .image-edit {
+  border-radius: 100vw;
+  aspect-ratio: 1;
+  outline: 5px solid var(--white);
+  display: flex;
+  position: absolute;
+  bottom: -5px;
+  right: -5px;
+  background-color: var(--grey);
+  cursor: pointer;
+}
+
+.Profile form {
+  padding: 2rem;
+}
+
+.Profile form .Input {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.Profile form .Input label {
+  margin-right: 2ch;
+  width: min-content;
+}
+
+.Profile .Input input {
+  width: 60%;
+}
+
+.Profile .image-edit {
+  color: var(--white);
+  display: block;
+  border: none;
+}
+
+.Profile .btn-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.Profile .btn-container .Button {
+  width: 8vmax;
+}

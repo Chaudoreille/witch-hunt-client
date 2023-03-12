@@ -2,12 +2,10 @@ import React, { useContext } from "react";
 import { Outlet, NavLink, Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import "./Layout.css";
-import api from "../../service/service";
 
 function Layout() {
   const { isLoading, user } = useContext(AuthContext);
 
-  console.log(user)
   if (isLoading)
     return (
       <>

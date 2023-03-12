@@ -13,6 +13,7 @@ import Lobbies from "./pages/Lobbies/Lobbies";
 import CreateGame from "./pages/CreateGame/CreateGame";
 import JoinPrivateGame from "./pages/JoinPrivateGame/JoinPrivateGame";
 import GameRoom from "./pages/GameRoom/GameRoom";
+import Profile from "./pages/Profile/Profile";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -37,6 +38,7 @@ function App() {
             </Route>
 
             <Route path="/logout" element={<Logout />} />
+            <Route path="/profile" element={<Profile />}></Route>
           </Route>
         </Route>
       </Routes>
