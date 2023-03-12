@@ -15,8 +15,8 @@ function Profile() {
   const [editMode, setEditMode] = useState(null);
 
   return (
-    <section className="Profile flex-center-section">
-      <div className="window-center-grey">
+    <section className="Profile flex-center-section auth">
+      <div className="window-center-grey auth">
         {editMode === "image" ? (
           <EditProfile mode="image" setMode={setEditMode} />
         ) : editMode === "info" ? (

@@ -55,5 +55,6 @@
   z-index: -1;
   background-image: url(/public/images/village.jpeg);
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: cover;
+
 }

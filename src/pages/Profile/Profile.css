@@ -2,12 +2,9 @@
   color: var(--white);
 }
 
-.Profile .window-center-grey {
-  justify-content: space-evenly;
-}
-
 .Profile label {
   display: inline-block;
+  text-align: right;
 }
 
 .Profile .profile-pic-wrapper {
@@ -60,9 +57,7 @@
   cursor: pointer;
 }
 
-.Profile form {
-  padding: 2rem;
-}
+
 
 .Profile form .Input {
   width: 100%;
@@ -89,9 +84,9 @@
 
 .Profile .btn-container {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   margin-top: 2rem;
+  gap: 1rem;
 }
 
 .Profile .btn-container .Button {

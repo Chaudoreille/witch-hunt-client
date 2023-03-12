@@ -43,12 +43,7 @@ function JoinPrivateGame() {
     <section className="flex-center-section auth JoinPrivateGame">
       <div className="window-center-grey auth">
         <form>
-          {errors.length > 0 && (
-            <ul>
-              ciao
 
-            </ul>
-          )}
           <Input
             type="text"
             name="pin"

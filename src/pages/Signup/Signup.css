@@ -22,11 +22,6 @@
 }
 
 .random-avatars {
-    /* width: max-content;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    place-items: center; */
     display: flex;
     flex-wrap: wrap;
     width: 100%;
