@@ -13,25 +13,26 @@ function reducer(state, action) {
   return { ...state, ...action };
 }
 
-function WaitingRoom({ room, createGameActionHandler, displaySettings }) {
+function WaitingRoom({
+  room,
+  createGameActionHandler,
+  displaySettings,
+  setDisplaySettings,
+}) {
   const { user } = useContext(AuthContext);
   const [roomEditFormValues, dispatchRoomEditFormValues] = useReducer(
     reducer,
     room
   );
-  console.log("rendering waiting room");
   const isOwner = user._id === room.owner;
   const isSignedUp = room.state.players.some(
     (player) => player.user._id === user._id
   );
-
   function handleSubmit(event) {
     event.preventDefault();
     api
       .updateRoom(room._id, roomEditFormValues)
-      .then((updatedRoom) => {
-        console.log("room updated");
-      })
+      .then((updatedRoom) => {})
       // TODO display error message
       .catch((error) => console.error(error));
   }

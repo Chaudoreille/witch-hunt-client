@@ -183,4 +183,28 @@ api.updateProfile = async function (userFormData) {
   });
 };
 
+// Message routes
+
+api.sendMessage = async function (roomId, message) {
+  try {
+    const response = await api.post('/api/messages', {content: message, gameId:roomId})
+    return response.data;
+  } catch (error) {
+    if (error.response) throw Error(error.response.data.message);
+    throw Error('Error when trying to send Message:', error.message);
+  }
+}
+
+api.getMessages = async function (roomId, lastSeen) {
+  let url = `/api/messages?game=${roomId}`;
+  if (lastSeen) url += `&last=${lastSeen}`;
+  try {
+    const response = await api.get(url)
+    return response.data;
+  } catch (error) {
+    if (error.response) throw Error(error.response.data.message);
+    throw Error('Error when trying to retreive Messages:', error.message);
+  }
+}
+
 export default api;

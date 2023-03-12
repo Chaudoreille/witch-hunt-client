@@ -1,0 +1,34 @@
+.Messenger {
+    display: flex;
+    flex-direction: column;
+    color: white
+}
+
+.Messenger button {
+    width: 3rem;
+    height: 3rem;    
+    border-radius: 50%;
+    transform: rotate(-45deg);
+    cursor: pointer;
+    background-color: white;
+    border: unset
+}
+
+.Messenger .messenger-header {
+    width: 100%;
+    text-align: center;
+}
+
+.Messenger form {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.Messenger .messenger-container {
+    min-height: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.5rem;
+}

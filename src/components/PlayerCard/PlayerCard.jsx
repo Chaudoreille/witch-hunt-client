@@ -3,7 +3,6 @@ import "./PlayerCard.css";
 import LockIcon from "@mui/icons-material/Lock";
 
 function PlayerCard({ player, onClick, className, votes }) {
-  console.log(player.user.username);
   return (
     <div
       className={`PlayerCard ${className && className}`}
@@ -12,7 +11,11 @@ function PlayerCard({ player, onClick, className, votes }) {
         onClick();
       }}
     >
-      <img src={player.user.image} alt={player.user._id} />
+      <img
+        src={player.user.image}
+        alt={player.user.username}
+        title={player.user.username}
+      />
 
       <div>{player.user.username}</div>
       {votes && (
@@ -20,6 +23,8 @@ function PlayerCard({ player, onClick, className, votes }) {
           {votes.map((voter) => (
             <img
               src={voter.user.image}
+              title={voter.user.username}
+              alt={voter.user.username}
               key={voter.user._id}
               className={`vote ${
                 voter.vote.state === "Cast" ? "cast" : "locked"

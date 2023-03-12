@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useReducer } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import WaitingRoom from "../../components/WaitingRoom/WaitingRoom";
@@ -7,28 +7,34 @@ import api from "../../service/service";
 
 import "./GameRoom.css";
 import GameCompletedroom from "../../components/GameCompletedRoom/GameCompletedroom";
+import Messenger from "../../components/Messenger/Messenger";
+
+function reducer(state, action) {
+  if (state === null) return action;
+  if (action.updatedAt > state.updatedAt) {
+    console.log("update room");
+    return action;
+  }
+  console.log("keep room");
+  return state;
+}
 
 /**
  * Will get the room data and then display either the active gameroom or the waiting room, depending on
  * the current state of the game
  */
 function GameRoom() {
-  const [room, setRoom] = useState(null);
+  const [room, dispatchRoom] = useReducer(reducer, null);
+
   const [displaySettings, setDisplaySettings] = useState(false);
-  // The below state is used specifically without using the setter
-  // we just need a reference object that we can update without the reference changing
-  // so that we can access the current value from the loadroom function which
-  // has its values set in stone on interval creation
-  const [roomLastUpdated] = useState({
-    at: "never",
-  });
+
   const { user } = useContext(AuthContext);
 
   const { roomId } = useParams();
   const navigate = useNavigate();
 
   if (room === null) console.log("FIRST LOAD");
-
+  console.log("rendering game room");
   async function loadRoom() {
     api
       .getRoom(roomId)
@@ -37,17 +43,7 @@ function GameRoom() {
           "fetching room updates " + new Date().toISOString().slice(11, 19)
         );
 
-        if (fetchedRoom.updatedAt !== roomLastUpdated.at) {
-          console.log("SETTING NEW ROOM");
-          console.log(
-            "previously last updated at",
-            roomLastUpdated.at,
-            "new updatedate",
-            fetchedRoom.updatedAt
-          );
-          setRoom(fetchedRoom);
-          roomLastUpdated.at = fetchedRoom.updatedAt;
-        }
+        dispatchRoom(fetchedRoom);
       })
       .catch((error) => {
         console.error(error.message);
@@ -91,27 +87,35 @@ function GameRoom() {
 
   return (
     <section className="GameRoom">
-      {room.state.status === "Lobby" && (
-        <WaitingRoom
-          room={room}
-          createGameActionHandler={createGameActionHandler}
-          displaySettings={displaySettings}
-        />
-      )}
-      {room.state.status === "Started" && (
-        <ActiveRoom
-          room={room}
-          createGameActionHandler={createGameActionHandler}
-          displaySettings={displaySettings}
-        />
-      )}
-      {room.state.status === "Completed" && (
-        <GameCompletedroom
-          room={room}
-          createGameActionHandler={createGameActionHandler}
-          displaySettings={displaySettings}
-        />
-      )}
+      <div id="game">
+        {room.state.status === "Lobby" && (
+          <WaitingRoom
+            room={room}
+            createGameActionHandler={createGameActionHandler}
+            displaySettings={displaySettings}
+            setDisplaySettings={setDisplaySettings}
+          />
+        )}
+        {room.state.status === "Started" && (
+          <ActiveRoom
+            room={room}
+            createGameActionHandler={createGameActionHandler}
+            displaySettings={displaySettings}
+            setDisplaySettings={setDisplaySettings}
+          />
+        )}
+        {room.state.status === "Completed" && (
+          <GameCompletedroom
+            room={room}
+            createGameActionHandler={createGameActionHandler}
+            displaySettings={displaySettings}
+            setDisplaySettings={setDisplaySettings}
+          />
+        )}
+      </div>
+      <div id="messenger">
+        <Messenger room={room} />
+      </div>
     </section>
   );
 }
