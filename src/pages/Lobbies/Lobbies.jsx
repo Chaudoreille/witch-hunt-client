@@ -43,14 +43,14 @@ function Lobbies({ filters }) {
             <ButtonLink variant={"primary"} link={"/games/join"}>
               Join game
             </ButtonLink>
-            <ButtonLink variant={"primary"} link={"/games"}>
-              My Games
-            </ButtonLink>
             <ButtonLink variant={"primary"} link={"/games/create"}>
               Create a game
             </ButtonLink>
           </div>
           <div className="filters">
+            <ButtonLink variant={"primary"} link={"/home"}>
+              My Games
+            </ButtonLink>
             <Input
               type="text"
               name="search"

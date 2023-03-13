@@ -9,12 +9,26 @@
 .Lobbies .actionBar {
   display: flex;
   flex-flow: row wrap;
-  padding: 2rem;
+  padding: 0.5rem 1rem;
+  align-items: center;
 }
 
+.Lobbies .filters .Button,
 .Lobbies .actionBar .Button {
-  margin: 1rem 2rem;
+  margin: 1rem 1rem;
   width: auto;
+}
+
+.Lobbies .filters .Input input {
+  margin: unset;
+}
+
+
+.Lobbies .filters {
+  display: flex;
+  flex-flow: row wrap;
+  padding: 0.5rem 1rem;
+  align-items: center;
 }
 
 .Lobbies .filters .Input label {
