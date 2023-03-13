@@ -15,8 +15,6 @@ import GameRoom from "./pages/GameRoom/GameRoom";
 import Profile from "./pages/Profile/Profile";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <div className="App">
       <Routes>
@@ -29,7 +27,7 @@ function App() {
         <Route element={<AuthenticatedOnly />}>
           <Route element={<Layout />}>
             <Route path="/home" element={<Lobbies />} />
-            <Route path="/lobbies">
+            <Route path="/games">
               <Route path="create" element={<CreateGame />} />
               <Route path="join" element={<JoinPrivateGame />} />
               <Route path=":roomId" element={<GameRoom />} />

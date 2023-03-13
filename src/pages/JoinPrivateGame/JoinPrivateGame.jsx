@@ -17,7 +17,7 @@ function JoinPrivateGame() {
   function handleSubmit(event) {
     event.preventDefault();
     if (pin.length !== 6) {
-      errors.push("Pin must be 6 characters long and alphanumeric")
+      errors.push("Pin must be 6 characters long and alphanumeric");
       return;
     }
 
@@ -28,17 +28,17 @@ function JoinPrivateGame() {
       .getRooms({ pin: pin })
       .then((room) => {
         const roomId = room._id;
-        navigate(`/lobbies/${roomId}`);
+        navigate(`/games/${roomId}`);
       })
       .catch((error) => {
         // TODO error message display
         alert(error.message);
-        errors.push(error.message)
-        console.log(errors)
+        errors.push(error.message);
+        console.log(errors);
       });
   }
 
-  { console.log(errors) }
+  { console.log(errors); }
   return (
     <section className="flex-center-section auth JoinPrivateGame">
       <div className="window-center-grey auth">

@@ -8,7 +8,7 @@ import Input from "../../components/Input/Input";
 import ButtonLink from "../../components/Button/ButtonLink";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 
-function Lobbies() {
+function Lobbies({ filters }) {
   const [rooms, setRooms] = useState([]);
   const [filter, setFilter] = useState("");
 
@@ -40,13 +40,13 @@ function Lobbies() {
       {rooms.length ? (
         <>
           <div className="actionBar">
-            <ButtonLink variant={"primary"} link={"/lobbies/join"}>
+            <ButtonLink variant={"primary"} link={"/games/join"}>
               Join game
             </ButtonLink>
-            <ButtonLink variant={"primary"} link={"/lobbies/join"}>
+            <ButtonLink variant={"primary"} link={"/games"}>
               My Games
             </ButtonLink>
-            <ButtonLink variant={"primary"} link={"/lobbies/create"}>
+            <ButtonLink variant={"primary"} link={"/games/create"}>
               Create a game
             </ButtonLink>
           </div>
@@ -64,7 +64,7 @@ function Lobbies() {
       ) : (
         <h2>
           There are currently no active lobbies matching your current filter.
-          <Link to="/lobbies/create">Would you like to create one?</Link>
+          <Link to="/games/create">Would you like to create one?</Link>
         </h2>
       )}
     </section>

@@ -28,7 +28,7 @@ function CreateGame() {
       .createRoom(room)
       .then((newRoom) => {
         const roomId = newRoom._id;
-        navigate(`/lobbies/${newRoom._id}`);
+        navigate(`/games/${newRoom._id}`);
       })
 
       .catch((error) => {

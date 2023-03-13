@@ -11,7 +11,7 @@ function GameCard({ game, displayLink }) {
   const participants = game.state.players.length;
   const totalParticipants = game.maxPlayers;
 
-  const link = displayLink ? `/lobbies/${id}` : null;
+  const link = displayLink ? `/games/${id}` : null;
 
   return (
     <div className="GameCard">
