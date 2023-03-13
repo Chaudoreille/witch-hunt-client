@@ -12,8 +12,9 @@ function reducer(state, action) {
 }
 
 function CreateGame() {
+  const { user } = useContext(AuthContext);
   const [room, dispatchRoom] = useReducer(reducer, {
-    name: "",
+    name: `${user.username}'s Witch hunt`,
     maxPlayers: 10,
     isPublished: true,
     spokenLanguage: "English",
@@ -21,7 +22,6 @@ function CreateGame() {
   console.log("room", room);
 
   const navigate = useNavigate();
-  const { user } = useContext(AuthContext);
 
   function handleSubmit(event) {
     event.preventDefault();
