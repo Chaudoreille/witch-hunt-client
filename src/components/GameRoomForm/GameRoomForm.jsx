@@ -22,19 +22,21 @@ function GameRoomForm({
       <Input
         name="maxPlayers"
         type="number"
+        min="3"
         value={room.maxPlayers}
         label="Players"
         action={(event) =>
           dispatchRoomChanges({ maxPlayers: event.target.value })
         }
       />
+
       <div className="input-toggle">
         <label>Visibility</label>
         <div className="visib-toggle">
-          <input checked={room.isPublished} type="radio" id="visib-toggle-public" name="visib" value={room.isPublished} onChange={(event) => { console.log("change"); dispatchRoomChanges({ isPublished: event.target.checked }) }}></input>
+          <input checked={room.isPublished} type="radio" id="visib-toggle-public" name="visib" value={room.isPublished} onChange={(event) => { dispatchRoomChanges({ isPublished: event.target.checked }) }}></input>
           <label className="radio-button" htmlFor="visib-toggle-public">Public</label>
 
-          <input checked={!room.isPublished} type="radio" id="visib-toggle-private" name="visib" value={!room.isPublished} onChange={(event) => { console.log("change"); dispatchRoomChanges({ isPublished: !event.target.checked }) }}></input>
+          <input checked={!room.isPublished} type="radio" id="visib-toggle-private" name="visib" value={!room.isPublished} onChange={(event) => { dispatchRoomChanges({ isPublished: !event.target.checked }) }}></input>
           <label className="radio-button" htmlFor="visib-toggle-private">Private</label>
         </div>
       </div>
