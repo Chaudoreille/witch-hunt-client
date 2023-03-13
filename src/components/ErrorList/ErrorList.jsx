@@ -4,6 +4,14 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import "./ErrorList.css";
 
 const ErrorList = ({ messages, closeAction }) => {
+  const removeDuplicates = (messageList) => {
+    const noDuplicates = new Set();
+    messageList.forEach((msg) => noDuplicates.add(msg));
+    return [...noDuplicates];
+  };
+
+  const cleanMessages = removeDuplicates(messages);
+
   return (
     <div className='ErrorList'>
       {closeAction && (
@@ -13,9 +21,9 @@ const ErrorList = ({ messages, closeAction }) => {
           </button>
         </div>
       )}
-      {messages.map(message => (
+      {cleanMessages.map(message => (
         message &&
-        <p className='error-wrapper'>
+        <p key={message} className='error-wrapper'>
           <span>
             <ErrorOutlineIcon className='error-icon' />
           </span>
