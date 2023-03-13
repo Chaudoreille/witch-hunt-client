@@ -47,9 +47,11 @@ function GameRoom() {
         dispatchRoom(fetchedRoom);
       })
       .catch((error) => {
-        console.error(error.message);
-        alert("game room no longer exists");
-        navigate("/lobbies");
+        if (!errors.includes("Unable to load room data"))
+          setErrors((currentList) => [
+            ...currentList,
+            "Unable to load room data",
+          ]);
       });
   }
 
