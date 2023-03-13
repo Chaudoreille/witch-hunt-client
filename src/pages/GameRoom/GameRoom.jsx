@@ -144,7 +144,7 @@ function GameRoom() {
           )}
         </div>
         <div id="messenger">
-          <Messenger room={room} />
+          <Messenger room={room} handleErrors={dispatchErrors} />
         </div>
       </div>
     </section>

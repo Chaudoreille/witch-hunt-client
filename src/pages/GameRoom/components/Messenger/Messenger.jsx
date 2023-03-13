@@ -6,7 +6,7 @@ import SendIcon from "@mui/icons-material/Send";
 import api from "../../../../service/service";
 import MessageCard from "../MessageCard/MessageCard";
 
-function Messenger({ room }) {
+function Messenger({ room, handleErrors }) {
   const [messages, setMessages] = useState([]);
   const [currentInput, setCurrentInput] = useState("");
   const [messagesLastUpdated] = useState({
@@ -22,11 +22,15 @@ function Messenger({ room }) {
           messagesLastUpdated.at = response.at(-1).updatedAt;
         }
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        let errorMessage;
+        if (error.response) errorMessage = error.response.data.message;
+        else errorMessage = error.message;
+        handleErrors(errorMessage);
+      });
   }
 
   useEffect(() => {
-    loadMessages();
     const intervalId = setInterval(() => {
       loadMessages();
     }, 1000);
