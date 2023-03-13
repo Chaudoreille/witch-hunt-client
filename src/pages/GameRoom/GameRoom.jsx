@@ -20,13 +20,21 @@ function reducer(state, action) {
   return state;
 }
 
+function errorReducer(state, action) {
+  console.log("running error reducer");
+  if (action === null) return [];
+  console.log("trying to add error", action, "to", state);
+  if (!state.includes(action)) return [...state, action];
+  return state;
+}
+
 /**
  * Will get the room data and then display either the active gameroom or the waiting room, depending on
  * the current state of the game
  */
 function GameRoom() {
   const [room, dispatchRoom] = useReducer(reducer, null);
-  const [errors, setErrors] = useState([]);
+  const [errors, dispatchErrors] = useReducer(errorReducer, []);
   const [displaySettings, setDisplaySettings] = useState(false);
 
   const { user } = useContext(AuthContext);
@@ -47,11 +55,9 @@ function GameRoom() {
         dispatchRoom(fetchedRoom);
       })
       .catch((error) => {
-        if (!errors.includes("Unable to load room data"))
-          setErrors((currentList) => [
-            ...currentList,
-            "Unable to load room data",
-          ]);
+        const errorMessage = "Unable to load room data";
+
+        dispatchErrors(errorMessage);
       });
   }
 
@@ -89,8 +95,7 @@ function GameRoom() {
           let errorMessage;
           if (error.response) errorMessage = error.response.data.message;
           else errorMessage = error.message;
-          if (!errors.includes(errorMessage))
-            setErrors((currentList) => [...currentList, errorMessage]);
+          dispatchErrors(errorMessage);
           throw new Error("returning action error");
         });
     };
@@ -109,7 +114,7 @@ function GameRoom() {
   return (
     <section className="GameRoom">
       {errors.length > 0 && (
-        <ErrorList messages={errors} closeAction={() => setErrors([])} />
+        <ErrorList messages={errors} closeAction={() => dispatchErrors(null)} />
       )}
       <div className="row">
         <div id="game">
