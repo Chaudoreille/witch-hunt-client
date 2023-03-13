@@ -28,24 +28,16 @@ function GameRoomForm({
           dispatchRoomChanges({ maxPlayers: event.target.value })
         }
       />
-      <Input
-        name="isPublished"
-        type="checkbox"
-        value={room.isPublished}
-        label="Visibility"
-        action={(event) =>
-          dispatchRoomChanges({ isPublished: event.target.checked })
-        }
-      />
-      {/* TODO WIP toggle */}
+      <div className="input-toggle">
+        <label>Visibility</label>
+        <div className="visib-toggle">
+          <input checked={room.isPublished} type="radio" id="visib-toggle-public" name="visib" value={room.isPublished} onChange={(event) => { console.log("change"); dispatchRoomChanges({ isPublished: event.target.checked }) }}></input>
+          <label className="radio-button" htmlFor="visib-toggle-public">Public</label>
 
-      {/* <div class="visib-toggle" onChange={(event) => dispatchRoomChanges({ isPublished: event.target.checked })}>
-        <input type="radio" id="visib-toggle-public" name="visib" value={room.isPublished} checked></input>
-        <label className="radio-button" htmlFor="visib-toggle-public">Public</label>
-
-        <input type="radio" id="visib-toggle-private" name="visib" value={room.isPublished}></input>
-        <label className="radio-button" htmlFor="visib-toggle-private">Private</label>
-      </div> */}
+          <input checked={!room.isPublished} type="radio" id="visib-toggle-private" name="visib" value={!room.isPublished} onChange={(event) => { console.log("change"); dispatchRoomChanges({ isPublished: !event.target.checked }) }}></input>
+          <label className="radio-button" htmlFor="visib-toggle-private">Private</label>
+        </div>
+      </div>
 
 
       <Input
