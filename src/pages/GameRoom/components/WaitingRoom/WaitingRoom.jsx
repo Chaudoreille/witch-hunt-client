@@ -1,11 +1,11 @@
 import { useContext, useState, useReducer, useEffect } from "react";
 import "./WaitingRoom.css";
 import PlayerCard from "../PlayerCard/PlayerCard";
-import { AuthContext } from "../../context/AuthContext";
-import Button from "../Button/Button";
-import api from "../../service/service";
+import { AuthContext } from "../../../../context/AuthContext";
+import Button from "../../../../components/Button/Button";
+import api from "../../../../service/service";
 import FilterNoneOutlinedIcon from "@mui/icons-material/FilterNoneOutlined";
-import GameRoomForm from "../GameRoomForm/GameRoomForm";
+import GameRoomForm from "../../../../components/GameRoomForm/GameRoomForm";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 

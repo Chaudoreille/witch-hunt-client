@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useContext, useReducer } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
-import WaitingRoom from "../../components/WaitingRoom/WaitingRoom";
-import ActiveRoom from "../../components/ActiveRoom/ActiveRoom";
+import WaitingRoom from "./components/WaitingRoom/WaitingRoom";
+import ActiveRoom from "./components/ActiveRoom/ActiveRoom";
 import api from "../../service/service";
 
 import "./GameRoom.css";
-import GameCompletedroom from "../../components/GameCompletedRoom/GameCompletedroom";
-import Messenger from "../../components/Messenger/Messenger";
+import GameCompletedroom from "./components/GameCompletedRoom/GameCompletedroom";
+import Messenger from "./components/Messenger/Messenger";
 
 function reducer(state, action) {
   if (state === null) return action;

@@ -1,8 +1,8 @@
 import PlayerCard from "../PlayerCard/PlayerCard";
-import Button from "../Button/Button";
+import Button from "../../../../components/Button/Button";
 import { useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
-import api from "../../service/service";
+import { AuthContext } from "../../../../context/AuthContext";
+import api from "../../../../service/service";
 import "./ActiveRoom.css";
 
 function ActiveRoom({ room, createGameActionHandler, displaySettings }) {

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./Messenger.css";
-import Input from "../Input/Input";
-import Button from "../Button/Button";
+import Input from "../../../../components/Input/Input";
+import Button from "../../../../components/Button/Button";
 import SendIcon from "@mui/icons-material/Send";
-import api from "../../service/service";
+import api from "../../../../service/service";
 import MessageCard from "../MessageCard/MessageCard";
 
 function Messenger({ room }) {
