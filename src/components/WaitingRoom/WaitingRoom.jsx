@@ -32,7 +32,9 @@ function WaitingRoom({
     event.preventDefault();
     api
       .updateRoom(room._id, roomEditFormValues)
-      .then((updatedRoom) => {})
+      .then((updatedRoom) => {
+        setDisplaySettings(false);
+      })
       // TODO display error message
       .catch((error) => console.error(error));
   }
@@ -48,6 +50,7 @@ function WaitingRoom({
             />
           )}
           <h2>{room.name}</h2>
+          <h4>({room.spokenLanguage})</h4>
         </div>
         <div className="row">
           <PermIdentityIcon className="icon-user" />
