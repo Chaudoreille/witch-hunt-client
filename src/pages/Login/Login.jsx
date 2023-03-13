@@ -5,6 +5,7 @@ import { useNavigate, Link } from "react-router-dom";
 import Input from "../../components/Input/Input"
 import "./Login.css";
 import Button from "../../components/Button/Button";
+import Error from "../../components/ErrorList/ErrorList";
 
 /**
  * Login Page
@@ -13,7 +14,7 @@ import Button from "../../components/Button/Button";
  */
 function Login() {
   const [user, setUser] = useState({ email: "", password: "" });
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errors, setErrors] = useState({});
   const { storeToken, authenticateUser } = useContext(AuthContext);
 
   // TODO do we actually need to navigate manually after successful login,
@@ -23,6 +24,8 @@ function Login() {
 
   async function handleLogin(event) {
     event.preventDefault();
+    const newErrors = {};
+    setErrors({});
 
     try {
       const response = await api.login(user);
@@ -31,7 +34,8 @@ function Login() {
       await authenticateUser();
     } catch (error) {
       console.error(error);
-      setErrorMessage(error.response.data.message);
+      newErrors.found = { message: error.response.data.message };
+      setErrors(newErrors)
     }
   }
 
@@ -39,14 +43,25 @@ function Login() {
     setUser({ ...user, ...inputData });
   }
 
+
+
+  const displayErrors = () => {
+    console.log(errors.found)
+    if (!Object.values(errors).length) return;
+
+    return (
+      <Error messages={Object.values(errors).map(error => error.message)} />
+    );
+  };
+
   return (
     <section className="flex-center-section">
       <div className="window-center-grey">
         <img src="images/witch-run_logo.png" />
         <form onSubmit={handleLogin} className="Login Form">
-          {errorMessage && (
-            <div className="error-message">{errorMessage}</div>
-          )}
+
+          {displayErrors()}
+
           <Input type="email"
             name="email"
             action={(event) => updateUser({ email: event.target.value })}
