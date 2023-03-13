@@ -11,12 +11,13 @@ function PlayerCard({ player, onClick, className, votes }) {
         onClick();
       }}
     >
-      <img
-        src={player.user.image}
-        alt={player.user.username}
-        title={player.user.username}
-      />
-
+      <div className="user-image">
+        <img
+          src={player.user.image}
+          alt={player.user.username}
+          title={player.user.username}
+        />
+      </div>
       <div>{player.user.username}</div>
       {votes && (
         <div>
@@ -26,9 +27,8 @@ function PlayerCard({ player, onClick, className, votes }) {
               title={voter.user.username}
               alt={voter.user.username}
               key={voter.user._id}
-              className={`vote ${
-                voter.vote.state === "Cast" ? "cast" : "locked"
-              }`}
+              className={`vote ${voter.vote.state === "Cast" ? "cast" : "locked"
+                }`}
             />
           ))}
         </div>
