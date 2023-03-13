@@ -5,6 +5,7 @@ import GameCardList from "../../components/GameCardList/GameCardList";
 import "./Lobbies.css";
 import { Link } from "react-router-dom";
 import Input from "../../components/Input/Input";
+import ButtonLink from "../../components/Button/ButtonLink";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 
 function Lobbies() {
@@ -30,21 +31,34 @@ function Lobbies() {
 
   const filteredRooms = filter
     ? rooms.filter((room) =>
-        room.spokenLanguage.toLowerCase().includes(filter.toLowerCase())
-      )
+      room.spokenLanguage.toLowerCase().includes(filter.toLowerCase())
+    )
     : rooms;
 
   return (
     <section className="Lobbies">
       {rooms.length ? (
         <>
-          <Input
-            type="text"
-            name="search"
-            label="Spoken language"
-            action={handleFilter}
-            value={filter}
-          />
+          <div className="actionBar">
+            <ButtonLink variant={"primary"} link={"/lobbies/join"}>
+              Join game
+            </ButtonLink>
+            <ButtonLink variant={"primary"} link={"/lobbies/join"}>
+              My Games
+            </ButtonLink>
+            <ButtonLink variant={"primary"} link={"/lobbies/create"}>
+              Create a game
+            </ButtonLink>
+          </div>
+          <div className="filters">
+            <Input
+              type="text"
+              name="search"
+              placeholder="Spoken language"
+              action={handleFilter}
+              value={filter}
+            />
+          </div>
           <GameCardList list={filteredRooms} displayLink={true} />
         </>
       ) : (

@@ -5,7 +5,6 @@ import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
 import Layout from "./pages/Layout/Layout";
 import Welcome from "./pages/Welcome/Welcome";
-import Home from "./pages/Home/Home";
 import NonAuthenticatedOnly from "./components/RouteProtection/NonAuthenticatedOnly";
 import AuthenticatedOnly from "./components/RouteProtection/AuthenticatedOnly";
 import Logout from "./pages/Logout/Logout";
@@ -29,11 +28,10 @@ function App() {
 
         <Route element={<AuthenticatedOnly />}>
           <Route element={<Layout />}>
-            <Route path="/home" element={<Home />} />
+            <Route path="/home" element={<Lobbies />} />
             <Route path="/lobbies">
-              <Route path="" element={<Lobbies />} />
               <Route path="create" element={<CreateGame />} />
-              <Route path="private" element={<JoinPrivateGame />} />
+              <Route path="join" element={<JoinPrivateGame />} />
               <Route path=":roomId" element={<GameRoom />} />
             </Route>
 

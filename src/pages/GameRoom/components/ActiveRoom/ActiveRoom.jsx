@@ -25,7 +25,7 @@ function ActiveRoom({ room, createGameActionHandler, displaySettings }) {
   )[0];
 
   // People that are not participating in the game cannot view the games actions
-  if (!player) return navigate("/lobbies");
+  if (!player) return navigate("/home");
 
   const isAlive = player.status === "Alive";
 
