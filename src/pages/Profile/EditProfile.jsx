@@ -5,10 +5,9 @@ import api from "../../service/service";
 import SelectImage from "../../components/SelectImage/SelectImage";
 import Button from "../../components/Button/Button";
 import Input from "../../components/Input/Input";
-import Error from "../../components/Error/Error";
+import Error from "../../components/ErrorList/ErrorList";
 
 import "./Profile.css";
-
 
 const EditProfile = ({ mode, setMode }) => {
   const { user, setUser } = useContext(AuthContext);
@@ -105,11 +104,7 @@ const EditProfile = ({ mode, setMode }) => {
     if (!Object.values(errors).length) return;
 
     return (
-      <Error>
-        {Object.values(errors).map(error => (
-          error.message && <p className="error-message">{error.message}</p>
-        ))}
-      </Error>
+      <Error messages={Object.values(errors).map(error => error.message)} />
     );
   };
 
