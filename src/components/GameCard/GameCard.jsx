@@ -2,6 +2,7 @@ import React from "react";
 import "./GameCard.css";
 import ButtonLink from "../Button/ButtonLink";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
+import PassedTime from "../PassedTime/PassedTime";
 
 function GameCard({ game, displayLink }) {
   const id = game._id;
@@ -9,9 +10,7 @@ function GameCard({ game, displayLink }) {
   const language = game.spokenLanguage;
   const participants = game.state.players.length;
   const totalParticipants = game.maxPlayers;
-  const creationTime = Math.round(
-    (new Date() - new Date(game.createdAt)) / (1000 * 60)
-  );
+
   const link = displayLink ? `/lobbies/${id}` : null;
 
   return (
@@ -25,7 +24,7 @@ function GameCard({ game, displayLink }) {
         </h3>
       </div>
       <div className="card-right">
-        <small>{creationTime} min ago</small>
+        <PassedTime model={game} />
         <div>
           {link && (
             <ButtonLink variant={"small"} link={link}>
