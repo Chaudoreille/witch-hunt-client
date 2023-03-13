@@ -8,4 +8,4 @@ const debounce = (callback, delay) => {
   };
 };
 
-module.exports = debounce;
+export default debounce;

@@ -62,8 +62,8 @@ function WaitingRoom({
               variant="primary"
               action={() => {
                 createGameActionHandler("start")()
-                  .then(() => {})
-                  .catch((error) => {});
+                  .then(() => { })
+                  .catch((error) => { });
               }}
             >
               Start Game
@@ -108,7 +108,7 @@ function WaitingRoom({
               action={() => {
                 createGameActionHandler("leave")()
                   .then(() => {
-                    navigate("/lobbies");
+                    navigate("/home");
                   })
                   .catch((error) => {
                     // ignore errors
@@ -124,8 +124,8 @@ function WaitingRoom({
               variant="primary"
               action={() => {
                 createGameActionHandler("join")()
-                  .then(() => {})
-                  .catch((error) => {});
+                  .then(() => { })
+                  .catch((error) => { });
               }}
             >
               Join Game

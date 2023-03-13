@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import "./Lobbies.css";
 
-import debounce from "../../utils/debouncs";
+import debounce from "../../utils/debounce";
 import GameCardList from "../../components/GameCardList/GameCardList";
 import Input from "../../components/Input/Input";
 import ButtonLink from "../../components/Button/ButtonLink";
