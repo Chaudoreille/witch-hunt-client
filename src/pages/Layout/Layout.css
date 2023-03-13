@@ -29,5 +29,10 @@ nav {
   border-radius: 50%;
   height: 100%;
   object-fit: cover;
+}
 
+nav .Button.logout {
+  font-size: 0.8rem;
+  width: unset;
+  padding: 0 1rem;
 }
