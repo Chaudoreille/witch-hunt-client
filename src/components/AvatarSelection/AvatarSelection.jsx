@@ -1,7 +1,23 @@
 import React, { useEffect, useState } from 'react';
 
-const AvatarSelection = ({ count, handleChange, className }) => {
+const AvatarSelection = ({ count, handleChange, className, checked, setChecked }) => {
   const [avatarList, setAvatarList] = useState([]);
+  const [selected, setSelected] = useState(null);
+
+  const select = (event) => {
+    if (setChecked instanceof Function) {
+      setChecked(true);
+    }
+    setSelected(() => event.target);
+    handleChange(event);
+  };
+
+  useEffect(() => {
+    if (!checked && selected) {
+      selected.checked = false;
+      setSelected(null);
+    }
+  }, [checked]);
 
   useEffect(() => {
     const avatarData = new Set();
@@ -16,7 +32,7 @@ const AvatarSelection = ({ count, handleChange, className }) => {
 
 
   return (
-    <div className={`AvatarSelection ${className}`} onChange={handleChange}>
+    <div className={`AvatarSelection ${className}`} onChange={select}>
       {avatarList.map((imageUri) => (
         <div key={imageUri} className="avatar">
           <input
