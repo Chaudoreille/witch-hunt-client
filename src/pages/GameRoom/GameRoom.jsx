@@ -70,7 +70,10 @@ function GameRoom() {
     return () => {
       api
         .takeAction(room._id, action, parameters)
-        .then((response) => console.log(`${action} response`, response))
+        .then((response) => {
+          console.log(`${action} response`, response);
+          if (action === "leave") return navigate("/lobbies");
+        })
         .catch((error) => console.log(`${action} error`, error));
     };
   }

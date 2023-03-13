@@ -7,7 +7,7 @@ import "./ActiveRoom.css";
 
 function ActiveRoom({ room, createGameActionHandler, displaySettings }) {
   const { user } = useContext(AuthContext);
-
+  const isPlayerAbleToLockVote = true;
   const isOwner = user._id === room.owner;
   const isSignedUp = room.state.players.some(
     (player) => player.user._id === user._id
@@ -28,16 +28,8 @@ function ActiveRoom({ room, createGameActionHandler, displaySettings }) {
           />
         ))}
       </div>
-      {displaySettings ? (
-        <div className="owner-options">
-          Change Settings Options to be added here. Feel free to move div
-          around... During Live Game, we probably don't want to allow any change
-          except Deletion?
-          <Button variant="secondary" action={() => api.deleteRoom(room._id)}>
-            Close Game and Delete Game Room
-          </Button>
-        </div>
-      ) : (
+
+      {isPlayerAbleToLockVote && (
         <div className="player-options">
           {isSignedUp && (
             <Button
