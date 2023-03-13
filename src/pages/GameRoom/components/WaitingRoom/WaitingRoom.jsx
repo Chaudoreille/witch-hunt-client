@@ -63,9 +63,7 @@ function WaitingRoom({
               action={() => {
                 createGameActionHandler("start")()
                   .then(() => {})
-                  .catch((error) => {
-                    console.log("catching error");
-                  });
+                  .catch((error) => {});
               }}
             >
               Start Game
@@ -127,9 +125,7 @@ function WaitingRoom({
               action={() => {
                 createGameActionHandler("join")()
                   .then(() => {})
-                  .catch((error) => {
-                    console.log("catching error");
-                  });
+                  .catch((error) => {});
               }}
             >
               Join Game

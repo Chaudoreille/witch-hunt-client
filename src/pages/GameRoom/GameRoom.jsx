@@ -13,17 +13,14 @@ import Messenger from "./components/Messenger/Messenger";
 function reducer(state, action) {
   if (state === null) return action;
   if (action.updatedAt > state.updatedAt) {
-    console.log("update room");
     return action;
   }
-  console.log("keep room");
   return state;
 }
 
 function errorReducer(state, action) {
-  console.log("running error reducer");
   if (action === null) return [];
-  console.log("trying to add error", action, "to", state);
+
   if (!state.includes(action)) return [...state, action];
   return state;
 }
@@ -42,8 +39,6 @@ function GameRoom() {
   const { roomId } = useParams();
   const navigate = useNavigate();
 
-  if (room === null) console.log("FIRST LOAD");
-  console.log("rendering game room");
   async function loadRoom() {
     api
       .getRoom(roomId)
@@ -62,7 +57,6 @@ function GameRoom() {
   }
 
   useEffect(() => {
-    console.log("setting new interval");
     loadRoom();
 
     const intervalId = setInterval(() => {
@@ -70,7 +64,6 @@ function GameRoom() {
     }, 1000);
 
     return () => {
-      console.log("clearing old interval");
       clearInterval(intervalId);
     };
   }, [roomId]);
@@ -89,7 +82,7 @@ function GameRoom() {
       return api
         .takeAction(room._id, action, parameters)
         .then((response) => {
-          console.log(`${action} response`, response);
+          return response.data;
         })
         .catch((error) => {
           let errorMessage;

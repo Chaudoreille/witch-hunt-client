@@ -190,8 +190,8 @@ api.sendMessage = async function (roomId, message) {
     const response = await api.post('/api/messages', {content: message, gameId:roomId})
     return response.data;
   } catch (error) {
-    if (error.response) throw Error(error.response.data.message);
-    throw Error('Error when trying to send Message:', error.message);
+    if (error.response) throw new Error(error.response.data.message);
+    throw new Error(error.message);
   }
 }
 

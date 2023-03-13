@@ -28,7 +28,7 @@ function ActiveRoom({ room, createGameActionHandler, displaySettings }) {
   if (!player) return navigate("/lobbies");
 
   const isAlive = player.status === "Alive";
-  console.log(player.vote);
+
   const isVoteCast = player.vote.state === "Cast";
   const isVoteLocked = player.vote.state === "Locked";
 
@@ -42,9 +42,7 @@ function ActiveRoom({ room, createGameActionHandler, displaySettings }) {
             onClick={() => {
               createGameActionHandler("castVote", player.user._id)()
                 .then(() => {})
-                .catch((error) => {
-                  console.log("catching error");
-                });
+                .catch((error) => {});
             }}
             className={player.status.toLowerCase()}
             votes={room.state.players.filter(
@@ -61,9 +59,7 @@ function ActiveRoom({ room, createGameActionHandler, displaySettings }) {
             action={() => {
               createGameActionHandler("lockVote")()
                 .then(() => {})
-                .catch((error) => {
-                  console.log("catching error");
-                });
+                .catch((error) => {});
             }}
           >
             Lock Your Vote

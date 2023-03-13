@@ -36,7 +36,6 @@ function Messenger({ room, handleErrors }) {
     }, 1000);
 
     return () => {
-      console.log("clearing old interval");
       clearInterval(intervalId);
     };
   }, []);
@@ -56,10 +55,14 @@ function Messenger({ room, handleErrors }) {
           api
             .sendMessage(room._id, currentInput)
             .then((response) => {
-              console.log(response);
               setCurrentInput("");
             })
-            .catch((error) => console.log(error));
+            .catch((error) => {
+              let errorMessage;
+              if (error.response) errorMessage = error.response.data.message;
+              else errorMessage = error.message;
+              handleErrors(errorMessage);
+            });
         }}
       >
         <Input
