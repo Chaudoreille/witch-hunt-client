@@ -4,14 +4,33 @@ import { useContext } from "react";
 import { AuthContext } from "../../../../context/AuthContext";
 import api from "../../../../service/service";
 import "./ActiveRoom.css";
+import { useNavigate } from "react-router-dom";
+
+function isAlive(user, gameroom) {
+  const player = gameroom.state.players.filter(
+    (player) => player.user._id === user._id
+  )[0];
+  if (!player) return undefined;
+
+  if (player.status === "Alive") return true;
+  return false;
+}
 
 function ActiveRoom({ room, createGameActionHandler, displaySettings }) {
   const { user } = useContext(AuthContext);
-  const isPlayerAbleToLockVote = true;
-  const isOwner = user._id === room.owner;
-  const isSignedUp = room.state.players.some(
+  const navigate = useNavigate();
+
+  const player = room.state.players.filter(
     (player) => player.user._id === user._id
-  );
+  )[0];
+
+  // People that are not participating in the game cannot view the games actions
+  if (!player) return navigate("/lobbies");
+
+  const isAlive = player.status === "Alive";
+  console.log(player.vote);
+  const isVoteCast = player.vote.state === "Cast";
+  const isVoteLocked = player.vote.state === "Locked";
 
   return (
     <div className="ActiveRoom">
@@ -29,18 +48,16 @@ function ActiveRoom({ room, createGameActionHandler, displaySettings }) {
         ))}
       </div>
 
-      {isPlayerAbleToLockVote && (
-        <div className="player-options">
-          {isSignedUp && (
-            <Button
-              variant="primary"
-              action={createGameActionHandler("lockVote")}
-            >
-              Lock Your Vote
-            </Button>
-          )}
-        </div>
-      )}
+      <div className="player-options">
+        {isAlive && isVoteCast && (
+          <Button
+            variant="primary"
+            action={createGameActionHandler("lockVote")}
+          >
+            Lock Your Vote
+          </Button>
+        )}
+      </div>
     </div>
   );
 }
