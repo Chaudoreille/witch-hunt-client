@@ -1,7 +1,7 @@
 import React from 'react';
-import "./ErrorList.css";
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import "./ErrorList.css";
 
 const ErrorList = ({ messages, closeAction }) => {
   return (

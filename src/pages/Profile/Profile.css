@@ -6,6 +6,23 @@
   gap: 1rem;
 }
 
+.Profile .actionBar {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+}
+
+.Profile .actionBar .closeButton {
+  color: white;
+  display: block;
+  height: min-content;
+  line-height: 0;
+}
+
+.Profile .actionBar .closeButton .close-icon {
+  font-size: 2rem;
+}
+
 .Profile label {
   display: inline-block;
   text-align: right;
@@ -60,8 +77,6 @@
   background-color: var(--grey);
   cursor: pointer;
 }
-
-
 
 .Profile form .Input {
   width: 100%;
