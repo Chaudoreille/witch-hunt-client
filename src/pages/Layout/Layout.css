@@ -31,6 +31,8 @@ nav {
 
 nav .Button.logout {
   font-size: 0.8rem;
-  width: unset;
+  width: max-content;
+  margin-right: 1rem;
   padding: 0 1rem;
+  outline: 2px solid var(--borderButton);
 }
