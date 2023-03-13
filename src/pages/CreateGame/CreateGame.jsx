@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import GameRoomForm from "../../components/GameRoomForm/GameRoomForm";
 import "./CreateGame.css";
-import ErrorContainer from "../../components/Error/Error.jsx";
 
 function reducer(state, action) {
   return { ...state, ...action };
