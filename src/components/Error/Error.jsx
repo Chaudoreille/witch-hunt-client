@@ -1,8 +1,6 @@
 import React from 'react';
 import "./Error.css";
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
-// alternative error icon
-// import ErrorIcon from '@mui/icons-material/Error';
 
 const Error = ({ children }) => {
   return (

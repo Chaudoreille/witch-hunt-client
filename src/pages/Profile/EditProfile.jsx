@@ -132,8 +132,8 @@ const EditProfile = ({ mode, setMode }) => {
     return (
       <>
         <h3>User Information</h3>
+        {displayErrors()}
         <form className='EditProfile' onSubmit={submitUser}>
-          {displayErrors()}
           <Input
             type="text" name="username" label="Username" placeholder="Username"
             action={handleChange} value={userData.username}

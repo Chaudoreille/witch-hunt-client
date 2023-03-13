@@ -1,0 +1,54 @@
+.CreateGame form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.CreateGame .Input input {
+  margin-left: 1rem;
+  width: 20vmax;
+}
+
+.CreateGame .Input label {
+  display: inline-block;
+  width: 8ch;
+  text-align: right;
+}
+
+.CreateGame .Button {
+  margin-top: 2rem;
+}
+
+.visib-toggle {
+  background-color: var(--darkGrey);
+  padding: 14px 5px;
+  border-radius: 30px;
+  display: inline-block
+}
+
+.visib-toggle [name="visib"] {
+  display: none
+}
+
+.visib-toggle input[type="radio"]+label {
+  background-color: var(--darkGrey);
+  color: var(--white);
+  padding: 10px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.visib-toggle input[type="radio"]:checked+label {
+  background-color: var(--blue);
+  ;
+}
+
+.input-toggle div {
+  margin-left: 1rem;
+}
+
+.visib-toggle {
+  margin-left: 1rem;
+  width: max-content;
+}

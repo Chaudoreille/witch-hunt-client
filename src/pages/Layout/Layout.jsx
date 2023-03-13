@@ -26,7 +26,6 @@ function Layout() {
             <img src="/images/witch-run_logo.png" />
           </NavLink>
           <NavLink to="/profile" className="pp-nav">
-            {" "}
             <img src={user.image} />
           </NavLink>
         </nav>

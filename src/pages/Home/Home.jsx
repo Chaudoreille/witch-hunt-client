@@ -5,9 +5,8 @@ import "./Home.css";
 
 function Home() {
   return (
-    <section className="Home">
-      <div className="column">
-        {" "}
+    <section className="flex-center-section auth">
+      <div className="window-center-grey auth">
         <ButtonLink variant={"primary"} link={"/lobbies/create"}>
           Create a game
         </ButtonLink>
