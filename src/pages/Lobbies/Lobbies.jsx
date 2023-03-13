@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import api from "../../service/service";
-
-import GameCardList from "../../components/GameCardList/GameCardList";
-import "./Lobbies.css";
 import { Link } from "react-router-dom";
+
+import "./Lobbies.css";
+
+import debounce from "../../utils/debouncs";
+import GameCardList from "../../components/GameCardList/GameCardList";
 import Input from "../../components/Input/Input";
 import ButtonLink from "../../components/Button/ButtonLink";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 
-function Lobbies({ filters }) {
+function Lobbies() {
   const [rooms, setRooms] = useState([]);
   const [filter, setFilter] = useState("");
 
