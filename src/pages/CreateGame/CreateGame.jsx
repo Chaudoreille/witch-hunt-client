@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import GameRoomForm from "../../components/GameRoomForm/GameRoomForm";
 import "./CreateGame.css";
+import ErrorList from "../../components/ErrorList/ErrorList";
 
 function reducer(state, action) {
   return { ...state, ...action };
@@ -50,15 +51,7 @@ function CreateGame() {
           <div>@{user.username}, let's create your game! </div>
         </div>
         {errors.length > 0 && (
-          <>
-            {" "}
-            <ul>
-              {errors.map((error) => (
-                <li>{error}</li>
-              ))}
-            </ul>
-            <button onClick={clearErrors}>Clear Errors</button>
-          </>
+          <ErrorList messages={errors} closeAction={clearErrors} />
         )}
         <GameRoomForm
           handleSubmit={handleSubmit}
