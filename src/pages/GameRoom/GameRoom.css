@@ -5,6 +5,7 @@
 .GameRoom {
     margin: 3rem 10rem;
     display: flex;
+    flex-direction: column;
     gap: 3rem;
 }
 
@@ -28,4 +29,8 @@
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+}
+
+.GameRoom .ErrorList {
+    width: 100%;
 }

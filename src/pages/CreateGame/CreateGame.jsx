@@ -1,7 +1,5 @@
 import React, { useReducer, useContext, useState } from "react";
 import api from "../../service/service";
-import Input from "../../components/Input/Input";
-import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import GameRoomForm from "../../components/GameRoomForm/GameRoomForm";
@@ -39,10 +37,6 @@ function CreateGame() {
       });
   }
 
-  function clearErrors() {
-    setErrors([]);
-  }
-
   return (
     <section className="flex-center-section auth">
       <div className="window-center-grey auth CreateGame">
@@ -51,7 +45,7 @@ function CreateGame() {
           <div>@{user.username}, let's create your game! </div>
         </div>
         {errors.length > 0 && (
-          <ErrorList messages={errors} closeAction={clearErrors} />
+          <ErrorList messages={errors} closeAction={() => setErrors([])} />
         )}
         <GameRoomForm
           handleSubmit={handleSubmit}

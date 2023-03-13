@@ -8,6 +8,7 @@ import FilterNoneOutlinedIcon from "@mui/icons-material/FilterNoneOutlined";
 import GameRoomForm from "../../../../components/GameRoomForm/GameRoomForm";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import { useNavigate } from "react-router-dom";
 
 function reducer(state, action) {
   return { ...state, ...action };
@@ -24,6 +25,7 @@ function WaitingRoom({
     reducer,
     room
   );
+  const navigate = useNavigate();
   const isOwner = user._id === room.owner;
   const isSignedUp = room.state.players.some(
     (player) => player.user._id === user._id
@@ -56,7 +58,16 @@ function WaitingRoom({
           <PermIdentityIcon className="icon-user" />
           {room.state.players.length}/{room.maxPlayers}
           {isOwner && (
-            <Button variant="primary" action={createGameActionHandler("start")}>
+            <Button
+              variant="primary"
+              action={() => {
+                createGameActionHandler("start")()
+                  .then(() => {})
+                  .catch((error) => {
+                    console.log("catching error");
+                  });
+              }}
+            >
               Start Game
             </Button>
           )}
@@ -94,11 +105,33 @@ function WaitingRoom({
       ) : (
         <div className="player-options">
           {isSignedUp ? (
-            <Button variant="primary" action={createGameActionHandler("leave")}>
+            <Button
+              variant="primary"
+              action={() => {
+                createGameActionHandler("leave")()
+                  .then(() => {
+                    navigate("/lobbies");
+                  })
+                  .catch((error) => {
+                    // ignore errors
+                    // we already add them to errorlist when the gamehandler is executed,
+                    // no further action required
+                  });
+              }}
+            >
               Leave Game
             </Button>
           ) : (
-            <Button variant="primary" action={createGameActionHandler("join")}>
+            <Button
+              variant="primary"
+              action={() => {
+                createGameActionHandler("join")()
+                  .then(() => {})
+                  .catch((error) => {
+                    console.log("catching error");
+                  });
+              }}
+            >
               Join Game
             </Button>
           )}

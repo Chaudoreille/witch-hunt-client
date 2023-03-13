@@ -39,7 +39,13 @@ function ActiveRoom({ room, createGameActionHandler, displaySettings }) {
           <PlayerCard
             key={player.user._id}
             player={player}
-            onClick={createGameActionHandler("castVote", player.user._id)}
+            onClick={() => {
+              createGameActionHandler("castVote", player.user._id)()
+                .then(() => {})
+                .catch((error) => {
+                  console.log("catching error");
+                });
+            }}
             className={player.status.toLowerCase()}
             votes={room.state.players.filter(
               (p) => p.vote.target === player.user._id
@@ -52,7 +58,13 @@ function ActiveRoom({ room, createGameActionHandler, displaySettings }) {
         {isAlive && isVoteCast && (
           <Button
             variant="primary"
-            action={createGameActionHandler("lockVote")}
+            action={() => {
+              createGameActionHandler("lockVote")()
+                .then(() => {})
+                .catch((error) => {
+                  console.log("catching error");
+                });
+            }}
           >
             Lock Your Vote
           </Button>

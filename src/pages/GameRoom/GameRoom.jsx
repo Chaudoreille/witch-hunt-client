@@ -4,6 +4,7 @@ import { AuthContext } from "../../context/AuthContext";
 import WaitingRoom from "./components/WaitingRoom/WaitingRoom";
 import ActiveRoom from "./components/ActiveRoom/ActiveRoom";
 import api from "../../service/service";
+import ErrorList from "../../components/ErrorList/ErrorList";
 
 import "./GameRoom.css";
 import GameCompletedroom from "./components/GameCompletedRoom/GameCompletedroom";
@@ -25,7 +26,7 @@ function reducer(state, action) {
  */
 function GameRoom() {
   const [room, dispatchRoom] = useReducer(reducer, null);
-
+  const [errors, setErrors] = useState([]);
   const [displaySettings, setDisplaySettings] = useState(false);
 
   const { user } = useContext(AuthContext);
@@ -66,15 +67,30 @@ function GameRoom() {
     };
   }, [roomId]);
 
+  /**
+   * Creates a function that will contact the backend to execute the specified action
+   * with the specified parameters (if any). Returns a promise that resolves to the
+   * returned data, or rejects to the error message.
+   * Will also add the error message to the error list
+   * @param {String} action
+   * @param  {...any} parameters
+   * @returns
+   */
   function createGameActionHandler(action, ...parameters) {
-    return () => {
-      api
+    return async () => {
+      return api
         .takeAction(room._id, action, parameters)
         .then((response) => {
           console.log(`${action} response`, response);
-          if (action === "leave") return navigate("/lobbies");
         })
-        .catch((error) => console.log(`${action} error`, error));
+        .catch((error) => {
+          let errorMessage;
+          if (error.response) errorMessage = error.response.data.message;
+          else errorMessage = error.message;
+          if (!errors.includes(errorMessage))
+            setErrors((currentList) => [...currentList, errorMessage]);
+          throw new Error("returning action error");
+        });
     };
   }
 
@@ -90,34 +106,39 @@ function GameRoom() {
 
   return (
     <section className="GameRoom">
-      <div id="game">
-        {room.state.status === "Lobby" && (
-          <WaitingRoom
-            room={room}
-            createGameActionHandler={createGameActionHandler}
-            displaySettings={displaySettings}
-            setDisplaySettings={setDisplaySettings}
-          />
-        )}
-        {room.state.status === "Started" && (
-          <ActiveRoom
-            room={room}
-            createGameActionHandler={createGameActionHandler}
-            displaySettings={displaySettings}
-            setDisplaySettings={setDisplaySettings}
-          />
-        )}
-        {room.state.status === "Completed" && (
-          <GameCompletedroom
-            room={room}
-            createGameActionHandler={createGameActionHandler}
-            displaySettings={displaySettings}
-            setDisplaySettings={setDisplaySettings}
-          />
-        )}
-      </div>
-      <div id="messenger">
-        <Messenger room={room} />
+      {errors.length > 0 && (
+        <ErrorList messages={errors} closeAction={() => setErrors([])} />
+      )}
+      <div className="row">
+        <div id="game">
+          {room.state.status === "Lobby" && (
+            <WaitingRoom
+              room={room}
+              createGameActionHandler={createGameActionHandler}
+              displaySettings={displaySettings}
+              setDisplaySettings={setDisplaySettings}
+            />
+          )}
+          {room.state.status === "Started" && (
+            <ActiveRoom
+              room={room}
+              createGameActionHandler={createGameActionHandler}
+              displaySettings={displaySettings}
+              setDisplaySettings={setDisplaySettings}
+            />
+          )}
+          {room.state.status === "Completed" && (
+            <GameCompletedroom
+              room={room}
+              createGameActionHandler={createGameActionHandler}
+              displaySettings={displaySettings}
+              setDisplaySettings={setDisplaySettings}
+            />
+          )}
+        </div>
+        <div id="messenger">
+          <Messenger room={room} />
+        </div>
       </div>
     </section>
   );
