@@ -6,6 +6,7 @@ import ActiveRoom from "./components/ActiveRoom/ActiveRoom";
 import api from "../../service/service";
 import ErrorList from "../../components/ErrorList/ErrorList";
 import Loader from "../../components/Loader/Loader";
+import io from 'socket.io-client';
 
 import "./GameRoom.css";
 import GameCompletedroom from "./components/GameCompletedRoom/GameCompletedroom";
@@ -34,8 +35,10 @@ function GameRoom() {
   const [room, dispatchRoom] = useReducer(reducer, null);
   const [errors, dispatchErrors] = useReducer(errorReducer, []);
   const [displaySettings, setDisplaySettings] = useState(false);
+  const [socket, setSocket] = useState(null);
+  const [messages, setMessages] = useState([]);
 
-  const { user } = useContext(AuthContext);
+  const { user, token } = useContext(AuthContext);
 
   const { roomId } = useParams();
   const navigate = useNavigate();
@@ -56,18 +59,34 @@ function GameRoom() {
         dispatchErrors(errorMessage);
       });
   }
-
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   useEffect(() => {
     loadRoom();
+    const ioSocket = io(import.meta.env.VITE_BACKEND_URL, {
+      auth: {
+        token: token,
+      },
+      query: {
+        game: roomId,
+      }
+    });
+    ioSocket.on("message", (message) => {
+      setMessages(oldMessages => [...oldMessages, message]);
+    });
 
-    const intervalId = setInterval(() => {
-      loadRoom();
-    }, 1000);
+    setSocket(ioSocket);
 
     return () => {
-      clearInterval(intervalId);
+      ioSocket.emit('end');
     };
   }, [roomId]);
+
+  function sendMessage(message) {
+    socket.emit("message", message);
+  };
+
 
   /**
    * Creates a function that will contact the backend to execute the specified action
@@ -137,7 +156,7 @@ function GameRoom() {
         )}
       </div>
       <div id="messenger">
-        <Messenger room={room} handleErrors={dispatchErrors} />
+        <Messenger room={room} sendMessage={sendMessage} handleErrors={dispatchErrors} messages={messages} />
       </div>
     </section>
   );

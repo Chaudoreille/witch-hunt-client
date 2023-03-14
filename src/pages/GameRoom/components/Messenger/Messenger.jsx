@@ -1,44 +1,51 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Messenger.css";
 import Input from "../../../../components/Input/Input";
 import Button from "../../../../components/Button/Button";
 import SendIcon from "@mui/icons-material/Send";
-import api from "../../../../service/service";
 import MessageCard from "../MessageCard/MessageCard";
 
-function Messenger({ room, handleErrors }) {
-  const [messages, setMessages] = useState([]);
+function Messenger({ room, handleErrors, sendMessage, messages }) {
   const [currentInput, setCurrentInput] = useState("");
-  const [messagesLastUpdated] = useState({
-    at: null,
-  });
+  // const [messagesLastUpdated] = useState({
+  //   at: null,
+  // });
 
-  async function loadMessages() {
-    api
-      .getMessages(room._id, messagesLastUpdated.at)
-      .then((response) => {
-        if (response.length > 0) {
-          setMessages((oldMessages) => [...oldMessages, ...response]);
-          messagesLastUpdated.at = response.at(-1).updatedAt;
-        }
-      })
-      .catch((error) => {
-        let errorMessage;
-        if (error.response) errorMessage = error.response.data.message;
-        else errorMessage = error.message;
-        handleErrors(errorMessage);
-      });
+  // async function loadMessages() {
+  //   api
+  //     .getMessages(room._id, messagesLastUpdated.at)
+  //     .then((response) => {
+  //       if (response.length > 0) {
+  //         setMessages((oldMessages) => [...oldMessages, ...response]);
+  //         messagesLastUpdated.at = response.at(-1).updatedAt;
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       let errorMessage;
+  //       if (error.response) errorMessage = error.response.data.message;
+  //       else errorMessage = error.message;
+  //       handleErrors(errorMessage);
+  //     });
+  // }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const message = { content: currentInput };
+    sendMessage(message);
+    setCurrentInput("");
+
+    // api
+    //   .sendMessage(room._id, currentInput)
+    //   .then((response) => {
+    //     setCurrentInput("");
+    //   })
+    //   .catch((error) => {
+    //     let errorMessage;
+    //     if (error.response) errorMessage = error.response.data.message;
+    //     else errorMessage = error.message;
+    //     handleErrors(errorMessage);
+    //   });
   }
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      loadMessages();
-    }, 1000);
-
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, []);
 
   return (
     <div className="Messenger">
@@ -50,20 +57,7 @@ function Messenger({ room, handleErrors }) {
       </div>
       <form
         className="messenger-form"
-        onSubmit={(event) => {
-          event.preventDefault();
-          api
-            .sendMessage(room._id, currentInput)
-            .then((response) => {
-              setCurrentInput("");
-            })
-            .catch((error) => {
-              let errorMessage;
-              if (error.response) errorMessage = error.response.data.message;
-              else errorMessage = error.message;
-              handleErrors(errorMessage);
-            });
-        }}
+        onSubmit={handleSubmit}
       >
         <Input
           value={currentInput}
