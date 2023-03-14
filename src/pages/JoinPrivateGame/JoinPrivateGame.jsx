@@ -18,7 +18,7 @@ function JoinPrivateGame() {
   function handleSubmit(event) {
     event.preventDefault();
     if (pin.length !== 6) {
-      errors.push("Pin must be 6 characters long and alphanumeric");
+      setErrors(["Pin must be 6 characters long and alphanumeric"]);
       return;
     }
 
@@ -29,7 +29,7 @@ function JoinPrivateGame() {
         navigate(`/games/${roomId}`);
       })
       .catch((error) => {
-        setErrors(error.message);
+        setErrors([error.message]);
       });
   }
 
@@ -39,8 +39,8 @@ function JoinPrivateGame() {
   return (
     <section className="flex-center-section auth JoinPrivateGame">
       <div className="window-center-grey auth">
-        <ErrorList messages={errors} />
         <form>
+          {errors.length > 0 && <ErrorList messages={errors} />}
           <Input
             type="text"
             name="pin"
