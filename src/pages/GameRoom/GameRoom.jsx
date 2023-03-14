@@ -12,14 +12,6 @@ import "./GameRoom.css";
 import GameCompletedroom from "./components/GameCompletedRoom/GameCompletedroom";
 import Messenger from "./components/Messenger/Messenger";
 
-function reducer(state, action) {
-  if (state === null) return action;
-  if (action.updatedAt > state.updatedAt) {
-    return action;
-  }
-  return state;
-}
-
 function errorReducer(state, action) {
   if (action === null) return [];
 
@@ -32,7 +24,7 @@ function errorReducer(state, action) {
  * the current state of the game
  */
 function GameRoom() {
-  const [room, dispatchRoom] = useReducer(reducer, null);
+  const [room, setRoom] = useState(null);
   const [errors, dispatchErrors] = useReducer(errorReducer, []);
   const [displaySettings, setDisplaySettings] = useState(false);
   const [socket, setSocket] = useState(null);
@@ -43,50 +35,39 @@ function GameRoom() {
   const { roomId } = useParams();
   const navigate = useNavigate();
 
-  async function loadRoom() {
-    api
-      .getRoom(roomId)
-      .then((fetchedRoom) => {
-        // console.log(
-        //   "fetching room updates " + new Date().toISOString().slice(11, 19)
-        // );
-
-        dispatchRoom(fetchedRoom);
-      })
-      .catch((error) => {
-        const errorMessage = "Unable to load room data";
-
-        dispatchErrors(errorMessage);
-      });
-  }
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   useEffect(() => {
-    loadRoom();
     const ioSocket = io(import.meta.env.VITE_BACKEND_URL, {
       auth: {
         token: token,
       },
       query: {
         game: roomId,
-      }
+      },
     });
     ioSocket.on("message", (message) => {
-      setMessages(oldMessages => [...oldMessages, message]);
+      setMessages((oldMessages) => [...oldMessages, message]);
     });
+
+    ioSocket.on("update-room", (room) => {
+      console.log("updating room");
+      setRoom(room);
+    });
+
+    ioSocket.on("error", (errorMessage) => dispatchErrors(errorMessage));
 
     setSocket(ioSocket);
 
     return () => {
-      ioSocket.emit('end');
+      ioSocket.emit("end");
     };
   }, [roomId]);
 
   function sendMessage(message) {
     socket.emit("message", message);
-  };
-
+  }
 
   /**
    * Creates a function that will contact the backend to execute the specified action
@@ -156,7 +137,11 @@ function GameRoom() {
         )}
       </div>
       <div id="messenger">
-        <Messenger room={room} sendMessage={sendMessage} handleErrors={dispatchErrors} messages={messages} />
+        <Messenger
+          room={room}
+          sendMessage={sendMessage}
+          handleErrors={dispatchErrors}
+          messages={messages} />
       </div>
     </section>
   );
