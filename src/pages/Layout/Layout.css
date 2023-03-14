@@ -17,17 +17,6 @@ nav {
   top: 1vh;
 }
 
-.pp-nav {
-  height: 6vh;
-  aspect-ratio: 1;
-  margin-right: 1rem;
-}
-
-.pp-nav img {
-  border-radius: 50%;
-  height: 100%;
-  object-fit: cover;
-}
 
 nav .Button.logout {
   font-size: 0.8rem;
@@ -35,4 +24,17 @@ nav .Button.logout {
   margin-right: 1rem;
   padding: 0 1rem;
   outline: 2px solid var(--borderButton);
+}
+
+nav .actions-nav {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin: 1.5rem;
+}
+
+@media (max-width: 550px) {
+  nav .actions-nav {
+    justify-content: space-between;
+  }
 }
