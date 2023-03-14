@@ -5,7 +5,9 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import EditIcon from '@mui/icons-material/Edit';
 import EditProfile from "./EditProfile";
 import Button from "../../components/Button/Button";
+import ProfilePicture from "../../components/ProfilePicture/ProfilePicture";
 import "./Profile.css";
+
 
 /**
  * Profile Page
@@ -31,26 +33,24 @@ function Profile() {
         ) : (
           <>
             <div className="profile-pic-wrapper">
-              <div className="image-wrapper">
-                <img src={user.image} alt="avatar" />
-              </div>
+              <ProfilePicture user={user} />
               <button className="image-edit" onClick={() => setEditMode("image")}>
                 <EditIcon />
               </button>
             </div>
             <div className="user-info-wrapper">
-              <label>Username</label>
-              <span>{user.username}</span>
-              <label>Email</label>
-              <span>{user.email}</span>
-            </div >
+              <p className="label">Username</p>
+              <p className="info">{user.username}</p>
+              <p className="label">Email</p>
+              <p className="info">{user.email}</p>
+            </div>
             <Button variant="small" action={() => setEditMode("info")}>
               Edit user info
             </Button>
           </>
         )}
-      </div >
-    </section >
+      </div>
+    </section>
   );
 }
 
