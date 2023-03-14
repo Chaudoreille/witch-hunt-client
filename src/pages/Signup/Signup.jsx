@@ -4,7 +4,7 @@ import SelectImage from "../../components/SelectImage/SelectImage";
 import SignupForm from "../../components/SignupForm/SignupForm";
 import api from "../../service/service";
 import "./Signup.css";
-import Error from "../../components/ErrorList/ErrorList"
+import Error from "../../components/ErrorList/ErrorList";
 
 
 
@@ -53,7 +53,7 @@ function Signup() {
     if (!emailRegExp.test(email)) newErrors.email = { message: "Please enter a valid email address!" };
 
     if (Object.values(newErrors).length) {
-      setErrors(newErrors)
+      setErrors(newErrors);
       return;
     } else {
       setDisplayForm(false);
@@ -87,7 +87,9 @@ function Signup() {
     if (user.image) form.append("image", user.image);
 
     const signupResult = await api.signup(user);
+
     if (!signupResult.errors) return navigate("/login");
+
     setDisplayForm(true);
     setErrors(signupResult.errors);
   }
