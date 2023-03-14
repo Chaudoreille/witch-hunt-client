@@ -18,7 +18,7 @@ function Welcome() {
         rooms = rooms.slice(0, 10);
         setRooms(rooms);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.error(error));
   }, []);
 
   return (

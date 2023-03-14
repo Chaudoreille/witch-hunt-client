@@ -43,9 +43,9 @@ function GameRoom() {
     api
       .getRoom(roomId)
       .then((fetchedRoom) => {
-        console.log(
-          "fetching room updates " + new Date().toISOString().slice(11, 19)
-        );
+        // console.log(
+        //   "fetching room updates " + new Date().toISOString().slice(11, 19)
+        // );
 
         dispatchRoom(fetchedRoom);
       })
