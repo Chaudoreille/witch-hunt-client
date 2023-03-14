@@ -46,7 +46,6 @@ function Login() {
 
 
   const displayErrors = () => {
-    console.log(errors.found)
     if (!Object.values(errors).length) return;
 
     return (

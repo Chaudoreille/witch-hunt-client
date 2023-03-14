@@ -109,36 +109,34 @@ function GameRoom() {
       {errors.length > 0 && (
         <ErrorList messages={errors} closeAction={() => dispatchErrors(null)} />
       )}
-      <div className="row">
-        <div id="game">
-          {room.state.status === "Lobby" && (
-            <WaitingRoom
-              room={room}
-              createGameActionHandler={createGameActionHandler}
-              displaySettings={displaySettings}
-              setDisplaySettings={setDisplaySettings}
-            />
-          )}
-          {room.state.status === "Started" && (
-            <ActiveRoom
-              room={room}
-              createGameActionHandler={createGameActionHandler}
-              displaySettings={displaySettings}
-              setDisplaySettings={setDisplaySettings}
-            />
-          )}
-          {room.state.status === "Completed" && (
-            <GameCompletedroom
-              room={room}
-              createGameActionHandler={createGameActionHandler}
-              displaySettings={displaySettings}
-              setDisplaySettings={setDisplaySettings}
-            />
-          )}
-        </div>
-        <div id="messenger">
-          <Messenger room={room} handleErrors={dispatchErrors} />
-        </div>
+      <div id="game">
+        {room.state.status === "Lobby" && (
+          <WaitingRoom
+            room={room}
+            createGameActionHandler={createGameActionHandler}
+            displaySettings={displaySettings}
+            setDisplaySettings={setDisplaySettings}
+          />
+        )}
+        {room.state.status === "Started" && (
+          <ActiveRoom
+            room={room}
+            createGameActionHandler={createGameActionHandler}
+            displaySettings={displaySettings}
+            setDisplaySettings={setDisplaySettings}
+          />
+        )}
+        {room.state.status === "Completed" && (
+          <GameCompletedroom
+            room={room}
+            createGameActionHandler={createGameActionHandler}
+            displaySettings={displaySettings}
+            setDisplaySettings={setDisplaySettings}
+          />
+        )}
+      </div>
+      <div id="messenger">
+        <Messenger room={room} handleErrors={dispatchErrors} />
       </div>
     </section>
   );

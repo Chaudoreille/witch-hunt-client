@@ -3,32 +3,29 @@
 }
 
 .GameRoom {
-    margin: 3rem 10rem;
+    min-height: 120vh;
+    padding: 2rem;
     display: flex;
-    flex-direction: column;
-    gap: 3rem;
 }
 
-.GameRoom .room-header{
+.GameRoom .room-header {
     display: flex;
     justify-content: space-between;
-    color: white;   
-}
-
-.GameRoom .row {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    color: white;
 }
 
 .GameRoom #game {
-    flex-grow: 2;
+    display: flex;
+    width: 55vw;
 }
 
 .GameRoom #messenger {
-    flex-grow: 1;
+    position: fixed;
+    width: 35vw;
     display: flex;
     flex-direction: column;
+    right: 2rem;
+    bottom: 1rem;
 }
 
 .GameRoom .ErrorList {
