@@ -2,6 +2,7 @@ import React from "react";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
 import "./GameRoomForm.css";
+import Toggle from "../Toggle/Toggle";
 
 function GameRoomForm({
   handleSubmit,
@@ -9,6 +10,7 @@ function GameRoomForm({
   submitButtonLabel,
   dispatchRoomChanges,
 }) {
+
   return (
     <form onSubmit={handleSubmit}>
       <Input
@@ -29,38 +31,7 @@ function GameRoomForm({
         }
       />
 
-      <div className="input-toggle">
-        <label>Visibility</label>
-        <div className="visib-toggle">
-          <input
-            checked={room.isPublished}
-            type="radio"
-            id="visib-toggle-public"
-            name="visib"
-            value={room.isPublished}
-            onChange={(event) => {
-              dispatchRoomChanges({ isPublished: event.target.checked });
-            }}
-          ></input>
-          <label className="radio-button" htmlFor="visib-toggle-public">
-            Public
-          </label>
-
-          <input
-            checked={!room.isPublished}
-            type="radio"
-            id="visib-toggle-private"
-            name="visib"
-            value={!room.isPublished}
-            onChange={(event) => {
-              dispatchRoomChanges({ isPublished: !event.target.checked });
-            }}
-          ></input>
-          <label className="radio-button" htmlFor="visib-toggle-private">
-            Private
-          </label>
-        </div>
-      </div>
+      <Toggle obj={room} action={dispatchRoomChanges} />
 
       <Input
         name="spokenLanguage"

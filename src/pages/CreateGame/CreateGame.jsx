@@ -5,6 +5,7 @@ import { AuthContext } from "../../context/AuthContext";
 import GameRoomForm from "../../components/GameRoomForm/GameRoomForm";
 import "./CreateGame.css";
 import ErrorList from "../../components/ErrorList/ErrorList";
+import ProfilePicture from "../../components/ProfilePicture/ProfilePicture"
 
 function reducer(state, action) {
   return { ...state, ...action };
@@ -41,8 +42,8 @@ function CreateGame() {
     <section className="flex-center-section auth">
       <div className="window-center-grey auth CreateGame">
         <div className="header-row">
-          <img src={user.image} alt={user.username} />
-          <div>@{user.username}, let's create your game! </div>
+          <ProfilePicture user={user} />
+          <div>@{user.username},<br /> let's create your game! </div>
         </div>
         {errors.length > 0 && <ErrorList messages={errors} />}
         <GameRoomForm

@@ -1,7 +1,7 @@
 import React from "react";
 import "./Input.css";
 
-function Input({ type, name, action, className, label, value, placeholder, min }) {
+function Input({ type, name, action, className, label, value, placeholder }) {
   const options = {
     id: name,
     name: name,
@@ -14,10 +14,6 @@ function Input({ type, name, action, className, label, value, placeholder, min }
     options.checked = value;
   } else {
     options.value = value;
-  }
-
-  if (type === "number") {
-    options.min = min;
   }
 
   return (
