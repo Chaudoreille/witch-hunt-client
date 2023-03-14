@@ -12,17 +12,17 @@ import ErrorList from "../../components/ErrorList/ErrorList";
 
 function Lobbies() {
   const { user } = useContext(AuthContext);
-  const [rooms, setRooms] = useState([]);
+  const [rooms, setRooms] = useState(null);
   const [filters, setFilters] = useState({});
   const [errors, setErrors] = useState([]);
 
   function handleFilter(event) {
     const { name } = event.target;
-    setFilters(oldFilters => ({ ...oldFilters, [name]: event.target.value }));
+    setFilters((oldFilters) => ({ ...oldFilters, [name]: event.target.value }));
   }
 
   const toggleOwner = useCallback(() => {
-    setFilters(oldFilters => {
+    setFilters((oldFilters) => {
       if (oldFilters.hasOwnProperty("owner")) {
         const { owner, ...newFilters } = oldFilters;
         return newFilters;
@@ -43,7 +43,7 @@ function Lobbies() {
   };
 
   // we debounce the query call to avoid unnecessary calls on filter changes
-  // debounce returns a new function on each call. 
+  // debounce returns a new function on each call.
   // useCallback ensures function is created only once
   const optimizedQuery = useCallback(debounce(queryRooms, 400), []);
 
@@ -78,15 +78,13 @@ function Lobbies() {
           value={filters.name || ""}
         />
       </div>
-      {!errors.length ||
-        <ErrorList messages={errors} />
-      }
-      {rooms.length ? (
+      {!errors.length || <ErrorList messages={errors} />}
+      {!rooms ? (
+        <div style={{ color: "white" }}>Loading</div>
+      ) : rooms.length ? (
         <GameCardList list={rooms} displayLink={true} />
       ) : (
-        <h2>
-          No active lobbies match your current filters.
-        </h2>
+        <h2>No active lobbies match your current filters.</h2>
       )}
     </section>
   );

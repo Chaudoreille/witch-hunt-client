@@ -6,6 +6,7 @@
     min-height: 120vh;
     padding: 2rem;
     display: flex;
+    flex-direction: column;
 }
 
 .GameRoom .room-header {
@@ -30,4 +31,11 @@
 
 .GameRoom .ErrorList {
     width: 100%;
+}
+
+.GameRoom .row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: white;
 }

@@ -4,10 +4,11 @@ import Button from "../../components/Button/Button";
 import "./JoinPrivateGame.css";
 import api from "../../service/service";
 import { useNavigate } from "react-router-dom";
+import ErrorList from "../../components/ErrorList/ErrorList";
 
 function JoinPrivateGame() {
   const [pin, setPin] = useState("");
-  const errors = [];
+  const [errors, setErrors] = useState([]);
   function handleInputChange(event) {
     setPin(event.target.value);
   }
@@ -21,9 +22,6 @@ function JoinPrivateGame() {
       return;
     }
 
-
-
-
     api
       .getRooms({ pin: pin })
       .then((room) => {
@@ -31,19 +29,18 @@ function JoinPrivateGame() {
         navigate(`/games/${roomId}`);
       })
       .catch((error) => {
-        // TODO error message display
-        alert(error.message);
-        errors.push(error.message);
-        console.log(errors);
+        setErrors(error.message);
       });
   }
 
-  { console.log(errors); }
+  {
+    console.log(errors);
+  }
   return (
     <section className="flex-center-section auth JoinPrivateGame">
       <div className="window-center-grey auth">
+        <ErrorList messages={errors} />
         <form>
-
           <Input
             type="text"
             name="pin"

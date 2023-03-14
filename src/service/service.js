@@ -72,7 +72,7 @@ api.getRooms = async function (query) {
     return response.data;
   } catch (error) {
     if (error.response) throw Error(error.response.data.message);
-    throw Error('Error when trying to retreive gameroom data:', error.message);
+    throw Error(error.message);
   }
 };
 

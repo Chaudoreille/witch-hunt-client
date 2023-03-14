@@ -33,7 +33,7 @@ function CreateGame() {
 
       .catch((error) => {
         console.error(error);
-        setErrors((errors) => [...errors, error.message]);
+        setErrors([error.message]);
       });
   }
 
@@ -44,9 +44,7 @@ function CreateGame() {
           <img src={user.image} alt={user.username} />
           <div>@{user.username}, let's create your game! </div>
         </div>
-        {errors.length > 0 && (
-          <ErrorList messages={errors} closeAction={() => setErrors([])} />
-        )}
+        {errors.length > 0 && <ErrorList messages={errors} />}
         <GameRoomForm
           handleSubmit={handleSubmit}
           room={room}

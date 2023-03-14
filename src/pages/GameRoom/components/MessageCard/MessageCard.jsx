@@ -18,7 +18,7 @@ function MessageCard({ message }) {
         title={message.author.username}
       />
       <div className="column">
-        <p classname="content">{message.content}</p>
+        <p className="content">{message.content}</p>
         <p className="timestamp">
           <PassedTime model={message} />
         </p>
