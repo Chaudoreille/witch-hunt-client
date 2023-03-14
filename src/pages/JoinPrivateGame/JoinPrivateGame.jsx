@@ -10,14 +10,14 @@ function JoinPrivateGame() {
   const [pin, setPin] = useState("");
   const [errors, setErrors] = useState([]);
   function handleInputChange(event) {
-    setPin(event.target.value);
+    setPin(event.target.value.toUpperCase());
   }
 
   const navigate = useNavigate();
 
   function handleSubmit(event) {
     event.preventDefault();
-    if (pin.length !== 6) {
+    if (!pin.match(/^[a-z0-9]{6}$/i)) {
       setErrors(["Pin must be 6 characters long and alphanumeric"]);
       return;
     }
@@ -33,9 +33,6 @@ function JoinPrivateGame() {
       });
   }
 
-  {
-    console.log(errors);
-  }
   return (
     <section className="flex-center-section auth JoinPrivateGame">
       <div className="window-center-grey auth">
