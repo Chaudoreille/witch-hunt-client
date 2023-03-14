@@ -23,7 +23,7 @@ function Welcome() {
 
   return (
     <section className="Welcome">
-      <div className="left">
+      <div className="window-center-grey">
         <img src="images/witch-run_logo.png" />
         <div className="buttons">
           <ButtonLink variant={"primary"} link={"/login"}>
@@ -34,7 +34,7 @@ function Welcome() {
           </ButtonLink>
         </div>
       </div>
-      <div className="right">
+      <div className="rooms-list">
         <GameCardList list={rooms} />
       </div>
     </section>

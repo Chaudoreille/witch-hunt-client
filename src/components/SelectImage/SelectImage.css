@@ -4,6 +4,7 @@
   text-align: center;
   align-items: center;
   gap: 1rem;
+  width: 35vmax;
 }
 
 .FileSelect .wrapper {

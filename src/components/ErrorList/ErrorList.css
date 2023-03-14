@@ -1,23 +1,26 @@
 .ErrorList {
   width: 30vmax;
   color: var(--errorsRed);
-  padding: 1rem;
-  margin: 1rem 0;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
   background-color: var(--white);
   border-radius: 12px;
   outline: 2px solid var(--errorsRed);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .ErrorList .error-wrapper {
-  font-size: .8rem;
+  font-size: clamp(0.6rem, 1vmax, 0.8rem);
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .ErrorList .error-icon {
-  margin: -2px 4px 0.5rem 0;
-  font-size: 1.2rem;
+  margin-right: 2px;
+  margin-top: 4px;
+  font-size: 1rem;
 }
 
 .ErrorList .actionBar {
