@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./Messenger.css";
-import Input from "../Input/Input";
-import Button from "../Button/Button";
+import Input from "../../../../components/Input/Input";
+import Button from "../../../../components/Button/Button";
 import SendIcon from "@mui/icons-material/Send";
-import api from "../../service/service";
+import api from "../../../../service/service";
 import MessageCard from "../MessageCard/MessageCard";
 
-function Messenger({ room }) {
+function Messenger({ room, handleErrors }) {
   const [messages, setMessages] = useState([]);
   const [currentInput, setCurrentInput] = useState("");
   const [messagesLastUpdated] = useState({
@@ -22,17 +22,20 @@ function Messenger({ room }) {
           messagesLastUpdated.at = response.at(-1).updatedAt;
         }
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        let errorMessage;
+        if (error.response) errorMessage = error.response.data.message;
+        else errorMessage = error.message;
+        handleErrors(errorMessage);
+      });
   }
 
   useEffect(() => {
-    loadMessages();
     const intervalId = setInterval(() => {
       loadMessages();
     }, 1000);
 
     return () => {
-      console.log("clearing old interval");
       clearInterval(intervalId);
     };
   }, []);
@@ -52,10 +55,14 @@ function Messenger({ room }) {
           api
             .sendMessage(room._id, currentInput)
             .then((response) => {
-              console.log(response);
               setCurrentInput("");
             })
-            .catch((error) => console.log(error));
+            .catch((error) => {
+              let errorMessage;
+              if (error.response) errorMessage = error.response.data.message;
+              else errorMessage = error.message;
+              handleErrors(errorMessage);
+            });
         }}
       >
         <Input

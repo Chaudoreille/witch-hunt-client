@@ -1,27 +1,26 @@
-import React, { useReducer, useContext } from "react";
+import React, { useReducer, useContext, useState } from "react";
 import api from "../../service/service";
-import Input from "../../components/Input/Input";
-import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import GameRoomForm from "../../components/GameRoomForm/GameRoomForm";
 import "./CreateGame.css";
+import ErrorList from "../../components/ErrorList/ErrorList";
 
 function reducer(state, action) {
   return { ...state, ...action };
 }
 
 function CreateGame() {
+  const { user } = useContext(AuthContext);
+  const [errors, setErrors] = useState([]);
   const [room, dispatchRoom] = useReducer(reducer, {
-    name: "",
+    name: `${user.username}'s Witch hunt`,
     maxPlayers: 10,
     isPublished: true,
     spokenLanguage: "English",
   });
-  console.log("room", room);
 
   const navigate = useNavigate();
-  const { user } = useContext(AuthContext);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -29,10 +28,13 @@ function CreateGame() {
       .createRoom(room)
       .then((newRoom) => {
         const roomId = newRoom._id;
-        navigate(`/lobbies/${newRoom._id}`);
+        navigate(`/games/${newRoom._id}`);
       })
-      // TODO display error message
-      .catch((error) => console.error(error));
+
+      .catch((error) => {
+        console.error(error);
+        setErrors([error.message]);
+      });
   }
 
   return (
@@ -42,6 +44,7 @@ function CreateGame() {
           <img src={user.image} alt={user.username} />
           <div>@{user.username}, let's create your game! </div>
         </div>
+        {errors.length > 0 && <ErrorList messages={errors} />}
         <GameRoomForm
           handleSubmit={handleSubmit}
           room={room}

@@ -1,57 +1,90 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext, useCallback } from "react";
 import api from "../../service/service";
-
-import GameCardList from "../../components/GameCardList/GameCardList";
+import { AuthContext } from "../../context/AuthContext";
 import "./Lobbies.css";
-import { Link } from "react-router-dom";
+
+import debounce from "../../utils/debounce";
+import GameCardList from "../../components/GameCardList/GameCardList";
 import Input from "../../components/Input/Input";
-import PermIdentityIcon from "@mui/icons-material/PermIdentity";
+import Button from "../../components/Button/Button";
+import ButtonLink from "../../components/Button/ButtonLink";
+import ErrorList from "../../components/ErrorList/ErrorList";
 
 function Lobbies() {
-  const [rooms, setRooms] = useState([]);
-  const [filter, setFilter] = useState("");
-
-  useEffect(() => {
-    api
-      .getRooms()
-      .then((rooms) => {
-        // TODO We probably will want to move the sorting to the route
-        rooms.sort((a, b) => {
-          return b.createdAt.localeCompare(a.createdAt);
-        });
-        setRooms(rooms);
-      })
-      .catch((error) => console.log(error));
-  }, []);
+  const { user } = useContext(AuthContext);
+  const [rooms, setRooms] = useState(null);
+  const [filters, setFilters] = useState({});
+  const [errors, setErrors] = useState([]);
 
   function handleFilter(event) {
-    setFilter(event.target.value);
+    const { name } = event.target;
+    setFilters((oldFilters) => ({ ...oldFilters, [name]: event.target.value }));
   }
 
-  const filteredRooms = filter
-    ? rooms.filter((room) =>
-        room.spokenLanguage.toLowerCase().includes(filter.toLowerCase())
-      )
-    : rooms;
+  const toggleOwner = useCallback(() => {
+    setFilters((oldFilters) => {
+      if (oldFilters.hasOwnProperty("owner")) {
+        const { owner, ...newFilters } = oldFilters;
+        return newFilters;
+      } else {
+        return { ...oldFilters, owner: user._id };
+      }
+    });
+  }, []);
+
+  const queryRooms = (query) => {
+    setErrors([]);
+    api
+      .getRooms(query)
+      .then((rooms) => {
+        setRooms(rooms);
+      })
+      .catch((error) => setErrors([error]));
+  };
+
+  // we debounce the query call to avoid unnecessary calls on filter changes
+  // debounce returns a new function on each call.
+  // useCallback ensures function is created only once
+  const optimizedQuery = useCallback(debounce(queryRooms, 400), []);
+
+  useEffect(() => optimizedQuery(filters), [filters]);
 
   return (
     <section className="Lobbies">
-      {rooms.length ? (
-        <>
-          <Input
-            type="text"
-            name="search"
-            label="Spoken language"
-            action={handleFilter}
-            value={filter}
-          />
-          <GameCardList list={filteredRooms} displayLink={true} />
-        </>
+      <div className="actionBar">
+        <ButtonLink variant={"primary"} link={"/games/join"}>
+          Join game
+        </ButtonLink>
+        <ButtonLink variant={"primary"} link={"/games/create"}>
+          Create a game
+        </ButtonLink>
+      </div>
+      <div className="filters">
+        <Button variant={"primary"} action={toggleOwner}>
+          {filters.owner ? "All Games" : "My Games"}
+        </Button>
+        <Input
+          type="text"
+          name="spokenLanguage"
+          placeholder="Spoken language"
+          action={handleFilter}
+          value={filters.spokenLanguage || ""}
+        />
+        <Input
+          type="text"
+          name="name"
+          placeholder="Game name"
+          action={handleFilter}
+          value={filters.name || ""}
+        />
+      </div>
+      {!errors.length || <ErrorList messages={errors} />}
+      {!rooms ? (
+        <div style={{ color: "white" }}>Loading</div>
+      ) : rooms.length ? (
+        <GameCardList list={rooms} displayLink={true} />
       ) : (
-        <h2>
-          There are currently no active lobbies matching your current filter.
-          <Link to="/lobbies/create">Would you like to create one?</Link>
-        </h2>
+        <h2>No active lobbies match your current filters.</h2>
       )}
     </section>
   );

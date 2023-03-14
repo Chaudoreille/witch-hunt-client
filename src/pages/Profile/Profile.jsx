@@ -1,5 +1,7 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { Link } from "react-router-dom";
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import EditIcon from '@mui/icons-material/Edit';
 import EditProfile from "./EditProfile";
 import Button from "../../components/Button/Button";
@@ -17,6 +19,11 @@ function Profile() {
   return (
     <section className="Profile flex-center-section auth">
       <div className="window-center-grey auth">
+        <div className='actionBar'>
+          <Link className='closeButton' to="/home">
+            <HighlightOffIcon className='close-icon' />
+          </Link>
+        </div>
         {editMode === "image" ? (
           <EditProfile mode="image" setMode={setEditMode} />
         ) : editMode === "info" ? (

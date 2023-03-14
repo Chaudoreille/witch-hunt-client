@@ -6,7 +6,7 @@ function GameCompletedroom() {
   return (
     <div className="GameCompletedRoom">
       <h2>Game Over Man, Game Over</h2>
-      <Link to="/lobbies">Back to Lobbies</Link>
+      <Link to="/home">Back to Lobbies</Link>
     </div>
   );
 }

@@ -26,6 +26,7 @@
   gap: .5rem;
   border: 1px solid var(--borderGrey);
   padding: 1rem;
+  position: relative;
 }
 
 .window-center-grey img {
@@ -53,7 +54,7 @@
   height: 100%;
   opacity: .2;
   z-index: -1;
-  background-image: url(/public/images/village.jpeg);
+  background-image: url(/images/village.jpeg);
   background-repeat: no-repeat;
   background-size: cover;
 

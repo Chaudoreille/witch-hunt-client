@@ -11,7 +11,7 @@ function SignupForm({ handleChange, handleSubmit, user, errors }) {
       <Input type="username"
         name="username"
         action={handleChange}
-        className={errors.includes("username") ? "input-error" : ""}
+        className={"username" in errors ? "input-error" : ""}
         label="Username"
         value={user.username}
         placeholder="A funny username"
@@ -19,7 +19,7 @@ function SignupForm({ handleChange, handleSubmit, user, errors }) {
       <Input type="email"
         name="email"
         action={handleChange}
-        className={errors.includes("email") ? "input-error" : ""}
+        className={"email" in errors ? "input-error" : ""}
         label="Email"
         value={user.email}
         placeholder="A real email"
@@ -27,7 +27,7 @@ function SignupForm({ handleChange, handleSubmit, user, errors }) {
       <Input type="password"
         name="password"
         action={handleChange}
-        className={errors.includes("password") ? "input-error" : ""}
+        className={"password" in errors ? "input-error" : ""}
         label="Password"
         value={user.password}
         placeholder="A strong password"
@@ -35,7 +35,7 @@ function SignupForm({ handleChange, handleSubmit, user, errors }) {
       <Input type="password"
         name="confirmation"
         action={handleChange}
-        className={errors.includes("confirmation") ? "input-error" : ""}
+        className={"confirmation" in errors ? "input-error" : ""}
         label="Repeat password"
         value={user.confirmation}
         placeholder="Your password, again"

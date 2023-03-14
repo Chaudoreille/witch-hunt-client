@@ -4,13 +4,9 @@ import SelectImage from "../../components/SelectImage/SelectImage";
 import SignupForm from "../../components/SignupForm/SignupForm";
 import api from "../../service/service";
 import "./Signup.css";
+import Error from "../../components/ErrorList/ErrorList";
 
-const errorsFieldToMessage = {
-  username: "Please enter a username!",
-  email: "Please enter a valid email address!",
-  password: "Please enter a password!",
-  confirmation: "Your passwords are not identical!",
-};
+
 
 /**
  * Signup Page
@@ -20,6 +16,8 @@ const errorsFieldToMessage = {
  * @returns
  */
 function Signup() {
+  const [displayForm, setDisplayForm] = useState(true);
+  const [errors, setErrors] = useState({});
   const [user, setUser] = useState({
     username: "",
     password: "",
@@ -27,8 +25,6 @@ function Signup() {
     email: "",
     image: null,
   });
-  const [displayForm, setDisplayForm] = useState(true);
-  const [errors, setErrors] = useState([]);
   const navigate = useNavigate();
 
   function updateForm(event) {
@@ -43,24 +39,35 @@ function Signup() {
    * @returns
    */
   function handleFormSubmit(event) {
+    event.preventDefault();
+    const newErrors = {};
     const { username, email, password, confirmation } = user;
 
-    event.preventDefault();
-    const errors = [];
-    if (!username.length) errors.push("username");
-    if (!password.length) errors.push("password");
-    if (password !== confirmation) errors.push("confirmation");
+    setErrors({});
+    if (!username.length) newErrors.username = { message: "Please enter a username!" };
+    if (!password.length) newErrors.password = { message: "Please enter a password!" };
+    if (password !== confirmation) newErrors.confirmation = { message: "Your passwords are not identical!" };
 
     const emailRegExp = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-    if (!emailRegExp.test(email)) errors.push("email");
-    if (errors.length) {
-      setErrors(errors);
+    if (!emailRegExp.test(email)) newErrors.email = { message: "Please enter a valid email address!" };
+
+    if (Object.values(newErrors).length) {
+      setErrors(newErrors);
       return;
+    } else {
+      setDisplayForm(false);
     }
-    setDisplayForm(false);
-    setErrors([]);
   }
+
+  const displayErrors = () => {
+    if (!Object.values(errors).length) return;
+
+    return (
+      <Error messages={Object.values(errors).map(error => error.message)} />
+    );
+  };
+
 
   /**
    * Event Handler that will handle the second form submission
@@ -80,7 +87,9 @@ function Signup() {
     if (user.image) form.append("image", user.image);
 
     const signupResult = await api.signup(user);
+
     if (!signupResult.errors) return navigate("/login");
+
     setDisplayForm(true);
     setErrors(signupResult.errors);
   }
@@ -98,23 +107,18 @@ function Signup() {
    */
   function handleGoBack() {
     setDisplayForm(true);
-    setErrors([]);
+    setErrors({});
   }
+
+
 
   return (
     <section className="flex-center-section image-select">
-
       <div className="window-center-grey">
         <img src="images/witch-run_logo.png" id="img-signup" />
 
-        {errors.length > 0 && (
-          <ul>
-            {errors.map((error) => (
-              <li className="error-message">{errorsFieldToMessage[error]}</li>
-            ))}
-          </ul>
-        )}
 
+        {displayErrors()}
         {displayForm ? (
           <SignupForm
             handleChange={updateForm}

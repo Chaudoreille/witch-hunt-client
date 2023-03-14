@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
+import { AuthContext } from "../../../..//context/AuthContext";
+import PassedTime from "../../../../components/PassedTime/PassedTime";
 import "./MessageCard.css";
 
 function MessageCard({ message }) {
@@ -16,7 +17,12 @@ function MessageCard({ message }) {
         alt={message.author.username}
         title={message.author.username}
       />
-      <p>{message.content}</p>
+      <div className="column">
+        <p className="content">{message.content}</p>
+        <p className="timestamp">
+          <PassedTime model={message} />
+        </p>
+      </div>
     </div>
   );
 }

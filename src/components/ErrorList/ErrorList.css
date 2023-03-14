@@ -1,0 +1,34 @@
+.ErrorList {
+  width: 30vmax;
+  color: var(--errorsRed);
+  padding: 1rem;
+  margin: 1rem 0;
+  background-color: var(--white);
+  border-radius: 12px;
+  outline: 2px solid var(--errorsRed);
+}
+
+.ErrorList .error-wrapper {
+  font-size: .8rem;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.ErrorList .error-icon {
+  margin: -2px 4px 0.5rem 0;
+  font-size: 1.2rem;
+}
+
+.ErrorList .actionBar {
+  width: 100%;
+  margin-top: -10px;
+  margin-left: 10px;
+  text-align: right;
+}
+
+.ErrorList .closeButton {
+  all: unset;
+  cursor: pointer;
+  line-height: 0;
+}

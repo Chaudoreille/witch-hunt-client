@@ -12,8 +12,6 @@
     border-radius: 100%;
 }
 
-
-
 .MessageCard.sent {
     background-color: darkturquoise;
     align-self: end;
@@ -22,4 +20,20 @@
 .MessageCard.received {
     background-color: greenyellow;
     align-self: start;
+}
+
+.MessageCard .column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.MessageCard .content {
+    align-self: start;
+}
+
+.MessageCard .timestamp {
+    align-self: end;
+    font-size: 0.6rem;
 }

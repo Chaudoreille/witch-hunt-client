@@ -15,8 +15,6 @@ nav {
   left: 50%;
   transform: translate(-50%, 0);
   top: 1vh;
-  content: "";
-
 }
 
 .pp-nav {
@@ -29,5 +27,12 @@ nav {
   border-radius: 50%;
   height: 100%;
   object-fit: cover;
+}
 
+nav .Button.logout {
+  font-size: 0.8rem;
+  width: max-content;
+  margin-right: 1rem;
+  padding: 0 1rem;
+  outline: 2px solid var(--borderButton);
 }
