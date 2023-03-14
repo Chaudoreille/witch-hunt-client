@@ -8,16 +8,21 @@ function MessageCard({ message }) {
 
   return (
     <div
-      className={`MessageCard ${user.user._id === message.author._id ? "sent" : "received"
-        }`}
+      className={`MessageCard ${
+        user.user._id === message.author._id ? "sent" : "received"
+      }`}
     >
       <img
         src={message.author.image}
         alt={message.author.username}
         title={message.author.username}
       />
-      <p>{message.content}</p>
-      <PassedTime model={message} />
+      <div className="column">
+        <p classname="content">{message.content}</p>
+        <p className="timestamp">
+          <PassedTime model={message} />
+        </p>
+      </div>
     </div>
   );
 }
