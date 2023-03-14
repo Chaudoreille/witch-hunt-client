@@ -21,6 +21,11 @@
     position: relative;
 }
 
+.Welcome .rooms-list li {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
 .Welcome .rooms-list::before {
     background: linear-gradient(180deg, rgba(0, 0, 0, 0) 20%, #1c1e26 99%);
     content: "\00a0";

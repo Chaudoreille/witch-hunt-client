@@ -1,29 +1,34 @@
-
 .GameCard {
-    background-color: var(--grey) ;
+    background-color: var(--grey);
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 1rem 1.5rem;
+    gap: 1rem;
     border-radius: 8px;
-    width: 30vw;
+    width: 28vmax;
+    min-width: 400px;
+    height: 18vh;
     color: var(--white);
-    margin-bottom: 2rem;
 }
-.GameCard .card-left{
+
+.GameCard .card-left {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
 }
 
-.GameCard .card-right{
+.GameCard .card-right {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     justify-content: space-between;
     height: 100%;
-    gap: 2rem;
+}
+
+.GameCard h2 {
+    font-size: 3vh;
 }
 
 .GameCard h3 {
@@ -35,8 +40,19 @@
     align-items: center;
 }
 
-.icon-user{
+.icon-user {
     font-size: .8rem;
-   
 }
 
+
+@media (max-width: 750px) {
+    .GameCard {
+        min-width: 90vw;
+    }
+}
+
+@media (max-width: 550px) {
+    .GameCard h2 {
+        font-size: 1rem;
+    }
+}

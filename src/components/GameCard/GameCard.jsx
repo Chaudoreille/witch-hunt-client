@@ -20,11 +20,15 @@ function GameCard({ game, displayLink }) {
         <h2>{name}</h2>
         <h3>
           <PermIdentityIcon className="icon-user" />
-          {participants}/{totalParticipants}
+          <span>
+            {participants}/{totalParticipants}
+          </span>
         </h3>
       </div>
       <div className="card-right">
-        <PassedTime model={game} />
+        <h3>
+          <PassedTime model={game} />
+        </h3>
         <div>
           {link && (
             <ButtonLink variant={"small"} link={link}>
