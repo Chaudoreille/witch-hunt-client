@@ -49,7 +49,6 @@ function WaitingRoom({
     setOpen(true);
   };
 
-
   return (
     <div className="WaitingRoom">
 
@@ -132,7 +131,7 @@ function WaitingRoom({
       </div>
       {displaySettings && (
         <>
-          <dialog className="owner-options" open={open}>
+          <div className="owner-options">
             <GameRoomForm
               handleSubmit={handleSubmit}
               room={roomEditFormValues}
@@ -147,7 +146,7 @@ function WaitingRoom({
             }}>
               Delete Room
             </Button>
-          </dialog>
+          </div>
         </>
       )}
     </div>
