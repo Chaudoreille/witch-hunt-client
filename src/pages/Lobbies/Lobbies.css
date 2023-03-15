@@ -2,49 +2,109 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-
   align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  min-height: 100vh;
+  background-image: url(/images/witch-street-desat.jpg);
+  background-size: cover;
+  background-attachment: fixed;
 }
 
-.Lobbies .actionBar {
+.Lobbies .actionBar,
+.Lobbies .filters {
   display: flex;
   flex-flow: row wrap;
-  padding: 0.5rem 1rem;
   align-items: center;
+  justify-content: center;
 }
 
-.Lobbies .filters .Button,
+.Lobbies .commandsBar {
+  padding: 2rem;
+  background-color: var(--darkGrey);
+  border-radius: 25px;
+  margin: 2rem 0;
+  width: 95vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+}
+
 .Lobbies .actionBar .Button {
   margin: 1rem 1rem;
-  width: auto;
+  max-width: 24vh;
 }
 
 .Lobbies .filters .Input input {
   margin: unset;
+  width: 22vmax;
 }
 
 .Lobbies .filters {
   display: flex;
   flex-flow: row wrap;
-  padding: 0.5rem 1rem;
   align-items: center;
+  gap: 1rem;
 }
 
-.Lobbies .filters .Input label {
-  margin-right: 2ch;
+.Lobbies .filters .Input label,
+.Lobbies .filters .Toggle>label {
+  display: none;
 }
 
 .Lobbies ul {
   display: flex;
   flex-wrap: wrap;
-  margin: 2rem;
   justify-content: center;
+
 }
+
 
 .Lobbies li {
   margin: 1rem;
 }
 
-.Lobbies h2 {
-  color: white
+.Lobbies .toggle {
+  background-color: #363E4B;
+  ;
+}
+
+.Lobbies .toggle input[type="radio"]+label {
+  background-color: #363E4B;
+}
+
+.Lobbies .window-grey {
+  border-radius: var(--windowRadius);
+  width: 70vmax;
+  height: max-content;
+  max-width: 90vw;
+  background-color: var(--grey);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  border: 1px solid var(--borderGrey);
+  padding: 2rem;
+}
+
+.Lobbies .window-grey h2 {
+  color: var(--white);
+  font-size: 3vmin;
+}
+
+.Lobbies .window-grey img {
+  width: 15vmax;
+}
+
+@media (max-width:850px) {
+  .Lobbies .commandsBar {
+    padding: 2rem 8rem;
+  }
+
+  .Lobbies .filters .Input input {
+    width: 35vmax;
+  }
+
 }
