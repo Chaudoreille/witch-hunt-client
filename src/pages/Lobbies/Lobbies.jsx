@@ -84,7 +84,10 @@ function Lobbies() {
             icon={<SearchIcon />}
           />
 
-          <Toggle onChangeLeft={(event) => toggleOwner(event.target.checked)} onChangeRight={(event) => toggleOwner(!event.target.checked)} toggle={filters.owner} optionLeft="My rooms" optionRight="All rooms" />
+          <Toggle toggle={filters.owner || false} optionLeft="My rooms" optionRight="All rooms"
+            onChangeLeft={(event) => toggleOwner(event.target.checked)}
+            onChangeRight={(event) => toggleOwner(!event.target.checked)}
+          />
 
         </div>
       </div>
