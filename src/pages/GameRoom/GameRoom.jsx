@@ -3,27 +3,28 @@ import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import WaitingRoom from "./components/WaitingRoom/WaitingRoom";
 import ActiveRoom from "./components/ActiveRoom/ActiveRoom";
-import api from "../../service/service";
 import ErrorList from "../../components/ErrorList/ErrorList";
 import Loader from "../../components/Loader/Loader";
+import io from 'socket.io-client';
 
 import "./GameRoom.css";
 import GameCompletedroom from "./components/GameCompletedRoom/GameCompletedroom";
 import Messenger from "./components/Messenger/Messenger";
 
-function reducer(state, action) {
-  if (state === null) return action;
-  if (action.updatedAt > state.updatedAt) {
-    return action;
-  }
-  return state;
-}
+/**
+ * Adds errorMessage to the list of errors.
+ * Handing it null instead of a String will
+ * reset the error list to an empty list
+ * @param {Array} existingErrors
+ * @param {String} errorMessage
+ * @returns
+ */
+function errorReducer(existingErrors, errorMessage) {
+  if (errorMessage === null) return [];
 
-function errorReducer(state, action) {
-  if (action === null) return [];
-
-  if (!state.includes(action)) return [...state, action];
-  return state;
+  if (!existingErrors.includes(errorMessage))
+    return [...existingErrors, errorMessage];
+  return existingErrors;
 }
 
 /**
@@ -31,114 +32,142 @@ function errorReducer(state, action) {
  * the current state of the game
  */
 function GameRoom() {
-  const [room, dispatchRoom] = useReducer(reducer, null);
+  const [room, setRoom] = useState(null);
   const [errors, dispatchErrors] = useReducer(errorReducer, []);
   const [displaySettings, setDisplaySettings] = useState(false);
+  const [socket, setSocket] = useState(null);
+  const [messages, setMessages] = useState([]);
 
-  const { user } = useContext(AuthContext);
+  const { user, token } = useContext(AuthContext);
 
   const { roomId } = useParams();
   const navigate = useNavigate();
 
-  async function loadRoom() {
-    api
-      .getRoom(roomId)
-      .then((fetchedRoom) => {
-        // console.log(
-        //   "fetching room updates " + new Date().toISOString().slice(11, 19)
-        // );
-
-        dispatchRoom(fetchedRoom);
-      })
-      .catch((error) => {
-        const errorMessage = "Unable to load room data";
-
-        dispatchErrors(errorMessage);
-      });
-  }
-
+  /**
+   * Create Socket for real-time communication
+   */
   useEffect(() => {
-    loadRoom();
+    const ioSocket = io(import.meta.env.VITE_BACKEND_URL, {
+      auth: {
+        token: token,
+      },
+      query: {
+        game: roomId,
+      },
+    });
 
-    const intervalId = setInterval(() => {
-      loadRoom();
-    }, 1000);
+    ioSocket.on("connect_error", (error) => {
+      dispatchErrors(error.message);
+      navigate("/home");
+    });
+
+    ioSocket.on("initialize-messages", (messages) => {
+      setMessages(messages);
+    });
+
+    ioSocket.on("message", (message) => {
+      setMessages((oldMessages) => [...oldMessages, message]);
+    });
+
+    ioSocket.on("update-room", (room) => {
+      setRoom(room);
+    });
+
+    ioSocket.on("deleted-room", (message) => {
+      dispatchErrors(message);
+      setRoom(null);
+    });
+
+    ioSocket.on("error", (errorMessage) => {
+      dispatchErrors(errorMessage);
+    });
+
+    setSocket(ioSocket);
 
     return () => {
-      clearInterval(intervalId);
+      ioSocket.emit("end");
     };
   }, [roomId]);
 
+  function sendMessage(message) {
+    socket.emit("message", message);
+  }
+
+  function socketErrorHandler(error) {
+    if (error) {
+      dispatchErrors(error);
+    }
+  }
   /**
    * Creates a function that will contact the backend to execute the specified action
    * with the specified parameters (if any). Returns a promise that resolves to the
    * returned data, or rejects to the error message.
    * Will also add the error message to the error list
    * @param {String} action
-   * @param  {...any} parameters
+   * @param  {Array} parameters - optional
+   * @param {Function} callback - optional
    * @returns
    */
-  function createGameActionHandler(action, ...parameters) {
-    return async () => {
-      return api
-        .takeAction(room._id, action, parameters)
-        .then((response) => {
-          return response.data;
-        })
-        .catch((error) => {
-          let errorMessage;
-          if (error.response) errorMessage = error.response.data.message;
-          else errorMessage = error.message;
-          dispatchErrors(errorMessage);
-          throw new Error("returning action error");
-        });
+  function createGameActionHandler(
+    action,
+    parameters = [],
+    callback = socketErrorHandler
+  ) {
+    return () => {
+      socket.emit("game-action", action, parameters, callback);
     };
   }
-
-  if (!room) return <section className="GameRoom"><Loader /></section>;
-
-  const isOwner = user._id === room.owner;
-  const currentPlayercount =
-    room.state.status === "Lobby"
-      ? room.state.players.length
-      : room.state.players.filter((player) => player.status === "Alive").length;
-  const maxPlayerCount =
-    room.state.status === "Lobby" ? room.maxPlayers : room.state.players.length;
 
   return (
     <section className="GameRoom">
       {errors.length > 0 && (
-        <ErrorList messages={errors} closeAction={() => dispatchErrors(null)} />
+        <ErrorList messages={errors} closeAction={() => {
+          if (!room) {
+            navigate('/home');
+          } else {
+            dispatchErrors(null);
+          }
+        }} />
       )}
-      <div id="game">
-        {room.state.status === "Lobby" && (
-          <WaitingRoom
-            room={room}
-            createGameActionHandler={createGameActionHandler}
-            displaySettings={displaySettings}
-            setDisplaySettings={setDisplaySettings}
-          />
-        )}
-        {room.state.status === "Started" && (
-          <ActiveRoom
-            room={room}
-            createGameActionHandler={createGameActionHandler}
-            displaySettings={displaySettings}
-            setDisplaySettings={setDisplaySettings}
-          />
-        )}
-        {room.state.status === "Completed" && (
-          <GameCompletedroom
-            room={room}
-            createGameActionHandler={createGameActionHandler}
-            displaySettings={displaySettings}
-            setDisplaySettings={setDisplaySettings}
-          />
-        )}
-      </div>
-      <div id="messenger">
-        <Messenger room={room} handleErrors={dispatchErrors} />
-      </div>
+      {!room ? (<Loader />) : (
+        <>
+          <div id="game">
+            {room.state.status === "Lobby" && (
+              <WaitingRoom
+                room={room}
+                createGameActionHandler={createGameActionHandler}
+                displaySettings={displaySettings}
+                setDisplaySettings={setDisplaySettings}
+                dispatchErrors={dispatchErrors}
+                socket={socket}
+              />
+            )}
+            {room.state.status === "Started" && (
+              <ActiveRoom
+                room={room}
+                createGameActionHandler={createGameActionHandler}
+                displaySettings={displaySettings}
+                setDisplaySettings={setDisplaySettings}
+              />
+            )}
+            {room.state.status === "Completed" && (
+              <GameCompletedroom
+                room={room}
+                createGameActionHandler={createGameActionHandler}
+                displaySettings={displaySettings}
+                setDisplaySettings={setDisplaySettings}
+              />
+            )}
+          </div>
+          <div id="messenger">
+            <Messenger
+              room={room}
+              sendMessage={sendMessage}
+              handleErrors={dispatchErrors}
+              messages={messages} />
+          </div>
+        </>
+      )}
     </section>
   );
 }

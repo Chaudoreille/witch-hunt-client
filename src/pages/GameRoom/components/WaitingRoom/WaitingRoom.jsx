@@ -1,4 +1,4 @@
-import { useContext, useState, useReducer, useEffect } from "react";
+import { useContext, useReducer } from "react";
 import "./WaitingRoom.css";
 import PlayerCard from "../PlayerCard/PlayerCard";
 import { AuthContext } from "../../../../context/AuthContext";
@@ -20,6 +20,8 @@ function WaitingRoom({
   createGameActionHandler,
   displaySettings,
   setDisplaySettings,
+  dispatchErrors,
+  socket,
 }) {
   const { user } = useContext(AuthContext);
   const [roomEditFormValues, dispatchRoomEditFormValues] = useReducer(
@@ -35,11 +37,11 @@ function WaitingRoom({
     event.preventDefault();
     api
       .updateRoom(room._id, roomEditFormValues)
-      .then((updatedRoom) => {
+      .then(() => {
         setDisplaySettings(false);
+        socket.emit("force-update");
       })
-      // TODO display error message
-      .catch((error) => console.error(error));
+      .catch((error) => dispatchErrors(error.message));
   }
 
   return (
@@ -58,36 +60,27 @@ function WaitingRoom({
           {isSignedUp ? (
             <Button
               variant="primary"
-              action={() => {
-                createGameActionHandler("leave")()
-                  .then(() => {
-                    navigate("/home");
-                  })
-                  .catch((error) => {
-                    // ignore errors
-                    // we already add them to errorlist when the gamehandler is executed,
-                    // no further action required
-                  });
-              }}
+              action={createGameActionHandler("leave", [], (error) => {
+                if (error) {
+                  dispatchErrors(error);
+                } else {
+                  navigate("/home");
+                }
+              })}
             >
               Leave Game
             </Button>
           ) : (
-
             <Button
               variant="primary"
-              action={() => {
-                createGameActionHandler("join")()
-                  .then(() => { })
-                  .catch((error) => { });
-              }}
+              action={createGameActionHandler("join")}
             >
               Join Game
             </Button>
-
           )}
         </ActionsBar>
       )}
+
       <div className="waiting-section">
         <div className="room-header">
           {isOwner && (
@@ -103,20 +96,16 @@ function WaitingRoom({
           <div className="row">
             <PermIdentityIcon className="icon-user" />
             {room.state.players.length}/{room.maxPlayers}
-            <ActionsBar >
-              {isOwner && (
+            {isOwner && (
+              <ActionsBar >
                 <Button
                   variant="primary"
-                  action={() => {
-                    createGameActionHandler("start")()
-                      .then(() => { })
-                      .catch((error) => { });
-                  }}
+                  action={createGameActionHandler("start")}
                 >
                   Start Game
                 </Button>
-              )}
-            </ActionsBar>
+              </ActionsBar>
+            )}
           </div>
         </div>
         <div className="playerlist">
@@ -134,7 +123,12 @@ function WaitingRoom({
               submitButtonLabel="Edit Room Settings"
               dispatchRoomChanges={dispatchRoomEditFormValues}
             />
-            <Button variant="secondary" action={() => api.deleteRoom(room._id)}>
+            <Button variant="secondary" action={() => {
+              socket.emit("delete-room", () => {
+                api.deleteRoom(room._id);
+                navigate("/home");
+              });
+            }}>
               Close Game and Delete Game Room
             </Button>
           </div>

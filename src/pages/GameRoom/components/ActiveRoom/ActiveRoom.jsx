@@ -2,21 +2,10 @@ import PlayerCard from "../PlayerCard/PlayerCard";
 import Button from "../../../../components/Button/Button";
 import { useContext } from "react";
 import { AuthContext } from "../../../../context/AuthContext";
-import api from "../../../../service/service";
 import "./ActiveRoom.css";
 import { useNavigate } from "react-router-dom";
 
-function isAlive(user, gameroom) {
-  const player = gameroom.state.players.filter(
-    (player) => player.user._id === user._id
-  )[0];
-  if (!player) return undefined;
-
-  if (player.status === "Alive") return true;
-  return false;
-}
-
-function ActiveRoom({ room, createGameActionHandler, displaySettings }) {
+function ActiveRoom({ room, createGameActionHandler }) {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -30,7 +19,7 @@ function ActiveRoom({ room, createGameActionHandler, displaySettings }) {
   const isAlive = player.status === "Alive";
 
   const isVoteCast = player.vote.state === "Cast";
-  const isVoteLocked = player.vote.state === "Locked";
+  // const isVoteLocked = player.vote.state === "Locked";
 
   return (
     <div className="ActiveRoom">
@@ -39,11 +28,7 @@ function ActiveRoom({ room, createGameActionHandler, displaySettings }) {
           <PlayerCard
             key={player.user._id}
             player={player}
-            onClick={() => {
-              createGameActionHandler("castVote", player.user._id)()
-                .then(() => {})
-                .catch((error) => {});
-            }}
+            onClick={createGameActionHandler("castVote", [player.user._id])}
             className={player.status.toLowerCase()}
             votes={room.state.players.filter(
               (p) => p.vote.target === player.user._id
@@ -56,11 +41,7 @@ function ActiveRoom({ room, createGameActionHandler, displaySettings }) {
         {isAlive && isVoteCast && (
           <Button
             variant="primary"
-            action={() => {
-              createGameActionHandler("lockVote")()
-                .then(() => {})
-                .catch((error) => {});
-            }}
+            action={createGameActionHandler("lockVote")}
           >
             Lock Your Vote
           </Button>
