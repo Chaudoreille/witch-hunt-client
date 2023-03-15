@@ -1,7 +1,7 @@
 import React from "react";
 import "./PlayerCard.css";
 import LockIcon from "@mui/icons-material/Lock";
-import ProfilePicture from "../../../../components/ProfilePicture/ProfilePicture"
+import ProfilePicture from "../../../../components/ProfilePicture/ProfilePicture";
 
 function PlayerCard({ player, onClick, className, votes }) {
   return (

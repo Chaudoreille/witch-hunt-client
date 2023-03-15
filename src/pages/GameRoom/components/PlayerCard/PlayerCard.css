@@ -1,0 +1,21 @@
+.PlayerLobbyCard {
+  width: max-content;
+  height: 4rem;
+  border-radius: 14px;
+  display: flex;
+  gap: 1rem;
+  color: var(--white);
+  align-items: center;
+  padding: 1rem;
+  border: 3px solid var(--blue);
+}
+
+.PlayerLobbyCard .ProfilePicture {
+  outline: 1px solid var(--white);
+  height: 5vh;
+}
+
+.PlayerLobbyCard h6 {
+  font-weight: 400;
+  font-size: 1rem;
+}

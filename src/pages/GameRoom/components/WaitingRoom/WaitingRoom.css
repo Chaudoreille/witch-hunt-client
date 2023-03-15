@@ -38,29 +38,6 @@ dialog::before {
     gap: 2rem;
 }
 
-
-.WaitingRoom .PlayerCard {
-    width: max-content;
-    height: 4rem;
-    border-radius: 14px;
-    display: flex;
-    gap: 1rem;
-    color: var(--white);
-    align-items: center;
-    padding: 1rem;
-    border: 3px solid var(--blue);
-}
-
-.WaitingRoom .PlayerCard .ProfilePicture {
-    outline: 1px solid var(--white);
-    height: 5vh;
-}
-
-.WaitingRoom .PlayerCard h6 {
-    font-weight: 400;
-    font-size: 1rem;
-}
-
 .WaitingRoom .playerlist {
     display: flex;
     flex-wrap: wrap;

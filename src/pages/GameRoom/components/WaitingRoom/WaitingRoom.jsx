@@ -1,6 +1,6 @@
 import { useContext, useState, useReducer } from "react";
 import "./WaitingRoom.css";
-import PlayerCard from "../PlayerCard/PlayerCard";
+import PlayerLobbyCard from "../PlayerCard/PlayerLobbyCard";
 import { AuthContext } from "../../../../context/AuthContext";
 import Button from "../../../../components/Button/Button";
 import api from "../../../../service/service";
@@ -126,7 +126,7 @@ function WaitingRoom({
         </div>
         <div className="playerlist">
           {room.state.players.map((player) => (
-            <PlayerCard key={player.user._id} player={player} />
+            <PlayerLobbyCard key={player.user._id} player={player} />
           ))}
         </div>
       </div>
