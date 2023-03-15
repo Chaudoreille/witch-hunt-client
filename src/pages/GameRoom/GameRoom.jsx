@@ -56,6 +56,11 @@ function GameRoom() {
       },
     });
 
+    ioSocket.on("connect_error", (error) => {
+      dispatchErrors(error.message);
+      navigate("/home");
+    });
+
     ioSocket.on("initialize-messages", (messages) => {
       setMessages(messages);
     });
@@ -69,7 +74,10 @@ function GameRoom() {
       setRoom(room);
     });
 
-    ioSocket.on("error", (errorMessage) => dispatchErrors(errorMessage));
+    ioSocket.on("error", (errorMessage) => {
+      console.log("received error message via socket", errorMessage);
+      dispatchErrors(errorMessage);
+    });
 
     setSocket(ioSocket);
 
