@@ -26,34 +26,12 @@
     width: 55vw;
 }
 
-.GameRoom .PlayerCard {
-    width: max-content;
-    height: 4rem;
-    border-radius: 14px;
+.GameRoom .ErrorList {
+    width: 100%;
     display: flex;
-    gap: 1rem;
-    color: var(--white);
     align-items: center;
-    padding: 1rem;
-    border: 3px solid var(--blue);
+    justify-content: center;
 }
-
-.GameRoom .PlayerCard .ProfilePicture {
-    outline: 1px solid var(--white);
-    height: 5vh;
-}
-
-.GameRoom .PlayerCard h6 {
-    font-weight: 400;
-    font-size: 1rem;
-}
-
-.GameRoom .playerlist {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.3rem;
-}
-
 
 .GameRoom #messenger {
     position: fixed;
@@ -62,10 +40,6 @@
     flex-direction: column;
     right: 2rem;
     bottom: 1rem;
-}
-
-.GameRoom .ErrorList {
-    width: 100%;
 }
 
 .GameRoom .row {

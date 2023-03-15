@@ -21,3 +21,15 @@
     width: 5rem;
     object-fit: cover;
 }
+
+.CreateGame .Button {
+    margin-top: 2rem;
+}
+
+
+@media(max-width:750px) {
+
+    .CreateGame .window-center-grey.auth {
+        padding: 4rem;
+    }
+}
