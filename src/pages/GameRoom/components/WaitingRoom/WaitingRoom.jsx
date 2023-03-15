@@ -46,50 +46,6 @@ function WaitingRoom({
 
   return (
     <div className="WaitingRoom">
-      <div className="room-header">
-        <div className="row">
-          {isOwner && (
-            <SettingsOutlinedIcon
-              className="clickable-icon"
-              onClick={() => setDisplaySettings(!displaySettings)}
-            />
-          )}
-          <h2>{room.name}</h2>
-          <h4>({room.spokenLanguage})</h4>
-        </div>
-        <div className="row">
-          <PermIdentityIcon className="icon-user" />
-          {room.state.players.length}/{room.maxPlayers}
-          {isOwner && (
-            <Button
-              variant="primary"
-              action={createGameActionHandler("start")}
-            >
-              Start Game
-            </Button>
-          )}
-        </div>
-      </div>
-      <div className="playerlist">
-        {room.state.players.map((player) => (
-          <PlayerCard key={player.user._id} player={player} />
-        ))}
-      </div>
-      {displaySettings && (
-        <>
-          <div className="owner-options">
-            <GameRoomForm
-              handleSubmit={handleSubmit}
-              room={roomEditFormValues}
-              submitButtonLabel="Edit Room Settings"
-              dispatchRoomChanges={dispatchRoomEditFormValues}
-            />
-            <Button variant="secondary" action={() => api.deleteRoom(room._id)}>
-              Close Game and Delete Game Room
-            </Button>
-          </div>
-        </>
-      )}
       {isOwner ? (
         <h2 className="game-pin">
           Pin {room.pin}
@@ -115,17 +71,16 @@ function WaitingRoom({
               Leave Game
             </Button>
           ) : (
-
             <Button
               variant="primary"
               action={createGameActionHandler("join")}
             >
               Join Game
             </Button>
-
           )}
         </ActionsBar>
       )}
+
       <div className="waiting-section">
         <div className="room-header">
           {isOwner && (
@@ -141,20 +96,16 @@ function WaitingRoom({
           <div className="row">
             <PermIdentityIcon className="icon-user" />
             {room.state.players.length}/{room.maxPlayers}
-            <ActionsBar >
-              {isOwner && (
+            {isOwner && (
+              <ActionsBar >
                 <Button
                   variant="primary"
-                  action={() => {
-                    createGameActionHandler("start")()
-                      .then(() => { })
-                      .catch((error) => { });
-                  }}
+                  action={createGameActionHandler("start")}
                 >
                   Start Game
                 </Button>
-              )}
-            </ActionsBar>
+              </ActionsBar>
+            )}
           </div>
         </div>
         <div className="playerlist">
