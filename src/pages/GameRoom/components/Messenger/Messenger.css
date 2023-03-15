@@ -1,28 +1,47 @@
 .Messenger {
     display: flex;
     flex-direction: column;
-    color: white
+    color: white;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    margin-bottom: -1rem;
+    padding: 0 .5rem;
+    background-color: #80808024;
 }
 
 .Messenger button {
     width: 3rem;
-    height: 3rem;    
+    height: 3rem;
     border-radius: 50%;
     transform: rotate(-45deg);
     cursor: pointer;
     background-color: white;
-    border: unset
+    border: unset;
+    flex-shrink: 0;
+    color: var(--darkGrey);
 }
 
 .Messenger .messenger-header {
     width: 100%;
     text-align: center;
+    background-color: var(--grey);
+    padding: .5rem;
+    border-radius: 12px;
+    margin-bottom: .5rem;
 }
 
 .Messenger form {
     display: flex;
     gap: 1rem;
     align-items: center;
+}
+
+.Messenger form .Input {
+    width: 100%;
+}
+
+.Messenger form .Input input {
+    width: 100%;
 }
 
 .Messenger .messenger-container {
@@ -32,5 +51,5 @@
     justify-content: space-between;
     gap: 0.5rem;
     max-height: 60vh;
-    overflow-x:auto;
+    overflow-x: auto;
 }

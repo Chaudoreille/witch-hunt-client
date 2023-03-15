@@ -17,7 +17,9 @@ function Messenger({ room, handleErrors, sendMessage, messages }) {
 
   return (
     <div className="Messenger">
-      <div className="messenger-header">Village Chat for {room.name}</div>
+      <div className="messenger-header">
+        <p>Village Chat for {room.name}</p>
+      </div>
       <div className="messenger-container">
         {messages.map((message) => (
           <MessageCard message={message} key={message._id} />
@@ -32,7 +34,7 @@ function Messenger({ room, handleErrors, sendMessage, messages }) {
           type="text"
           name="message"
           action={(event) => setCurrentInput(event.target.value)}
-          placeholder={"Send a message to your village chat"}
+          placeholder={"Send a message to your village"}
         />
         <Button>
           <SendIcon />
