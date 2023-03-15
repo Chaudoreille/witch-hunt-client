@@ -1,9 +1,3 @@
-.WaitingRoom .playerlist {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-}
-
 .WaitingRoom .owner-options {
     background-color: blueviolet;
     color: white;
@@ -11,40 +5,21 @@
     margin: 3rem 0;
 }
 
-.WaitingRoom .PlayerCard {
-    width: max-content;
-    height: 4rem;
-    border-radius: 14px;
-    display: flex;
-    gap: 1rem;
-    color: var(--white);
-    align-items: center;
-    padding: 1rem;
-    border: 3px solid var(--blue);
-}
-
-.WaitingRoom .PlayerCard .user-image {
-    height: 5vh;
-    aspect-ratio: 1;
-}
-
-.WaitingRoom .PlayerCard .user-image img {
-    border-radius: 50%;
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-}
-
 .WaitingRoom .game-pin {
+    color: var(--white);
     text-transform: uppercase;
-    background-color: lightgray;
+    background-color: var(--blue);
     width: 100%;
+    border-radius: 12px;
     height: 5rem;
     text-align: center;
     font-size: 3rem;
     margin-top: 2rem;
 }
 
-.WaitingRoom h4 {
-    font-weight: 300;
+
+.WaitingRoom .waiting-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }

@@ -4,6 +4,7 @@
   text-align: center;
   align-items: center;
   gap: 1rem;
+  width: 35vmax;
 }
 
 .FileSelect .wrapper {
@@ -11,13 +12,14 @@
   align-items: center;
   justify-content: center;
   border: 1px dashed var(--white);
-  height: 10vmin;
+  height: clamp(75px, 10vmin, 100px);
   width: 100%;
   position: relative;
 }
 
 .FileSelect .absolute {
   position: absolute;
+  font-size: 2vmin;
 }
 
 .FileSelect .attach-file {
@@ -30,4 +32,8 @@
   opacity: 0;
   width: 100%;
   height: 100%;
+}
+
+.FileSelect h3 {
+  font-size: 4vmin;
 }

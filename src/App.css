@@ -15,7 +15,7 @@
 
 .window-center-grey {
   border-radius: var(--windowRadius);
-  width: 40vmax;
+  width: 50vmax;
   max-height: 95vh;
   min-height: 80vh;
   background-color: var(--grey);
@@ -30,7 +30,7 @@
 }
 
 .window-center-grey img {
-  width: 35%;
+  width: 17vmax;
 }
 
 
@@ -58,4 +58,11 @@
   background-repeat: no-repeat;
   background-size: cover;
 
+}
+
+@media (max-width: 750px) {
+  .window-center-grey {
+    width: max-content;
+    margin: 2rem
+  }
 }

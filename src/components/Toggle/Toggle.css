@@ -1,0 +1,30 @@
+.toggle {
+  background-color: var(--darkGrey);
+  padding: 14px 5px;
+  border-radius: 30px;
+  display: inline-block;
+  margin-left: 1rem;
+  width: max-content;
+}
+
+.toggle [name="toggle"] {
+  display: none
+}
+
+.toggle input[type="radio"]+label {
+  background-color: var(--darkGrey);
+  color: var(--white);
+  padding: 10px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle input[type="radio"]:checked+label {
+  background-color: var(--blue);
+  ;
+}
+
+.input-toggle div {
+  margin-left: 1rem;
+}

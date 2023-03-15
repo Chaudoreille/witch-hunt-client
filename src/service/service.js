@@ -41,10 +41,20 @@ api.login = async function (user) {
 /**
  * getUser - gets the currentUSer based on authentication token
  */
-api.user = async function () {
+api.user = function () {
   return api.get("/auth/me");
 };
 
+/**
+ * invalidEmail - checks if email adress is valid and available
+ */
+api.invalidEmail = function (email) {
+  return api.get(`/auth/valid-email/${email}`)
+    .then(() => false)
+    .catch(error => {
+      return error.response.data;
+    });
+};
 
 // Game Room Routes
 

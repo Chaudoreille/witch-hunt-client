@@ -38,7 +38,7 @@ function Signup() {
    * @param {Event} event
    * @returns
    */
-  function handleFormSubmit(event) {
+  async function handleFormSubmit(event) {
     event.preventDefault();
     const newErrors = {};
     const { username, email, password, confirmation } = user;
@@ -48,9 +48,10 @@ function Signup() {
     if (!password.length) newErrors.password = { message: "Please enter a password!" };
     if (password !== confirmation) newErrors.confirmation = { message: "Your passwords are not identical!" };
 
-    const emailRegExp = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-
-    if (!emailRegExp.test(email)) newErrors.email = { message: "Please enter a valid email address!" };
+    const invalidEmail = await api.invalidEmail(email);
+    if (invalidEmail) {
+      newErrors.email = invalidEmail;
+    }
 
     if (Object.values(newErrors).length) {
       setErrors(newErrors);

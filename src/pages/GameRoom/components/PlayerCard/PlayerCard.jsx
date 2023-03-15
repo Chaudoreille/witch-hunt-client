@@ -1,6 +1,7 @@
 import React from "react";
 import "./PlayerCard.css";
 import LockIcon from "@mui/icons-material/Lock";
+import ProfilePicture from "../../../../components/ProfilePicture/ProfilePicture"
 
 function PlayerCard({ player, onClick, className, votes }) {
   return (
@@ -11,14 +12,9 @@ function PlayerCard({ player, onClick, className, votes }) {
         onClick();
       }}
     >
-      <div className="user-image">
-        <img
-          src={player.user.image}
-          alt={player.user.username}
-          title={player.user.username}
-        />
-      </div>
-      <div>{player.user.username}</div>
+      <ProfilePicture user={player.user} />
+
+      <h6>{player.user.username}</h6>
       {votes && (
         <div>
           {votes.map((voter) => (

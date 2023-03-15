@@ -9,6 +9,7 @@ import GameRoomForm from "../../../../components/GameRoomForm/GameRoomForm";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import { useNavigate } from "react-router-dom";
+import ActionsBar from "../ActionsBar/ActionsBar";
 
 function reducer(state, action) {
   return { ...state, ...action };
@@ -43,54 +44,6 @@ function WaitingRoom({
 
   return (
     <div className="WaitingRoom">
-      <div className="room-header">
-        <div className="row">
-          {isOwner && (
-            <SettingsOutlinedIcon
-              className="clickable-icon"
-              onClick={() => setDisplaySettings(!displaySettings)}
-            />
-          )}
-          <h2>{room.name}</h2>
-          <h4>({room.spokenLanguage})</h4>
-        </div>
-        <div className="row">
-          <PermIdentityIcon className="icon-user" />
-          {room.state.players.length}/{room.maxPlayers}
-          {isOwner && (
-            <Button
-              variant="primary"
-              action={() => {
-                createGameActionHandler("start")()
-                  .then(() => { })
-                  .catch((error) => { });
-              }}
-            >
-              Start Game
-            </Button>
-          )}
-        </div>
-      </div>
-      <div className="playerlist">
-        {room.state.players.map((player) => (
-          <PlayerCard key={player.user._id} player={player} />
-        ))}
-      </div>
-      {displaySettings && (
-        <>
-          <div className="owner-options">
-            <GameRoomForm
-              handleSubmit={handleSubmit}
-              room={roomEditFormValues}
-              submitButtonLabel="Edit Room Settings"
-              dispatchRoomChanges={dispatchRoomEditFormValues}
-            />
-            <Button variant="secondary" action={() => api.deleteRoom(room._id)}>
-              Close Game and Delete Game Room
-            </Button>
-          </div>
-        </>
-      )}
       {isOwner ? (
         <h2 className="game-pin">
           Pin {room.pin}
@@ -101,7 +54,7 @@ function WaitingRoom({
           />
         </h2>
       ) : (
-        <div className="player-options">
+        <ActionsBar >
           {isSignedUp ? (
             <Button
               variant="primary"
@@ -120,6 +73,7 @@ function WaitingRoom({
               Leave Game
             </Button>
           ) : (
+
             <Button
               variant="primary"
               action={() => {
@@ -130,8 +84,61 @@ function WaitingRoom({
             >
               Join Game
             </Button>
+
           )}
+        </ActionsBar>
+      )}
+      <div className="waiting-section">
+        <div className="room-header">
+          {isOwner && (
+            <SettingsOutlinedIcon
+              className="clickable-icon"
+              onClick={() => setDisplaySettings(!displaySettings)}
+            />
+          )}
+          <div className="room-info">
+            <h2>{room.name}</h2>
+            <h4>({room.spokenLanguage})</h4>
+          </div>
+          <div className="row">
+            <PermIdentityIcon className="icon-user" />
+            {room.state.players.length}/{room.maxPlayers}
+            <ActionsBar >
+              {isOwner && (
+                <Button
+                  variant="primary"
+                  action={() => {
+                    createGameActionHandler("start")()
+                      .then(() => { })
+                      .catch((error) => { });
+                  }}
+                >
+                  Start Game
+                </Button>
+              )}
+            </ActionsBar>
+          </div>
         </div>
+        <div className="playerlist">
+          {room.state.players.map((player) => (
+            <PlayerCard key={player.user._id} player={player} />
+          ))}
+        </div>
+      </div>
+      {displaySettings && (
+        <>
+          <div className="owner-options">
+            <GameRoomForm
+              handleSubmit={handleSubmit}
+              room={roomEditFormValues}
+              submitButtonLabel="Edit Room Settings"
+              dispatchRoomChanges={dispatchRoomEditFormValues}
+            />
+            <Button variant="secondary" action={() => api.deleteRoom(room._id)}>
+              Close Game and Delete Game Room
+            </Button>
+          </div>
+        </>
       )}
     </div>
   );

@@ -1,0 +1,20 @@
+.ProfilePicture {
+  height: 6vh;
+  aspect-ratio: 1;
+  outline: 2px solid var(--white);
+  border-radius: 50%;
+  position: relative;
+}
+
+.ProfilePicture .inner-border {
+  aspect-ratio: 1;
+  border: 3px solid transparent;
+  border-radius: 50%;
+}
+
+.ProfilePicture img {
+  border-radius: 50%;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}

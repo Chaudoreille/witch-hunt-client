@@ -23,11 +23,6 @@
   font-size: 2rem;
 }
 
-.Profile label {
-  display: inline-block;
-  text-align: right;
-}
-
 .Profile .profile-pic-wrapper {
   position: relative;
   margin: 3rem;
@@ -42,28 +37,35 @@
   overflow: hidden;
 }
 
-.Profile .image-wrapper img {
-  object-fit: cover;
-  width: 100%;
-}
-
 .Profile .user-info-wrapper {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin: 1rem 0;
-  font-size: 1.2em;
 }
 
-.Profile .user-info-wrapper label {
-  margin-right: 2ch;
+.Profile .user-info-wrapper .info {
+  font-weight: 600;
+  font-size: 2vmax;
+
+}
+
+.Profile .user-info-wrapper .label {
+  font-weight: 300;
 }
 
 .Profile .Button.small {
   width: fit-content;
 }
 
-.Profile .image-wrapper {
-  border-radius: 100vw;
+.Profile .ProfilePicture {
+  outline: 7px solid var(--white);
+  height: 20vh;
+}
+
+.Profile .ProfilePicture .inner-border {
+  border: 9px solid transparent;
+
 }
 
 .Profile .image-edit {
@@ -72,8 +74,8 @@
   outline: 5px solid var(--white);
   display: flex;
   position: absolute;
-  bottom: -5px;
-  right: -5px;
+  bottom: -2px;
+  right: 11px;
   background-color: var(--grey);
   cursor: pointer;
 }

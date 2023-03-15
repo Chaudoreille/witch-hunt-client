@@ -5,6 +5,7 @@ import WaitingRoom from "./components/WaitingRoom/WaitingRoom";
 import ActiveRoom from "./components/ActiveRoom/ActiveRoom";
 import api from "../../service/service";
 import ErrorList from "../../components/ErrorList/ErrorList";
+import Loader from "../../components/Loader/Loader";
 
 import "./GameRoom.css";
 import GameCompletedroom from "./components/GameCompletedRoom/GameCompletedroom";
@@ -94,7 +95,7 @@ function GameRoom() {
     };
   }
 
-  if (!room) return <section className="GameRoom">Loading...</section>;
+  if (!room) return <section className="GameRoom"><Loader /></section>;
 
   const isOwner = user._id === room.owner;
   const currentPlayercount =
@@ -109,36 +110,34 @@ function GameRoom() {
       {errors.length > 0 && (
         <ErrorList messages={errors} closeAction={() => dispatchErrors(null)} />
       )}
-      <div className="row">
-        <div id="game">
-          {room.state.status === "Lobby" && (
-            <WaitingRoom
-              room={room}
-              createGameActionHandler={createGameActionHandler}
-              displaySettings={displaySettings}
-              setDisplaySettings={setDisplaySettings}
-            />
-          )}
-          {room.state.status === "Started" && (
-            <ActiveRoom
-              room={room}
-              createGameActionHandler={createGameActionHandler}
-              displaySettings={displaySettings}
-              setDisplaySettings={setDisplaySettings}
-            />
-          )}
-          {room.state.status === "Completed" && (
-            <GameCompletedroom
-              room={room}
-              createGameActionHandler={createGameActionHandler}
-              displaySettings={displaySettings}
-              setDisplaySettings={setDisplaySettings}
-            />
-          )}
-        </div>
-        <div id="messenger">
-          <Messenger room={room} handleErrors={dispatchErrors} />
-        </div>
+      <div id="game">
+        {room.state.status === "Lobby" && (
+          <WaitingRoom
+            room={room}
+            createGameActionHandler={createGameActionHandler}
+            displaySettings={displaySettings}
+            setDisplaySettings={setDisplaySettings}
+          />
+        )}
+        {room.state.status === "Started" && (
+          <ActiveRoom
+            room={room}
+            createGameActionHandler={createGameActionHandler}
+            displaySettings={displaySettings}
+            setDisplaySettings={setDisplaySettings}
+          />
+        )}
+        {room.state.status === "Completed" && (
+          <GameCompletedroom
+            room={room}
+            createGameActionHandler={createGameActionHandler}
+            displaySettings={displaySettings}
+            setDisplaySettings={setDisplaySettings}
+          />
+        )}
+      </div>
+      <div id="messenger">
+        <Messenger room={room} handleErrors={dispatchErrors} />
       </div>
     </section>
   );

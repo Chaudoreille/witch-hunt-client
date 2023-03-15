@@ -4,11 +4,15 @@
 
 .CreateGame .header-row {
     display: flex;
-    flex-direction: column;
     align-items: center;
     gap: 1rem;
     font-weight: 700;
-    text-align: center;
+    text-align: left;
+
+}
+
+.CreateGame .header-row .ProfilePicture {
+    height: 8vh;
 }
 
 .CreateGame div img {

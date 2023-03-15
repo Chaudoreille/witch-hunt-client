@@ -27,7 +27,7 @@ const ErrorList = ({ messages, closeAction }) => {
           <span>
             <ErrorOutlineIcon className='error-icon' />
           </span>
-          <span>{message}</span>
+          {message}
         </p>
       ))}
     </div>

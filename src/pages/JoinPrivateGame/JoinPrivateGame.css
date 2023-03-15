@@ -1,4 +1,4 @@
-.pin {
+.JoinPrivateGame .pin {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -6,13 +6,22 @@
 
 }
 
-.pin label {
+.JoinPrivateGame .pin label {
   font-size: 3rem;
   text-transform: uppercase;
   font-weight: 600;
 
 }
 
-#pin {
+.JoinPrivateGame #pin {
   width: 100%;
+}
+
+
+@media (max-width: 750px) {
+  .JoinPrivateGame .window-center-grey {
+    min-height: 50vh;
+    padding: 0 4rem;
+    min-width: 85vmin;
+  }
 }

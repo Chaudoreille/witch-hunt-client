@@ -1,12 +1,13 @@
 import { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import Loader from "../Loader/Loader";
 
 function AuthenticatedOnly() {
   const { isLoading, user } = useContext(AuthContext);
 
   if (isLoading) {
-    return <p>Loading</p>;
+    return <Loader />;
   }
 
   if (!user) {

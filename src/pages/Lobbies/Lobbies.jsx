@@ -9,6 +9,11 @@ import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import ButtonLink from "../../components/Button/ButtonLink";
 import ErrorList from "../../components/ErrorList/ErrorList";
+import Toggle from "../../components/Toggle/Toggle";
+import SearchIcon from '@mui/icons-material/Search';
+import Loader from "../../components/Loader/Loader";
+
+
 
 function Lobbies() {
   const { user } = useContext(AuthContext);
@@ -51,40 +56,51 @@ function Lobbies() {
 
   return (
     <section className="Lobbies">
-      <div className="actionBar">
-        <ButtonLink variant={"primary"} link={"/games/join"}>
-          Join game
-        </ButtonLink>
-        <ButtonLink variant={"primary"} link={"/games/create"}>
-          Create a game
-        </ButtonLink>
-      </div>
-      <div className="filters">
-        <Button variant={"primary"} action={toggleOwner}>
-          {filters.owner ? "All Games" : "My Games"}
-        </Button>
-        <Input
-          type="text"
-          name="spokenLanguage"
-          placeholder="Spoken language"
-          action={handleFilter}
-          value={filters.spokenLanguage || ""}
-        />
-        <Input
-          type="text"
-          name="name"
-          placeholder="Game name"
-          action={handleFilter}
-          value={filters.name || ""}
-        />
+      <div className="commandsBar">
+        <div className="actionBar">
+          <ButtonLink variant={"primary"} link={"/games/join"}>
+            Join a private game
+          </ButtonLink>
+          <ButtonLink variant={"primary"} link={"/games/create"}>
+            Create a game
+          </ButtonLink>
+        </div>
+        <div className="filters">
+
+          <Input
+            type="text"
+            name="spokenLanguage"
+            placeholder="Search by language"
+            action={handleFilter}
+            value={filters.spokenLanguage || ""}
+            icon={<SearchIcon />}
+          />
+          <Input
+            type="text"
+            name="name"
+            placeholder="Search by name"
+            action={handleFilter}
+            value={filters.name || ""}
+            icon={<SearchIcon />}
+          />
+
+          <Toggle toggle={filters.owner || false} optionLeft="My rooms" optionRight="All rooms"
+            onChangeLeft={(event) => toggleOwner(event.target.checked)}
+            onChangeRight={(event) => toggleOwner(!event.target.checked)}
+          />
+
+        </div>
       </div>
       {!errors.length || <ErrorList messages={errors} />}
       {!rooms ? (
-        <div style={{ color: "white" }}>Loading</div>
+        <Loader />
       ) : rooms.length ? (
         <GameCardList list={rooms} displayLink={true} />
       ) : (
-        <h2>No active lobbies match your current filters.</h2>
+        <div className="window-grey">
+          <img src="../../../public/images/empty-state-search.png" />
+          <h2>Sorry, we couldn't find any match !</h2>
+        </div>
       )}
     </section>
   );

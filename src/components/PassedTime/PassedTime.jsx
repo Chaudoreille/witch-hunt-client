@@ -49,7 +49,7 @@ function PassedTime({ model }) {
 
 
   return (
-    <small>{passedTime}</small>
+    <>{passedTime}</>
   );
 
 }
