@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import WaitingRoom from "./components/WaitingRoom/WaitingRoom";
 import ActiveRoom from "./components/ActiveRoom/ActiveRoom";
-import api from "../../service/service";
 import ErrorList from "../../components/ErrorList/ErrorList";
 import Loader from "../../components/Loader/Loader";
 import io from 'socket.io-client';
@@ -44,9 +43,9 @@ function GameRoom() {
   const { roomId } = useParams();
   const navigate = useNavigate();
 
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  /**
+   * Create Socket for real-time communication
+   */
   useEffect(() => {
     const ioSocket = io(import.meta.env.VITE_BACKEND_URL, {
       auth: {
@@ -78,41 +77,28 @@ function GameRoom() {
     socket.emit("message", message);
   }
 
+  function socketErrorHandler(error) {
+    if (error) {
+      dispatchErrors(error);
+    }
+  }
   /**
    * Creates a function that will contact the backend to execute the specified action
    * with the specified parameters (if any). Returns a promise that resolves to the
    * returned data, or rejects to the error message.
    * Will also add the error message to the error list
    * @param {String} action
-   * @param  {...any} parameters
+   * @param  {Array} parameters - optional
+   * @param {Function} callback - optional
    * @returns
    */
-  function createGameActionHandler(action, ...parameters) {
-    return async () => {
-      return api
-        .takeAction(room._id, action, parameters)
-        .then((response) => {
-          return response.data;
-        })
-        .catch((error) => {
-          let errorMessage;
-          if (error.response) errorMessage = error.response.data.message;
-          else errorMessage = error.message;
-          dispatchErrors(errorMessage);
-          throw new Error("returning action error");
-        });
+  function createGameActionHandler(action, parameters = [], callback = socketErrorHandler) {
+    return () => {
+      socket.emit("game-action", action, parameters, callback);
     };
   }
 
   if (!room) return <section className="GameRoom"><Loader /></section>;
-
-  const isOwner = user._id === room.owner;
-  const currentPlayercount =
-    room.state.status === "Lobby"
-      ? room.state.players.length
-      : room.state.players.filter((player) => player.status === "Alive").length;
-  const maxPlayerCount =
-    room.state.status === "Lobby" ? room.maxPlayers : room.state.players.length;
 
   return (
     <section className="GameRoom">
