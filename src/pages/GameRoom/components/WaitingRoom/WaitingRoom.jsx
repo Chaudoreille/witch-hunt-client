@@ -123,7 +123,12 @@ function WaitingRoom({
               submitButtonLabel="Edit Room Settings"
               dispatchRoomChanges={dispatchRoomEditFormValues}
             />
-            <Button variant="secondary" action={() => api.deleteRoom(room._id)}>
+            <Button variant="secondary" action={() => {
+              socket.emit("delete-room", () => {
+                api.deleteRoom(room._id);
+                navigate("/home");
+              });
+            }}>
               Close Game and Delete Game Room
             </Button>
           </div>

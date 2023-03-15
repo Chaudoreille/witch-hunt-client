@@ -70,12 +70,15 @@ function GameRoom() {
     });
 
     ioSocket.on("update-room", (room) => {
-      console.log("updating room");
       setRoom(room);
     });
 
+    ioSocket.on("deleted-room", (message) => {
+      dispatchErrors(message);
+      setRoom(null);
+    });
+
     ioSocket.on("error", (errorMessage) => {
-      console.log("received error message via socket", errorMessage);
       dispatchErrors(errorMessage);
     });
 
@@ -115,48 +118,56 @@ function GameRoom() {
     };
   }
 
-  if (!room) return <section className="GameRoom"><Loader /></section>;
-
   return (
     <section className="GameRoom">
       {errors.length > 0 && (
-        <ErrorList messages={errors} closeAction={() => dispatchErrors(null)} />
+        <ErrorList messages={errors} closeAction={() => {
+          if (!room) {
+            navigate('/home');
+          } else {
+            dispatchErrors(null);
+          }
+        }} />
       )}
-      <div id="game">
-        {room.state.status === "Lobby" && (
-          <WaitingRoom
-            room={room}
-            createGameActionHandler={createGameActionHandler}
-            displaySettings={displaySettings}
-            setDisplaySettings={setDisplaySettings}
-            dispatchErrors={dispatchErrors}
-            socket={socket}
-          />
-        )}
-        {room.state.status === "Started" && (
-          <ActiveRoom
-            room={room}
-            createGameActionHandler={createGameActionHandler}
-            displaySettings={displaySettings}
-            setDisplaySettings={setDisplaySettings}
-          />
-        )}
-        {room.state.status === "Completed" && (
-          <GameCompletedroom
-            room={room}
-            createGameActionHandler={createGameActionHandler}
-            displaySettings={displaySettings}
-            setDisplaySettings={setDisplaySettings}
-          />
-        )}
-      </div>
-      <div id="messenger">
-        <Messenger
-          room={room}
-          sendMessage={sendMessage}
-          handleErrors={dispatchErrors}
-          messages={messages} />
-      </div>
+      {!room ? (<Loader />) : (
+        <>
+          <div id="game">
+            {room.state.status === "Lobby" && (
+              <WaitingRoom
+                room={room}
+                createGameActionHandler={createGameActionHandler}
+                displaySettings={displaySettings}
+                setDisplaySettings={setDisplaySettings}
+                dispatchErrors={dispatchErrors}
+                socket={socket}
+              />
+            )}
+            {room.state.status === "Started" && (
+              <ActiveRoom
+                room={room}
+                createGameActionHandler={createGameActionHandler}
+                displaySettings={displaySettings}
+                setDisplaySettings={setDisplaySettings}
+              />
+            )}
+            {room.state.status === "Completed" && (
+              <GameCompletedroom
+                room={room}
+                createGameActionHandler={createGameActionHandler}
+                displaySettings={displaySettings}
+                setDisplaySettings={setDisplaySettings}
+              />
+            )}
+          </div>
+          <div id="messenger">
+            <Messenger
+              room={room}
+              sendMessage={sendMessage}
+              handleErrors={dispatchErrors}
+              messages={messages} />
+          </div>
+        </>
+      )}
     </section>
   );
 }
