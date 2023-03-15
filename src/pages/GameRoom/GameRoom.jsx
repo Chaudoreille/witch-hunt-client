@@ -37,6 +37,7 @@ function GameRoom() {
   const [displaySettings, setDisplaySettings] = useState(false);
   const [socket, setSocket] = useState(null);
   const [messages, setMessages] = useState([]);
+  const [messengerVisibility, setMessengerVisibility] = useState(true);
 
   const { user, token } = useContext(AuthContext);
 
@@ -162,9 +163,12 @@ function GameRoom() {
           <div id="messenger">
             <Messenger
               room={room}
+              className={messengerVisibility ? "visible" : "hidden"}
               sendMessage={sendMessage}
               handleErrors={dispatchErrors}
-              messages={messages} />
+              messages={messages}
+              setVisibility={setMessengerVisibility}
+            />
           </div>
         </>
       )}

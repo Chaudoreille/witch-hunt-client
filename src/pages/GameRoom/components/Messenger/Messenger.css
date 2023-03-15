@@ -21,6 +21,7 @@
 }
 
 .Messenger .messenger-header {
+    position: relative;
     width: 100%;
     text-align: center;
     background-color: var(--grey);
@@ -52,3 +53,35 @@
     max-height: 60vh;
     overflow-x: auto;
 }
+
+@media (max-width:950px) {
+    .Messenger {
+        width: 100%;
+    }
+
+    .Messenger.hidden .messenger-container {
+        display: none;
+    }
+
+    .Messenger .messenger-header .button-collapse {
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        aspect-ratio: 1;
+        cursor: pointer;
+    }
+
+    .Messenger.hidden .messenger-header .collapse-icon {
+        transform: rotate(180deg);
+    }
+
+    .Messenger .messenger-header .button-collapse .collapse-icon {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width:750px) {}
