@@ -87,7 +87,7 @@ function WaitingRoom({
                   </h2>
                   <Button
                     variant="primary"
-                    action={() => createGameActionHandler("start")}
+                    action={createGameActionHandler("start")}
                   >
                     Start Game
                   </Button>
