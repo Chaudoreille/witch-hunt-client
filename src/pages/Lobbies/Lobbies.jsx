@@ -11,6 +11,7 @@ import ButtonLink from "../../components/Button/ButtonLink";
 import ErrorList from "../../components/ErrorList/ErrorList";
 import Toggle from "../../components/Toggle/Toggle";
 import SearchIcon from '@mui/icons-material/Search';
+import Loader from "../../components/Loader/Loader";
 
 
 
@@ -84,17 +85,18 @@ function Lobbies() {
           />
 
           <Toggle onChangeLeft={(event) => toggleOwner(event.target.checked)} onChangeRight={(event) => toggleOwner(!event.target.checked)} toggle={filters.owner} optionLeft="My rooms" optionRight="All rooms" />
+
         </div>
       </div>
       {!errors.length || <ErrorList messages={errors} />}
       {!rooms ? (
-        <div style={{ color: "white" }}>Loading</div>
+        <Loader />
       ) : rooms.length ? (
         <GameCardList list={rooms} displayLink={true} />
       ) : (
         <div className="window-grey">
           <img src="../../../public/images/empty-state-search.png" />
-          <h2>Sorry, we couldn't find any match</h2>
+          <h2>Sorry, we couldn't find any match !</h2>
         </div>
       )}
     </section>

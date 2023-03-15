@@ -13,7 +13,6 @@ function Toggle({ toggle, optionLeft, optionRight, label, onChangeLeft, onChange
           type="radio"
           id="toggle-left"
           name="toggle"
-          value={toggle}
           onChange={onChangeLeft}
         ></input>
         <label className="radio-button" htmlFor="toggle-left">
@@ -25,7 +24,6 @@ function Toggle({ toggle, optionLeft, optionRight, label, onChangeLeft, onChange
           type="radio"
           id="toggle-right"
           name="toggle"
-          value={!toggle}
           onChange={onChangeRight}
 
         ></input>
