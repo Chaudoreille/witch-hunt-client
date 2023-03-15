@@ -29,8 +29,13 @@ nav .Button.logout {
 nav .actions-nav {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   width: 100%;
   margin: 1.5rem;
+}
+
+nav .ProfilePicture:hover {
+  background-color: var(--blue);
 }
 
 @media (max-width: 550px) {
