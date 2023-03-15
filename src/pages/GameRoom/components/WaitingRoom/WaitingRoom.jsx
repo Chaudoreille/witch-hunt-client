@@ -45,7 +45,6 @@ function WaitingRoom({
 
   const handleClickToOpen = () => {
     setOpen(true);
-    showModal()
   };
 
 
