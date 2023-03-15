@@ -10,7 +10,7 @@ function GameRoomForm({
   submitButtonLabel,
   dispatchRoomChanges,
 }) {
-
+  console.log(room)
   return (
     <form onSubmit={handleSubmit}>
       <Input
@@ -31,7 +31,7 @@ function GameRoomForm({
         }
       />
 
-      <Toggle obj={room} action={dispatchRoomChanges} />
+      <Toggle onChangeLeft={(event) => dispatchRoomChanges({ isPublished: event.target.checked })} onChangeRight={(event) => dispatchRoomChanges({ isPublished: !event.target.checked })} toggle={room.isPublished} optionLeft="Public" optionRight="Private" label="Visibility" />
 
       <Input
         name="spokenLanguage"
