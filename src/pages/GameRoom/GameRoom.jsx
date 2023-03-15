@@ -55,6 +55,11 @@ function GameRoom() {
         game: roomId,
       },
     });
+
+    ioSocket.on("initialize-messages", (messages) => {
+      setMessages(messages);
+    });
+
     ioSocket.on("message", (message) => {
       setMessages((oldMessages) => [...oldMessages, message]);
     });
@@ -92,7 +97,11 @@ function GameRoom() {
    * @param {Function} callback - optional
    * @returns
    */
-  function createGameActionHandler(action, parameters = [], callback = socketErrorHandler) {
+  function createGameActionHandler(
+    action,
+    parameters = [],
+    callback = socketErrorHandler
+  ) {
     return () => {
       socket.emit("game-action", action, parameters, callback);
     };
