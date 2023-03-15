@@ -7,7 +7,7 @@ const ProfilePicture = ({ user }) => {
     <>
       <div className='ProfilePicture'>
         <div className='inner-border'>
-          <img src={user.image} alt={user.username} />
+          <img src={user.image} alt={user.username} title={user.username} />
         </div>
       </div>
     </>

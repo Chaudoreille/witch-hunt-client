@@ -1,0 +1,15 @@
+.ActionsBar {
+  height: 10vh;
+  background-color: var(--grey);
+  width: 60vw;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.ActionsBar .Button {
+  width: max-content;
+}
