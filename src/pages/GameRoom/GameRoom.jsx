@@ -12,11 +12,20 @@ import "./GameRoom.css";
 import GameCompletedroom from "./components/GameCompletedRoom/GameCompletedroom";
 import Messenger from "./components/Messenger/Messenger";
 
-function errorReducer(state, action) {
-  if (action === null) return [];
+/**
+ * Adds errorMessage to the list of errors.
+ * Handing it null instead of a String will
+ * reset the error list to an empty list
+ * @param {Array} existingErrors
+ * @param {String} errorMessage
+ * @returns
+ */
+function errorReducer(existingErrors, errorMessage) {
+  if (errorMessage === null) return [];
 
-  if (!state.includes(action)) return [...state, action];
-  return state;
+  if (!existingErrors.includes(errorMessage))
+    return [...existingErrors, errorMessage];
+  return existingErrors;
 }
 
 /**
@@ -117,6 +126,8 @@ function GameRoom() {
             createGameActionHandler={createGameActionHandler}
             displaySettings={displaySettings}
             setDisplaySettings={setDisplaySettings}
+            dispatchErrors={dispatchErrors}
+            socket={socket}
           />
         )}
         {room.state.status === "Started" && (

@@ -20,6 +20,8 @@ function WaitingRoom({
   createGameActionHandler,
   displaySettings,
   setDisplaySettings,
+  dispatchErrors,
+  socket,
 }) {
   const { user } = useContext(AuthContext);
   const [roomEditFormValues, dispatchRoomEditFormValues] = useReducer(
@@ -37,13 +39,61 @@ function WaitingRoom({
       .updateRoom(room._id, roomEditFormValues)
       .then((updatedRoom) => {
         setDisplaySettings(false);
+        socket.emit("force-update");
       })
-      // TODO display error message
-      .catch((error) => console.error(error));
+      .catch((error) => dispatchErrors(error.message));
   }
 
   return (
     <div className="WaitingRoom">
+      <div className="room-header">
+        <div className="row">
+          {isOwner && (
+            <SettingsOutlinedIcon
+              className="clickable-icon"
+              onClick={() => setDisplaySettings(!displaySettings)}
+            />
+          )}
+          <h2>{room.name}</h2>
+          <h4>({room.spokenLanguage})</h4>
+        </div>
+        <div className="row">
+          <PermIdentityIcon className="icon-user" />
+          {room.state.players.length}/{room.maxPlayers}
+          {isOwner && (
+            <Button
+              variant="primary"
+              action={() => {
+                createGameActionHandler("start")()
+                  .then(() => { })
+                  .catch((error) => { });
+              }}
+            >
+              Start Game
+            </Button>
+          )}
+        </div>
+      </div>
+      <div className="playerlist">
+        {room.state.players.map((player) => (
+          <PlayerCard key={player.user._id} player={player} />
+        ))}
+      </div>
+      {displaySettings && (
+        <>
+          <div className="owner-options">
+            <GameRoomForm
+              handleSubmit={handleSubmit}
+              room={roomEditFormValues}
+              submitButtonLabel="Edit Room Settings"
+              dispatchRoomChanges={dispatchRoomEditFormValues}
+            />
+            <Button variant="secondary" action={() => api.deleteRoom(room._id)}>
+              Close Game and Delete Game Room
+            </Button>
+          </div>
+        </>
+      )}
       {isOwner ? (
         <h2 className="game-pin">
           Pin {room.pin}
