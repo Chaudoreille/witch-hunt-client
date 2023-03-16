@@ -32,13 +32,9 @@
     gap: 1rem;
 }
 
-
 .GameCompletedRoom img {
     width: 15vmax;
 }
-
-
-
 
 .GameCompletedRoom .new-game {
     width: max-content;
