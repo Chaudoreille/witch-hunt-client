@@ -98,6 +98,11 @@
   .GameRoom .message-boxes .Storytime,
   .GameRoom .message-boxes .ErrorList {
     width: 100%;
+    max-height: fit-content;
+  }
+
+  .GameRoom .message-boxes .Storytime span {
+    width: 4%
   }
 
 
