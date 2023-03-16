@@ -12,14 +12,7 @@
 }
 
 .CreateGame .header-row .ProfilePicture {
-    height: 8vh;
-}
-
-.CreateGame div img {
-    border-radius: 100%;
-    aspect-ratio: 1;
-    width: 5rem;
-    object-fit: cover;
+    scale: 1.1;
 }
 
 .CreateGame .Button {

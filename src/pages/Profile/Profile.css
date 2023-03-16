@@ -1,115 +1,103 @@
 .Profile {
-  color: var(--white);
+    color: var(--white);
 }
 
 .Profile .window-center-grey.auth {
-  gap: 1rem;
+    gap: 1rem;
 }
 
 .Profile .actionBar {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
 }
 
 .Profile .actionBar .closeButton {
-  color: white;
-  display: block;
-  height: min-content;
-  line-height: 0;
+    color: white;
+    display: block;
+    height: min-content;
+    line-height: 0;
 }
 
 .Profile .actionBar .closeButton .close-icon {
-  font-size: 2rem;
+    font-size: 2rem;
 }
 
 .Profile .profile-pic-wrapper {
-  position: relative;
-  margin: 3rem;
+    position: relative;
+    aspect-ratio: 1;
+    height: 20vh;
+    transform: translate(-50% -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.Profile .image-wrapper {
-  border-radius: 100vw;
-  width: 100px;
-  aspect-ratio: 1;
-  outline: 5px solid var(--white);
-  display: flex;
-  overflow: hidden;
+.Profile .ProfilePicture {
+    outline: 3px solid var(--white);
+    transform: scale(3);
 }
 
 .Profile .user-info-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1rem 0;
 }
 
 .Profile .user-info-wrapper .info {
-  font-weight: 600;
-  font-size: 2vmax;
+    font-weight: 600;
+    font-size: 2vmax;
 
 }
 
 .Profile .user-info-wrapper .label {
-  font-weight: 300;
+    font-weight: 300;
 }
 
 .Profile .Button.small {
-  width: fit-content;
-}
-
-.Profile .ProfilePicture {
-  outline: 7px solid var(--white);
-  height: 20vh;
-}
-
-.Profile .ProfilePicture .inner-border {
-  border: 9px solid transparent;
-
+    width: fit-content;
 }
 
 .Profile .image-edit {
-  border-radius: 100vw;
-  aspect-ratio: 1;
-  outline: 5px solid var(--white);
-  display: flex;
-  position: absolute;
-  bottom: -2px;
-  right: 11px;
-  background-color: var(--grey);
-  cursor: pointer;
+    position: absolute;
+    display: block;
+    cursor: pointer;
+    aspect-ratio: 1;
+    scale: 1.4;
+    bottom: 1vh;
+    right: 1.5vh;
+    border-radius: 100vw;
+    background-color: var(--grey);
+    color: var(--white);
+    outline: 5px solid var(--white);
+    border: none;
 }
 
 .Profile form .Input {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 .Profile form .Input label {
-  margin-right: 2ch;
-  width: min-content;
+    margin-right: 2ch;
+    width: min-content;
 }
 
 .Profile .Input input {
-  width: 60%;
-}
-
-.Profile .image-edit {
-  color: var(--white);
-  display: block;
-  border: none;
+    width: 60%;
 }
 
 .Profile .btn-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 2rem;
-  gap: 1rem;
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    gap: 1rem;
 }
 
 .Profile .btn-container .Button {
-  width: 8vmax;
+    width: 8vmax;
 }

@@ -1,93 +1,93 @@
 .clickable-icon {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .GameRoom {
-    min-height: 100vh;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
+  min-height: 100vh;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .GameRoom::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background-image: url(/images/village-gradient.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-image: url(/images/village-gradient.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 
 }
 
 
 .GameRoom .room-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    color: white;
-    gap: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  color: white;
+  gap: 1rem;
 }
 
 .GameRoom h4 {
-    font-weight: 300;
+  font-weight: 300;
 }
 
 .GameRoom #game {
-    display: flex;
-    width: 55vw;
+  display: flex;
+  width: 55vw;
 }
 
 .GameRoom .ErrorList {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .GameRoom #messenger {
-    position: fixed;
-    width: 35vw;
-    display: flex;
-    flex-direction: column;
-    right: 2rem;
-    bottom: 1rem;
+  position: fixed;
+  width: 35vw;
+  display: flex;
+  flex-direction: column;
+  right: 2rem;
+  bottom: 1rem;
 }
 
 .GameRoom .row {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: white;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: white;
 }
 
 
 @media (max-width:950px) {
-    .GameRoom .ActionsBar {
-        width: 100vw;
-    }
+  .GameRoom .ActionsBar {
+    width: 100vw;
+  }
 
-    .GameRoom #game {
-        width: calc(100vw - 4rem);
-    }
+  .GameRoom #game {
+    width: calc(100vw - 4rem);
+  }
 
-    .GameRoom #messenger {
-        width: 100vw;
-        right: 0;
-        background-color: var(--darkGrey);
-    }
+  .GameRoom #messenger {
+    width: 100vw;
+    right: 0;
+    background-color: var(--darkGrey);
+  }
 }
 
 @media (max-width:750px) {
-    .GameRoom .PlayerCard .ProfilePicture {
-        height: 4vh;
-    }
+  .GameRoom .PlayerCard .ProfilePicture {
+    scale: 0.9;
+  }
 
-    .GameRoom .PlayerCard h6 {
-        font-size: 0.8rem;
-    }
+  .GameRoom .PlayerCard h6 {
+    font-size: 0.8rem;
+  }
 }

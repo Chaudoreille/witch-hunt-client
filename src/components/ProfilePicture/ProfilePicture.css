@@ -1,20 +1,26 @@
 .ProfilePicture {
   height: 6vh;
   aspect-ratio: 1;
-  outline: 2px solid var(--white);
-  border-radius: 50%;
+  outline: 3px solid var(--white);
+  border-radius: 100%;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .ProfilePicture .inner-border {
+  border-radius: 100%;
+  height: 85%;
   aspect-ratio: 1;
-  border: 3px solid transparent;
-  border-radius: 50%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .ProfilePicture img {
-  border-radius: 50%;
-  height: 100%;
+  border-radius: 100%;
   width: 100%;
   object-fit: cover;
 }
