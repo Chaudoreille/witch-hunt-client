@@ -1,3 +1,40 @@
 .GameCompletedRoom {
-    background-color: bisque;
+    background-color: rgba(31, 34, 50, 0.568);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: min-content;
+    min-height: 100vh;
+    overflow-y: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.GameCompletedRoom .game-over {
+    background-color: var(--darkGrey);
+    border: 5px solid white;
+    width: 40vw;
+    height: 60vh;
+    border-radius: 12px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.GameCompletedRoom img {
+    width: 15vmax;
+}
+
+
+
+
+.GameCompletedRoom .new-game {
+    width: max-content;
+    height: max-content;
 }

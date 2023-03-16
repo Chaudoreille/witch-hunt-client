@@ -41,6 +41,7 @@ function GameRoom() {
   const [socket, setSocket] = useState(null);
   const [messages, setMessages] = useState([]);
   const [messengerVisibility, setMessengerVisibility] = useState(false);
+  const [winners, setWinners] = useState("");
 
   const { user, token } = useContext(AuthContext);
 
@@ -74,8 +75,9 @@ function GameRoom() {
 
     ioSocket.on("update-room", (room) => {
       setRoom(room);
-      dispatchStory(room.state.storytime);
-      dispatchTime(room.state.mode);
+      dispatchStory(room.state.storytime)
+      dispatchTime(room.state.mode)
+      setWinners(room.state.winners)
     });
 
     ioSocket.on("deleted-room", (message) => {
@@ -192,6 +194,7 @@ function GameRoom() {
                 createGameActionHandler={createGameActionHandler}
                 displaySettings={displaySettings}
                 setDisplaySettings={setDisplaySettings}
+                winners={winners}
               />
             )}
           </div>
