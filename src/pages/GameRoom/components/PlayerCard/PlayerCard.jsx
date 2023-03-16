@@ -5,21 +5,23 @@ import LockIcon from "@mui/icons-material/Lock";
 import ProfilePicture from "../../../../components/ProfilePicture/ProfilePicture";
 
 
-function PlayerCard({ player, onClick, className, votes }) {
+function PlayerCard({ player, onClick, className, votes, isRoleVisible }) {
   const { user } = useContext(AuthContext);
   const [status, setStatus] = useState("alive");
   const [role, setRole] = useState("hidden");
 
   useEffect(() => {
-    if (role === "hidden" &&
-      (player.user._id === user._id ||
-        player.status === "Dead")) {
+    if (isRoleVisible) {
       setRole(player.role.toLowerCase());
+    } else if (player.user._id === user._id || player.status === "Dead") {
+      setRole(player.role.toLowerCase());
+    } else {
+      setRole("hidden");
     }
     if (player.status.toLowerCase() !== status) {
       setStatus(player.status.toLowerCase());
     }
-  }, [player]);
+  }, [player, isRoleVisible]);
 
   return (
     <div className={`PlayerCard ${className && className} ${role !== "hidden" ? "reveal" : ""}`} onClick={(event) => {

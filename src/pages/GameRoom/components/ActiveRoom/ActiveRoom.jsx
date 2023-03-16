@@ -36,6 +36,7 @@ function ActiveRoom({ room, createGameActionHandler, totalWitches, killed }) {
               }
               return voter.vote.target === cardPlayer.user._id;
             })}
+            isRoleVisible={room.state.mode === "Nighttime" && cardPlayer.role === "Witch" && player.role === "Witch"}
           />
         ))}
       </div>
