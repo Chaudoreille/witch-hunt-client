@@ -9,6 +9,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: relative;
 }
 
 .ErrorList .error-wrapper {
@@ -24,14 +25,16 @@
 }
 
 .ErrorList .actionBar {
-  width: 100%;
-  margin-top: -10px;
-  margin-left: 10px;
-  text-align: right;
+  position: absolute;
+  right: 3px;
+  top: 3px;
+
 }
 
 .ErrorList .closeButton {
   all: unset;
+  right: 0;
+  top: 0;
   cursor: pointer;
   line-height: 0;
 }

@@ -9,6 +9,8 @@
 
 .Welcome .window-center-grey {
     gap: 3rem;
+    max-width: max-content;
+    padding: 3rem;
 }
 
 .buttons {
@@ -32,6 +34,7 @@
     height: 100%;
     position: absolute;
     width: 100%;
+    z-index: 100;
 }
 
 

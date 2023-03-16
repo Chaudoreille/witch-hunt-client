@@ -1,0 +1,221 @@
+.PlayerLobbyCard {
+  width: max-content;
+  height: 4rem;
+  border-radius: 14px;
+  display: flex;
+  gap: 0.5rem;
+  color: var(--white);
+  align-items: center;
+  padding: 1rem;
+  border: 3px solid var(--blue);
+}
+
+.PlayerLobbyCard .ProfilePicture {
+  outline: 2px solid var(--white);
+  scale: 0.8;
+}
+
+.PlayerLobbyCard h6 {
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.PlayerCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background-color: var(--gradientBlue);
+  cursor: pointer;
+}
+
+.PlayerCard .card-wrapper {
+  width: 15vh !important;
+  aspect-ratio: 182/270 !important;
+  display: flex;
+  flex-direction: column;
+  perspective: 1000px
+}
+
+.PlayerCard .disabled,
+.PlayerCard .dead {
+  cursor: default;
+}
+
+.PlayerCard .user-info {
+  display: flex;
+  margin-top: 0.5vh;
+  flex-direction: column;
+  align-items: center;
+  gap: 1vh;
+  color: var(--white);
+  border-radius: 15px;
+  outline: 4px solid var(--white);
+  width: 100%;
+  padding: 0.5rem;
+  background-color: var(--darkGrey);
+  position: relative;
+}
+
+.PlayerCard .user-info.me {
+  outline: 4px solid var(--blue);
+  background-color: var(--white);
+}
+
+.PlayerCard .card-wrapper .content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0.6rem;
+  gap: 2vh;
+  z-index: 1;
+}
+
+.PlayerCard .votes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1vh;
+  width: 100%;
+  height: 100%;
+}
+
+.PlayerCard .votes .cast,
+.PlayerCard .votes .locked {
+  display: flex;
+  align-items: center;
+  height: 45%;
+  width: 100%;
+  flex-flow: row wrap;
+  justify-content: center;
+  position: relative;
+}
+
+.PlayerCard .votes .vote-wrapper {
+  position: relative;
+  width: min-content;
+}
+
+.PlayerCard .votes .locked .icon-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  border-radius: 100%;
+}
+
+.PlayerCard .votes .locked .lock-icon {
+  color: white;
+  font-size: .8rem;
+}
+
+.PlayerCard .ProfilePicture.vote {
+  height: 1.5vh;
+  scale: 2;
+  outline: 1px solid white;
+}
+
+.PlayerCard .locked .ProfilePicture.vote {
+  outline: 1px solid rgb(83, 77, 77);
+}
+
+.PlayerCard .ProfilePicture.vote .inner-border {
+  height: 100%;
+}
+
+/* Card Back Handling */
+
+.PlayerCard .card {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border-radius: 15px;
+  color: var(--white);
+  cursor: pointer;
+
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  z-index: 0;
+}
+
+.PlayerCard.reveal .card-wrapper .card {
+  transform: rotateY(180deg);
+}
+
+.PlayerCard .card .bg {
+  position: absolute;
+  z-index: 0;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.PlayerCard .card .front.bg {
+  transform: rotateY(180deg);
+}
+
+.PlayerCard .card .back.bg {
+  background-image: url("/images/cards/card-back.png");
+}
+
+.PlayerCard .card .front.bg.villager.alive {
+  background-image: url("/images/cards/villager-card-classic.png");
+}
+
+.PlayerCard .card .front.bg.villager.dead {
+  background-image: url("/images/cards/villager-card-death-.png");
+}
+
+.PlayerCard .card .front.bg.witch.alive {
+  background-image: url("/images/cards/witch-card-classic.png");
+}
+
+.PlayerCard .card .front.bg.witch.dead {
+  background-image: url("/images/cards/witch-card-death-.png");
+}
+
+.PlayerCard.big .card .front.bg.villager.alive {
+  background-image: url("public//images/cards/villager-card-classic@2x.png");
+}
+
+.PlayerCard.big .card .front.bg.villager.dead {
+  background-image: url("/images/cards/villager-card-death-2x.png");
+}
+
+.PlayerCard.big .card .front.bg.witch.alive {
+  background-image: url("/images/cards/witch-card-classic@2x.png");
+}
+
+.PlayerCard.big .card .front.bg.witch.dead {
+  background-image: url("/images/cards/witch-card-death-2x.png");
+}
+
+@media (max-width:750px) {
+  .PlayerLobbyCard h6 {
+    font-size: 0.8rem;
+  }
+
+  .PlayerLobbyCard {
+    padding: 0.7rem;
+  }
+}
+
+@media (max-width:750px) {
+  .PlayerCard .card .ProfilePicture {
+    scale: 0.9;
+  }
+
+  .PlayerCard .card .ProfilePicture.vote {}
+
+  .PlayerCard .card h6 {
+    font-size: 0.8rem;
+  }
+}

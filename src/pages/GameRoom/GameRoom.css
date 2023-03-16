@@ -1,101 +1,116 @@
 .clickable-icon {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .GameRoom {
-    min-height: 100vh;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
+  min-height: 100vh;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  padding-bottom: 10vh;
 }
 
 .GameRoom .room-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    color: white;
-    gap: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  color: white;
+  gap: 1rem;
 }
 
 .GameRoom h4 {
-    font-weight: 300;
+  font-weight: 300;
 }
 
 .GameRoom #game {
-    display: flex;
-    width: 55vw;
+  display: flex;
+  width: 55vw;
+  z-index: 10;
 }
 
-.GameRoom .PlayerCard {
-    width: max-content;
-    height: 4rem;
-    border-radius: 14px;
-    display: flex;
-    gap: 1rem;
-    color: var(--white);
-    align-items: center;
-    padding: 1rem;
-    border: 3px solid var(--blue);
+.GameRoom .message-boxes {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  margin-bottom: 1rem;
+  text-align: center;
+
+
 }
 
-.GameRoom .PlayerCard .ProfilePicture {
-    outline: 1px solid var(--white);
-    height: 5vh;
+.GameRoom .ErrorList {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0;
+  width: 50vw;
+  align-self: start;
+  min-height: 3rem;
 }
 
-.GameRoom .PlayerCard h6 {
-    font-weight: 400;
-    font-size: 1rem;
-}
-
-.GameRoom .playerlist {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.3rem;
+.GameRoom .Storytime {
+  width: 40vw;
+  min-height: 3rem;
 }
 
 
 .GameRoom #messenger {
-    position: fixed;
-    width: 35vw;
-    display: flex;
-    flex-direction: column;
-    right: 2rem;
-    bottom: 1rem;
-}
-
-.GameRoom .ErrorList {
-    width: 100%;
+  position: fixed;
+  width: 30vw;
+  display: flex;
+  flex-direction: column;
+  right: 2rem;
+  bottom: 1rem;
+  z-index: 10
 }
 
 .GameRoom .row {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: white;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: white;
 }
 
 
 @media (max-width:950px) {
-    .GameRoom .ActionsBar {
-        width: 100vw;
-    }
+  .GameRoom .ActionsBar {
+    width: 100vw;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem 5rem;
+    height: max-content;
+  }
 
-    .GameRoom #game {
-        width: calc(100vw - 4rem);
-    }
+  .GameRoom #game {
+    width: calc(100vw - 4rem);
+  }
 
-    .GameRoom #messenger {
-        display: none;
-    }
-}
+  .GameRoom .message-boxes {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 
-@media (max-width:750px) {
-    .GameRoom .PlayerCard .ProfilePicture {
-        height: 4vh;
-    }
+  .GameRoom .message-boxes .Storytime,
+  .GameRoom .message-boxes .ErrorList {
+    width: 100%;
+    max-height: fit-content;
+  }
 
-    .GameRoom .PlayerCard h6 {
-        font-size: 0.8rem;
-    }
+  .GameRoom .message-boxes .Storytime span {
+    width: 4%
+  }
+
+
+  .GameRoom #messenger {
+    width: 100vw;
+    right: 0;
+    background-color: var(--darkGrey);
+  }
 }

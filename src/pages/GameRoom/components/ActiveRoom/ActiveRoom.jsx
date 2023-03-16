@@ -1,17 +1,17 @@
-import PlayerCard from "../PlayerCard/PlayerCard";
-import Button from "../../../../components/Button/Button";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../../context/AuthContext";
 import "./ActiveRoom.css";
-import { useNavigate } from "react-router-dom";
 
-function ActiveRoom({ room, createGameActionHandler }) {
+import PlayerCard from "../PlayerCard/PlayerCard";
+import Button from "../../../../components/Button/Button";
+import ActionsBar from "../ActionsBar/ActionsBar";
+
+function ActiveRoom({ room, createGameActionHandler, totalWitches, killed }) {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const player = room.state.players.filter(
-    (player) => player.user._id === user._id
-  )[0];
+  const player = room.state.players.find(player => player.user._id === user._id);
 
   // People that are not participating in the game cannot view the games actions
   if (!player) return navigate("/home");
@@ -24,20 +24,28 @@ function ActiveRoom({ room, createGameActionHandler }) {
   return (
     <div className="ActiveRoom">
       <div className="playerlist">
-        {room.state.players.map((player) => (
+        {room.state.players.map((cardPlayer) => (
           <PlayerCard
-            key={player.user._id}
-            player={player}
-            onClick={createGameActionHandler("castVote", [player.user._id])}
-            className={player.status.toLowerCase()}
-            votes={room.state.players.filter(
-              (p) => p.vote.target === player.user._id
-            )}
+            key={`PlayerCard-${cardPlayer.user._id}`}
+            player={cardPlayer}
+            onClick={createGameActionHandler("castVote", [cardPlayer.user._id])}
+            className={cardPlayer.status.toLowerCase()}
+            votes={room.state.players.filter(voter => {
+              if (room.state.mode === "Nighttime" && player.role !== "Witch") {
+                return false;
+              }
+              return voter.vote.target === cardPlayer.user._id;
+            })}
+            isRoleVisible={room.state.mode === "Nighttime" && cardPlayer.role === "Witch" && player.role === "Witch"}
           />
         ))}
       </div>
 
-      <div className="player-options">
+      <ActionsBar>
+        <div className="witches">
+          <img src="/images/witch.png" alt="witch hat" />
+          <p>{killed || 0}/{totalWitches}</p>
+        </div>
         {isAlive && isVoteCast && (
           <Button
             variant="primary"
@@ -46,9 +54,9 @@ function ActiveRoom({ room, createGameActionHandler }) {
             Lock Your Vote
           </Button>
         )}
-      </div>
+      </ActionsBar>
     </div>
   );
-}
+};
 
 export default ActiveRoom;

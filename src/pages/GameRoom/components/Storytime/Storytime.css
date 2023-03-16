@@ -1,0 +1,32 @@
+.Storytime {
+  width: 40%;
+  color: var(--blue);
+  padding: 0.8rem;
+  background-color: var(--white);
+  border-radius: 12px;
+  outline: 2px solid var(--blue);
+  display: flex;
+  align-self: end;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.Storytime .story {
+  font-size: clamp(0.6rem, 1vmax, 0.8rem);
+  display: flex;
+  align-items: center;
+  font-family: "Acme";
+  text-transform: uppercase;
+  text-align: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.Storytime .story span {
+  width: 7%;
+}
+
+.Storytime .story span img {
+  width: 100%;
+}

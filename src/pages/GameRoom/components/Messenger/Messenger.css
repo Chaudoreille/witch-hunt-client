@@ -1,22 +1,37 @@
 .Messenger {
     display: flex;
     flex-direction: column;
-    color: white
+    color: white;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    margin-bottom: -1rem;
+    background-color: #80808011;
 }
 
 .Messenger button {
     width: 3rem;
-    height: 3rem;    
+    height: 3rem;
     border-radius: 50%;
     transform: rotate(-45deg);
     cursor: pointer;
     background-color: white;
-    border: unset
+    border: unset;
+    flex-shrink: 0;
+    color: var(--darkGrey);
 }
 
 .Messenger .messenger-header {
+    position: relative;
     width: 100%;
     text-align: center;
+    background-color: var(--grey);
+    padding: .5rem;
+    border-radius: 12px;
+    margin-bottom: .5rem;
+}
+
+.Messenger .messenger-header .button-collapse {
+    display: none;
 }
 
 .Messenger form {
@@ -25,12 +40,64 @@
     align-items: center;
 }
 
+.Messenger form .Input {
+    width: 100%;
+}
+
+.Messenger form .Input input {
+    width: 100%;
+}
+
 .Messenger .messenger-container {
     min-height: 3rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     gap: 0.5rem;
-    max-height: 60vh;
-    overflow-x:auto;
+    max-height: 55vh;
+    overflow-x: auto;
+}
+
+
+.button-chat .chat-icon {
+    display: none;
+    font-size: 3.5rem;
+    background-color: white;
+    padding: 0.5rem;
+    color: var(--blue);
+    border-radius: 25px;
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    box-shadow: 5px 5px 5px 10px #14131323;
+}
+
+@media (max-width:950px) {
+    .Messenger.hidden {
+        display: none;
+    }
+
+    .button-chat .chat-icon {
+        display: block;
+    }
+
+    .Messenger .messenger-header .button-collapse {
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        aspect-ratio: 1;
+        cursor: pointer;
+    }
+
+    .Messenger.hidden .messenger-header .collapse-icon {
+        transform: rotate(180deg);
+    }
+
+    .Messenger .messenger-header .button-collapse .collapse-icon {
+        font-size: 2rem;
+    }
 }

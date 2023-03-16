@@ -1,6 +1,6 @@
-import { useContext, useReducer } from "react";
+import { useContext, useState, useReducer } from "react";
 import "./WaitingRoom.css";
-import PlayerCard from "../PlayerCard/PlayerCard";
+import PlayerLobbyCard from "../PlayerCard/PlayerLobbyCard";
 import { AuthContext } from "../../../../context/AuthContext";
 import Button from "../../../../components/Button/Button";
 import api from "../../../../service/service";
@@ -44,49 +44,23 @@ function WaitingRoom({
       .catch((error) => dispatchErrors(error.message));
   }
 
+  const handleClickToOpen = () => {
+    setOpen(true);
+  };
+
+
+
   return (
     <div className="WaitingRoom">
-      {isOwner ? (
-        <h2 className="game-pin">
-          Pin {room.pin}
-          &nbsp;
-          <FilterNoneOutlinedIcon
-            className="clickable-icon"
-            onClick={() => navigator.clipboard.writeText(room.pin)}
-          />
-        </h2>
-      ) : (
-        <ActionsBar >
-          {isSignedUp ? (
-            <Button
-              variant="primary"
-              action={createGameActionHandler("leave", [], (error) => {
-                if (error) {
-                  dispatchErrors(error);
-                } else {
-                  navigate("/home");
-                }
-              })}
-            >
-              Leave Game
-            </Button>
-          ) : (
-            <Button
-              variant="primary"
-              action={createGameActionHandler("join")}
-            >
-              Join Game
-            </Button>
-          )}
-        </ActionsBar>
-      )}
-
       <div className="waiting-section">
         <div className="room-header">
           {isOwner && (
             <SettingsOutlinedIcon
               className="clickable-icon"
-              onClick={() => setDisplaySettings(!displaySettings)}
+              onClick={() => {
+                setDisplaySettings(!displaySettings);
+                handleClickToOpen();
+              }}
             />
           )}
           <div className="room-info">
@@ -96,21 +70,60 @@ function WaitingRoom({
           <div className="row">
             <PermIdentityIcon className="icon-user" />
             {room.state.players.length}/{room.maxPlayers}
-            {isOwner && (
-              <ActionsBar >
-                <Button
-                  variant="primary"
-                  action={createGameActionHandler("start")}
-                >
-                  Start Game
-                </Button>
-              </ActionsBar>
-            )}
+
+            <ActionsBar >
+              {isOwner ? (
+                <>
+                  <h2 className="game-pin">
+                    Pin {room.pin}
+                    &nbsp;
+                    <FilterNoneOutlinedIcon
+                      className="clickable-icon"
+                      onClick={() => navigator.clipboard.writeText(room.pin)}
+                    />
+                  </h2>
+                  <Button
+                    variant="primary"
+                    action={createGameActionHandler("start")}
+                  >
+                    Start Game
+                  </Button>
+                </>
+              )
+                :
+                (<>
+                  {isSignedUp ? (
+                    <Button
+                      variant="primary"
+                      action={createGameActionHandler("leave", [], (error) => {
+                        if (error) {
+                          dispatchErrors(error);
+                        } else {
+                          navigate("/home");
+                        }
+                      })}
+                    >
+                      Leave Game
+                    </Button>
+                  ) : (
+
+                    <Button
+                      variant="primary"
+                      action={createGameActionHandler("join")}
+                    >
+                      Join Game
+                    </Button>
+
+                  )}
+                </>)
+              }
+
+            </ActionsBar>
           </div>
         </div>
         <div className="playerlist">
           {room.state.players.map((player) => (
-            <PlayerCard key={player.user._id} player={player} />
+            <PlayerLobbyCard key={player.user._id} player={player} />
           ))}
         </div>
       </div>
@@ -129,7 +142,7 @@ function WaitingRoom({
                 navigate("/home");
               });
             }}>
-              Close Game and Delete Game Room
+              Delete Room
             </Button>
           </div>
         </>

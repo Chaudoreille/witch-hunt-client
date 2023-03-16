@@ -7,33 +7,41 @@
     color: black
 }
 
-.MessageCard img {
-    width: 5rem;
-    border-radius: 100%;
-}
-
 .MessageCard.sent {
-    background-color: darkturquoise;
+    background-color: var(--blue);
+    color: var(--white);
     align-self: end;
+    gap: 1rem;
 }
 
 .MessageCard.received {
-    background-color: greenyellow;
+    background-color: var(--white);
+    color: black;
     align-self: start;
+    gap: 1rem;
+}
+
+.MessageCard.received .ProfilePicture {
+    outline: 2px solid var(--blue);
 }
 
 .MessageCard .column {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 100%;
+    width: 80%;
 }
 
 .MessageCard .content {
     align-self: start;
+    word-break: break-all;
 }
 
 .MessageCard .timestamp {
     align-self: end;
     font-size: 0.6rem;
+}
+
+.MessageCard .ProfilePicture {
+    height: 4vh;
 }

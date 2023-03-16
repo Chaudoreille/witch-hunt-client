@@ -1,49 +1,16 @@
-.ActiveRoom .playerlist{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
+.ActiveRoom .playerlist {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
 }
 
-.ActiveRoom .owner-options {
-    background-color: blueviolet;
-    color: white;
-    text-align: center;
+.ActiveRoom .witches {
+  color: white;
+  display: flex;
+  justify-content: center;
+  gap: .5rem;
 }
 
-.ActiveRoom .PlayerCard {
-    width: 10rem;
-    height: 20rem;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    color: black;
-    align-items: center;
-    padding: 0.2rem;
-}
-
-.ActiveRoom .PlayerCard img {
-    border-radius: 100%;
-    margin: 0.2rem;
-    width: 8rem;
-}
-
-.ActiveRoom .alive {
-    background-color: rgb(114, 247, 114);
-}
-
-.ActiveRoom .dead {
-    background-color: rgba(179, 68, 68, 0.755);
-}
-
-.ActiveRoom .PlayerCard img.vote {
-    width: 2.5rem;
-    border: 3px solid;
-}
-
-.ActiveRoom .PlayerCard img.locked {
-    border-color: red;
-}
-
-.ActiveRoom .PlayerCard img.cast {
-    border-color: green;
+.ActiveRoom .witches img {
+  width: 15%;
 }

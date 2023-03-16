@@ -17,7 +17,7 @@ function Input({ type, name, action, className, label, value, placeholder }) {
   }
 
   return (
-    <div className={`Input ${className}`}>
+    <div className={`Input${className ? ` ${className}` : ""}`}>
       <label htmlFor={name}>{label}</label>
       <input {...options} />
     </div>
