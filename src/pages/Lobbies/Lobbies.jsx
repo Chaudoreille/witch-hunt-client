@@ -98,7 +98,7 @@ function Lobbies() {
         <GameCardList list={rooms} displayLink={true} />
       ) : (
         <div className="window-grey">
-          <img src="../../../public/images/empty-state-search.png" />
+          <img src="/images/empty-state-search.png" />
           <h2>Sorry, we couldn't find any match !</h2>
         </div>
       )}
