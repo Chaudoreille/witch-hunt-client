@@ -7,7 +7,6 @@ function PlayerCard({ player, onClick, className, votes }) {
   const [face, setFace] = useState("down");
   const [role, setRole] = useState("");
 
-  console.log("player", player);
   return (
     <div className={`PlayerCard ${className && className}`}>
       <div className="card-wrapper">
@@ -30,26 +29,12 @@ function PlayerCard({ player, onClick, className, votes }) {
                 <div className="locked">
                   {votes.map((voter) => (
                     voter.vote.state === "Locked" && (
-                      <>
-                        <ProfilePicture
-                          user={voter.user}
-                          title={voter.user.username}
-                          key={voter.user._id}
-                          className={`vote`}
-                        />
-                        <ProfilePicture
-                          user={voter.user}
-                          title={voter.user.username}
-                          key={voter.user._id}
-                          className={`vote`}
-                        />
-                        <ProfilePicture
-                          user={voter.user}
-                          title={voter.user.username}
-                          key={voter.user._id}
-                          className={`vote`}
-                        />
-                      </>
+                      <ProfilePicture
+                        key={`PlayerCard-vote-${voter.user._id}`}
+                        user={voter.user}
+                        title={voter.user.username}
+                        className={`vote`}
+                      />
                     )
                   ))}
                 </div>
@@ -64,9 +49,9 @@ function PlayerCard({ player, onClick, className, votes }) {
             votes.map((voter) => (
               voter.vote.state === "Cast" && (
                 <ProfilePicture
+                  key={`PlayerCard-vote-${voter.user._id}`}
                   user={voter.user}
                   title={voter.user.username}
-                  key={voter.user._id}
                   className={`vote`}
                 />
               )

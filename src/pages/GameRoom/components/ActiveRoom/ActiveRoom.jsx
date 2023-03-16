@@ -26,7 +26,7 @@ function ActiveRoom({ room, createGameActionHandler }) {
       <div className="playerlist">
         {room.state.players.map((player) => (
           <PlayerCard
-            key={player.user._id}
+            key={`PlayerCard-${player.user._id}`}
             player={player}
             onClick={createGameActionHandler("castVote", [player.user._id])}
             className={player.status.toLowerCase()}
