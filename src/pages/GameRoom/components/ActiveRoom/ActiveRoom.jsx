@@ -1,9 +1,11 @@
-import PlayerCard from "../PlayerCard/PlayerCard";
-import Button from "../../../../components/Button/Button";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../../context/AuthContext";
 import "./ActiveRoom.css";
-import { useNavigate } from "react-router-dom";
+
+import PlayerCard from "../PlayerCard/PlayerCard";
+import Button from "../../../../components/Button/Button";
+import ActionsBar from "../ActionsBar/ActionsBar";
 
 function ActiveRoom({ room, createGameActionHandler }) {
   const { user } = useContext(AuthContext);
@@ -37,7 +39,7 @@ function ActiveRoom({ room, createGameActionHandler }) {
         ))}
       </div>
 
-      <div className="player-options">
+      <ActionsBar>
         {isAlive && isVoteCast && (
           <Button
             variant="primary"
@@ -46,7 +48,7 @@ function ActiveRoom({ room, createGameActionHandler }) {
             Lock Your Vote
           </Button>
         )}
-      </div>
+      </ActionsBar>
     </div>
   );
 }

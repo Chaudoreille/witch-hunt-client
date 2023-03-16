@@ -3,7 +3,7 @@
   height: 4rem;
   border-radius: 14px;
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
   color: var(--white);
   align-items: center;
   padding: 1rem;
@@ -25,30 +25,20 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem;
   gap: 1rem;
   background-color: var(--gradientBlue);
-  border-radius: 15px;
-  outline: 4px solid var(--blue);
-  z-index: -1;
 }
 
 .PlayerCard .card-wrapper {
-  display: flex;
-  flex-direction: column;
-}
-
-.PlayerCard .card {
   width: 15vh !important;
   aspect-ratio: 182/270 !important;
-  position: relative;
-  border-radius: 15px;
-  color: var(--white);
-  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  perspective: 1000px
 }
 
-.PlayerCard .card.disabled,
-.PlayerCard .card.dead {
+.PlayerCard .disabled,
+.PlayerCard .dead {
   cursor: default;
 }
 
@@ -59,27 +49,23 @@
   align-items: center;
   gap: 1vh;
   color: var(--white);
-}
-
-.PlayerCard .card .bg {
-  position: absolute;
-  z-index: 0;
-  background-size: contain;
-  background-repeat: no-repeat;
+  border-radius: 15px;
+  outline: 4px solid var(--white);
   width: 100%;
-  height: 100%;
+  padding: 0.5rem;
+  background-color: var(--darkGrey);
+  position: relative;
 }
 
-.PlayerCard .card .content {
+.PlayerCard .card-wrapper .content {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
   height: 100%;
   padding: 0.6rem;
-  gap: 2vh
+  gap: 2vh;
 }
-
 
 .PlayerCard .votes {
   display: flex;
@@ -98,14 +84,6 @@
   justify-content: center;
 }
 
-/* .PlayerCard .votes .cast {
-  flex-flow: column wrap;
-  justify-content: flex-start;
-  margin-left: -1vh;
-  height: calc(15vh * 270 / 182);
-  opacity: 0.5;
-} */
-
 .PlayerCard .ProfilePicture.vote {
   height: 1.5vh;
   scale: 2;
@@ -120,39 +98,73 @@
   height: 100%;
 }
 
-.PlayerCard .card .bg.hidden {
+/* Card Back Handling */
+
+.PlayerCard .card {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border-radius: 15px;
+  color: var(--white);
+  cursor: pointer;
+
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  z-index: 0;
+}
+
+.PlayerCard.reveal .card-wrapper .card {
+  transform: rotateY(180deg);
+}
+
+.PlayerCard .card .bg {
+  position: absolute;
+  z-index: 0;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.PlayerCard .card .front.bg {
+  transform: rotateY(180deg);
+}
+
+.PlayerCard .card .back.bg {
   background-image: url("/images/cards/card-back.png");
 }
 
-.PlayerCard .card .bg.villager.alive {
+.PlayerCard .card .front.bg.villager.alive {
   background-image: url("/images/cards/villager-card-classic.png");
 }
 
-.PlayerCard .card .bg.villager.dead {
+.PlayerCard .card .front.bg.villager.dead {
   background-image: url("/images/cards/villager-card-death-.png");
 }
 
-.PlayerCard .card .bg.witch.alive {
+.PlayerCard .card .front.bg.witch.alive {
   background-image: url("/images/cards/witch-card-classic.png");
 }
 
-.PlayerCard .card .bg.witch.dead {
+.PlayerCard .card .front.bg.witch.dead {
   background-image: url("/images/cards/witch-card-death-.png");
 }
 
-.PlayerCard.big .card .bg.villager.alive {
+.PlayerCard.big .card .front.bg.villager.alive {
   background-image: url("public//images/cards/villager-card-classic@2x.png");
 }
 
-.PlayerCard.big .card .bg.villager.dead {
+.PlayerCard.big .card .front.bg.villager.dead {
   background-image: url("/images/cards/villager-card-death-2x.png");
 }
 
-.PlayerCard.big .card .bg.witch.alive {
+.PlayerCard.big .card .front.bg.witch.alive {
   background-image: url("/images/cards/witch-card-classic@2x.png");
 }
 
-.PlayerCard.big .card .bg.witch.dead {
+.PlayerCard.big .card .front.bg.witch.dead {
   background-image: url("/images/cards/witch-card-death-2x.png");
 }
 

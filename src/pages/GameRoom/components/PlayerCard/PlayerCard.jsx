@@ -11,10 +11,6 @@ function PlayerCard({ player, onClick, className, votes }) {
   const [role, setRole] = useState("hidden");
 
   useEffect(() => {
-    console.log(player);
-    console.log(player.user._id === user._id, player.status === "Dead");
-    console.log(role);
-
     if (role === "hidden" &&
       (player.user._id === user._id ||
         player.status === "Dead")) {
@@ -26,27 +22,39 @@ function PlayerCard({ player, onClick, className, votes }) {
   }, [player]);
 
   return (
-    <div className={`PlayerCard ${className && className}`}>
+    <div className={`PlayerCard ${className && className} ${role !== "hidden" ? "reveal" : ""}`} onClick={(event) => {
+      if (!onClick) return;
+      onClick(event);
+    }}>
       <div className="user-info">
-        <ProfilePicture user={player.user} />
-        <h6>{player.user.username}</h6>
+        <ProfilePicture user={player.user} title={player.user.username} />
       </div>
       <div className="card-wrapper">
-        <div
-          className="card"
-          onClick={() => {
-            if (!onClick) return;
-            onClick();
-          }}
-        >
-          <div className={`bg ${status} ${role}`} />
-          <div className="content">
-            <div className="votes">
-              {votes && (
-                <>
-                  <div className="locked">
-                    {votes.map((voter) => (
-                      voter.vote.state === "Locked" && (
+        <div className="card">
+          <div className={`bg back`} />
+          <div className={`bg front ${status} ${role}`} />
+        </div>
+
+        <div className="content">
+          <div className="votes">
+            {votes && (
+              <>
+                <div className="locked">
+                  {votes.map((voter) => (
+                    voter.vote.state === "Locked" && (
+                      <ProfilePicture
+                        key={`PlayerCard-vote-${voter.user._id}`}
+                        user={voter.user}
+                        title={voter.user.username}
+                        className={`vote`}
+                      />
+                    )
+                  ))}
+                </div>
+                <div className="cast">
+                  {votes && (
+                    votes.map((voter) => (
+                      voter.vote.state === "Cast" && (
                         <ProfilePicture
                           key={`PlayerCard-vote-${voter.user._id}`}
                           user={voter.user}
@@ -54,26 +62,12 @@ function PlayerCard({ player, onClick, className, votes }) {
                           className={`vote`}
                         />
                       )
-                    ))}
-                  </div>
-                  <div className="cast">
-                    {votes && (
-                      votes.map((voter) => (
-                        voter.vote.state === "Cast" && (
-                          <ProfilePicture
-                            key={`PlayerCard-vote-${voter.user._id}`}
-                            user={voter.user}
-                            title={voter.user.username}
-                            className={`vote`}
-                          />
-                        )
-                      ))
-                    )}
-                  </div>
-                </>
+                    ))
+                  )}
+                </div>
+              </>
 
-              )}
-            </div>
+            )}
           </div>
         </div >
       </div>
