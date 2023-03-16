@@ -2,6 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./GameCompleted.css";
 
+/**
+ * GameCompletedroom
+ * This component will display the end of game result page.
+ * @returns JSX.Element
+ */
 function GameCompletedroom() {
   return (
     <div className="GameCompletedRoom">
