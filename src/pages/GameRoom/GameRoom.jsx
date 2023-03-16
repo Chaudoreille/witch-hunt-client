@@ -4,6 +4,7 @@ import { AuthContext } from "../../context/AuthContext";
 import WaitingRoom from "./components/WaitingRoom/WaitingRoom";
 import ActiveRoom from "./components/ActiveRoom/ActiveRoom";
 import ErrorList from "../../components/ErrorList/ErrorList";
+import Storytime from "./components/Storytime/Storytime";
 import Loader from "../../components/Loader/Loader";
 import io from 'socket.io-client';
 
@@ -34,6 +35,8 @@ function errorReducer(existingErrors, errorMessage) {
 function GameRoom() {
   const [room, setRoom] = useState(null);
   const [errors, dispatchErrors] = useReducer(errorReducer, []);
+  const [story, dispatchStory] = useState(null);
+  const [time, dispatchTime] = useState("Daytime")
   const [displaySettings, setDisplaySettings] = useState(false);
   const [socket, setSocket] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -71,6 +74,8 @@ function GameRoom() {
 
     ioSocket.on("update-room", (room) => {
       setRoom(room);
+      dispatchStory(room.state.storytime)
+      dispatchTime(room.state.mode)
     });
 
     ioSocket.on("deleted-room", (message) => {
@@ -133,6 +138,9 @@ function GameRoom() {
 
       {!room ? (<Loader />) : (
         <>
+          {story && (
+            <Storytime story={story} time={time} status={room.state.status} />
+          )}
           <div id="game">
             {room.state.status === "Lobby" && (
               <WaitingRoom
@@ -177,5 +185,6 @@ function GameRoom() {
     </section>
   );
 }
+
 
 export default GameRoom;

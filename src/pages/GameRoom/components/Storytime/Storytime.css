@@ -1,0 +1,37 @@
+.Storytime {
+  width: 40%;
+  color: var(--blue);
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  background-color: var(--white);
+  border-radius: 12px;
+  outline: 2px solid var(--blue);
+  display: flex;
+  align-self: end;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.Storytime .story {
+  font-size: clamp(0.6rem, 1vmax, 0.8rem);
+  display: flex;
+  align-items: center;
+  font-family: "Acme";
+  text-transform: uppercase;
+}
+
+.Storytime .story span {
+  align-self: start;
+}
+
+.Storytime .story span img {
+  height: 1.5rem;
+  width: auto;
+}
+
+@media(max-width:950px) {
+  .Storytime {
+    width: 100%;
+  }
+}
