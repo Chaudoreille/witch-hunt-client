@@ -21,6 +21,10 @@
     gap: 1rem;
 }
 
+.MessageCard.received .ProfilePicture {
+    outline: 2px solid var(--blue);
+}
+
 .MessageCard .column {
     display: flex;
     flex-direction: column;

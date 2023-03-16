@@ -37,13 +37,12 @@ function GameRoom() {
   const [displaySettings, setDisplaySettings] = useState(false);
   const [socket, setSocket] = useState(null);
   const [messages, setMessages] = useState([]);
-  const [messengerVisibility, setMessengerVisibility] = useState(true);
+  const [messengerVisibility, setMessengerVisibility] = useState(false);
 
   const { user, token } = useContext(AuthContext);
 
   const { roomId } = useParams();
   const navigate = useNavigate();
-
   /**
    * Create Socket for real-time communication
    */
@@ -168,6 +167,7 @@ function GameRoom() {
               handleErrors={dispatchErrors}
               messages={messages}
               setVisibility={setMessengerVisibility}
+              chat={messengerVisibility}
             />
           </div>
         </>

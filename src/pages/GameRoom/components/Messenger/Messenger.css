@@ -58,13 +58,27 @@
     overflow-x: auto;
 }
 
+
+.button-chat .chat-icon {
+    display: none;
+    font-size: 3.5rem;
+    background-color: white;
+    padding: 0.5rem;
+    color: var(--blue);
+    border-radius: 25px;
+    position: fixed;
+    bottom: 4rem;
+    right: 1rem;
+    box-shadow: 5px 5px 5px 10px #14131323;
+}
+
 @media (max-width:950px) {
-    .Messenger {
-        width: 100%;
+    .Messenger.hidden {
+        display: none;
     }
 
-    .Messenger.hidden .messenger-container {
-        display: none;
+    .button-chat .chat-icon {
+        display: block;
     }
 
     .Messenger .messenger-header .button-collapse {
@@ -87,5 +101,3 @@
         font-size: 2rem;
     }
 }
-
-@media (max-width:750px) {}
