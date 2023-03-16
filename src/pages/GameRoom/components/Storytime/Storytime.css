@@ -22,12 +22,11 @@
 }
 
 .Storytime .story span {
-  align-self: start;
+  width: 10%;
 }
 
 .Storytime .story span img {
-  height: 1.5rem;
-  width: auto;
+  width: 100%;
 }
 
 @media(max-width:950px) {
