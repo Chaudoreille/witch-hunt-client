@@ -9,127 +9,72 @@ function PlayerCard({ player, onClick, className, votes }) {
 
   console.log("player", player);
   return (
-    <div
-      className={`PlayerCard ${className && className}`}
-      onClick={() => {
-        if (!onClick) return;
-        onClick();
-      }}
-    >
-      <div className="card back" />
-      <div className={`card front ${role}`} />
-      <div className="content">
-        <div className="user-info">
-          <ProfilePicture user={player.user} />
-          <h6>{player.user.username}</h6>
-        </div>
-        <div className="votes">
+    <div className={`PlayerCard ${className && className}`}>
+      <div className="card-wrapper">
+        <div
+          className="card"
+          onClick={() => {
+            if (!onClick) return;
+            onClick();
+          }}
+        >
+          <div className="bg back" />
+          <div className={`bg front ${role}`} />
+          <div className="content">
+            <div className="user-info">
+              <ProfilePicture user={player.user} />
+              <h6>{player.user.username}</h6>
+            </div>
+            <div className="votes">
+              {votes && (
+                <div className="locked">
+                  {votes.map((voter) => (
+                    voter.vote.state === "Locked" && (
+                      <>
+                        <ProfilePicture
+                          user={voter.user}
+                          title={voter.user.username}
+                          key={voter.user._id}
+                          className={`vote`}
+                        />
+                        <ProfilePicture
+                          user={voter.user}
+                          title={voter.user.username}
+                          key={voter.user._id}
+                          className={`vote`}
+                        />
+                        <ProfilePicture
+                          user={voter.user}
+                          title={voter.user.username}
+                          key={voter.user._id}
+                          className={`vote`}
+                        />
+                      </>
+                    )
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </div >
+      </div>
+      <div className="votes">
+        <div className="cast">
           {votes && (
-            <>
-              <p>Votes</p>
-              <div className="cast">
-                {votes.map((voter) => (
-                  voter.vote.state === "Cast" && (
-                    <>
-                      <ProfilePicture
-                        user={voter.user}
-                        title={voter.user.username}
-                        key={voter.user._id}
-                        className={`vote`}
-                      />
-                      <ProfilePicture
-                        user={voter.user}
-                        title={voter.user.username}
-                        key={voter.user._id}
-                        className={`vote`}
-                      />
-                      <ProfilePicture
-                        user={voter.user}
-                        title={voter.user.username}
-                        key={voter.user._id}
-                        className={`vote`}
-                      />
-                      <ProfilePicture
-                        user={voter.user}
-                        title={voter.user.username}
-                        key={voter.user._id}
-                        className={`vote`}
-                      />
-                      <ProfilePicture
-                        user={voter.user}
-                        title={voter.user.username}
-                        key={voter.user._id}
-                        className={`vote`}
-                      />
-                      <ProfilePicture
-                        user={voter.user}
-                        title={voter.user.username}
-                        key={voter.user._id}
-                        className={`vote`}
-                      />
-                      <ProfilePicture
-                        user={voter.user}
-                        title={voter.user.username}
-                        key={voter.user._id}
-                        className={`vote`}
-                      />
-                      <ProfilePicture
-                        user={voter.user}
-                        title={voter.user.username}
-                        key={voter.user._id}
-                        className={`vote`}
-                      />
-                      <ProfilePicture
-                        user={voter.user}
-                        title={voter.user.username}
-                        key={voter.user._id}
-                        className={`vote`}
-                      />
-                      <ProfilePicture
-                        user={voter.user}
-                        title={voter.user.username}
-                        key={voter.user._id}
-                        className={`vote`}
-                      />
-                      <ProfilePicture
-                        user={voter.user}
-                        title={voter.user.username}
-                        key={voter.user._id}
-                        className={`vote`}
-                      />
-                      <ProfilePicture
-                        user={voter.user}
-                        title={voter.user.username}
-                        key={voter.user._id}
-                        className={`vote`}
-                      />
-                      <ProfilePicture
-                        user={voter.user}
-                        title={voter.user.username}
-                        key={voter.user._id}
-                        className={`vote`}
-                      />
-                    </>
-                  )
-                ))}
-              </div>
-              <div className="locked">
-                {votes.map((voter) => (
-                  voter.vote.state === "Locked" && (
-                    <ProfilePicture
-                      user={voter.user}
-                      title={voter.user.username}
-                      key={voter.user._id}
-                      className={`vote`}
-                    />
-                  )
-                ))}
-              </div>
-            </>
+            votes.map((voter) => (
+              voter.vote.state === "Cast" && (
+                <ProfilePicture
+                  user={voter.user}
+                  title={voter.user.username}
+                  key={voter.user._id}
+                  className={`vote`}
+                />
+              )
+            ))
           )}
         </div>
       </div>
-    </div >
+    </div>
   );
 }
 
