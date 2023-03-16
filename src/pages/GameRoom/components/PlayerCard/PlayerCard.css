@@ -11,8 +11,8 @@
 }
 
 .PlayerLobbyCard .ProfilePicture {
-  outline: 1px solid var(--white);
-  height: 5vh;
+  outline: 2px solid var(--white);
+  scale: 0.8;
 }
 
 .PlayerLobbyCard h6 {
