@@ -27,6 +27,7 @@
   justify-content: space-between;
   gap: 1rem;
   background-color: var(--gradientBlue);
+  cursor: pointer;
 }
 
 .PlayerCard .card-wrapper {
@@ -55,6 +56,11 @@
   padding: 0.5rem;
   background-color: var(--darkGrey);
   position: relative;
+}
+
+.PlayerCard .user-info.me {
+  outline: 4px solid var(--blue);
+  background-color: var(--white);
 }
 
 .PlayerCard .card-wrapper .content {

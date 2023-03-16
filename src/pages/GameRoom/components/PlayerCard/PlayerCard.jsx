@@ -26,7 +26,7 @@ function PlayerCard({ player, onClick, className, votes }) {
       if (!onClick) return;
       onClick(event);
     }}>
-      <div className="user-info">
+      <div className={`user-info ${player.user._id === user._id ? "me" : ""}`}>
         <ProfilePicture user={player.user} title={player.user.username} />
       </div>
       <div className="card-wrapper">
