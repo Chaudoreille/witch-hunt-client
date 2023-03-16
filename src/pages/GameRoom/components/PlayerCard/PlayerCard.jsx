@@ -56,9 +56,8 @@ function PlayerCard({ player, onClick, className, votes }) {
                 <div className="locked">
                   {votes.map((voter) => (
                     voter.vote.state === "Locked" && (
-                      <div className="vote-wrapper">
+                      <div className="vote-wrapper" key={`PlayerCard-vote-locked-${voter.user._id}`}>
                         <ProfilePicture
-                          key={`PlayerCard-vote-${voter.user._id}`}
                           user={voter.user}
                           title={voter.user.username}
                           className={`vote`}

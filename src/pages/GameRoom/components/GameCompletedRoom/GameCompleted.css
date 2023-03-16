@@ -4,13 +4,18 @@
     top: 0;
     left: 0;
     width: 100vw;
-    height: min-content;
     min-height: 100vh;
-    overflow-y: hidden;
+    height: min-content;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
+    opacity: 0;
+    transition: all 1s ease-in;
+}
+
+.GameCompletedRoom.show {
+    opacity: 100%;
 }
 
 .GameCompletedRoom .game-over {
@@ -26,6 +31,7 @@
     flex-direction: column;
     gap: 1rem;
 }
+
 
 .GameCompletedRoom img {
     width: 15vmax;
