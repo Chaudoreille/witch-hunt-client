@@ -39,18 +39,6 @@ function PlayerCard({ player, onClick, className, votes }) {
           <div className="votes">
             {votes && (
               <>
-                <div className="locked">
-                  {votes.map((voter) => (
-                    voter.vote.state === "Locked" && (
-                      <ProfilePicture
-                        key={`PlayerCard-vote-${voter.user._id}`}
-                        user={voter.user}
-                        title={voter.user.username}
-                        className={`vote`}
-                      />
-                    )
-                  ))}
-                </div>
                 <div className="cast">
                   {votes && (
                     votes.map((voter) => (
@@ -64,6 +52,23 @@ function PlayerCard({ player, onClick, className, votes }) {
                       )
                     ))
                   )}
+                </div>
+                <div className="locked">
+                  {votes.map((voter) => (
+                    voter.vote.state === "Locked" && (
+                      <div className="vote-wrapper">
+                        <ProfilePicture
+                          key={`PlayerCard-vote-${voter.user._id}`}
+                          user={voter.user}
+                          title={voter.user.username}
+                          className={`vote`}
+                        />
+                        <div className="icon-wrapper">
+                          <LockIcon className="lock-icon" />
+                        </div>
+                      </div>
+                    )
+                  ))}
                 </div>
               </>
 

@@ -65,6 +65,7 @@
   height: 100%;
   padding: 0.6rem;
   gap: 2vh;
+  z-index: 1;
 }
 
 .PlayerCard .votes {
@@ -73,15 +74,38 @@
   align-items: center;
   gap: 1vh;
   width: 100%;
+  height: 100%;
 }
 
 .PlayerCard .votes .cast,
 .PlayerCard .votes .locked {
   display: flex;
   align-items: center;
+  height: 45%;
   width: 100%;
   flex-flow: row wrap;
   justify-content: center;
+  position: relative;
+}
+
+.PlayerCard .votes .vote-wrapper {
+  position: relative;
+  width: min-content;
+}
+
+.PlayerCard .votes .locked .icon-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  border-radius: 100%;
+}
+
+.PlayerCard .votes .locked .lock-icon {
+  color: white;
+  font-size: .8rem;
 }
 
 .PlayerCard .ProfilePicture.vote {
