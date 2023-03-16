@@ -5,6 +5,7 @@ import ProfilePicture from "../../../../components/ProfilePicture/ProfilePicture
 
 function PlayerCard({ player, onClick, className, votes }) {
   const [face, setFace] = useState("down");
+  const [role, setRole] = useState("");
 
   console.log("player", player);
   return (
@@ -15,8 +16,9 @@ function PlayerCard({ player, onClick, className, votes }) {
         onClick();
       }}
     >
-      <div className={`card back`} />
-      <div className="contents">
+      <div className="card back" />
+      <div className={`card front ${role}`} />
+      <div className="content">
         <ProfilePicture user={player.user} />
 
         <h6>{player.user.username}</h6>
