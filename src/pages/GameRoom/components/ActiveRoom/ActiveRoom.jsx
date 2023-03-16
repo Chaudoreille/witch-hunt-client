@@ -11,9 +11,7 @@ function ActiveRoom({ room, createGameActionHandler }) {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const player = room.state.players.filter(
-    (player) => player.user._id === user._id
-  )[0];
+  const player = room.state.players.find(player => player.user._id === user._id);
 
   // People that are not participating in the game cannot view the games actions
   if (!player) return navigate("/home");
@@ -26,15 +24,18 @@ function ActiveRoom({ room, createGameActionHandler }) {
   return (
     <div className="ActiveRoom">
       <div className="playerlist">
-        {room.state.players.map((player) => (
+        {room.state.players.map((cardPlayer) => (
           <PlayerCard
-            key={`PlayerCard-${player.user._id}`}
-            player={player}
-            onClick={createGameActionHandler("castVote", [player.user._id])}
-            className={player.status.toLowerCase()}
-            votes={room.state.players.filter(
-              (p) => p.vote.target === player.user._id
-            )}
+            key={`PlayerCard-${cardPlayer.user._id}`}
+            player={cardPlayer}
+            onClick={createGameActionHandler("castVote", [cardPlayer.user._id])}
+            className={cardPlayer.status.toLowerCase()}
+            votes={room.state.players.filter(voter => {
+              if (room.state.mode === "Nighttime" && player.role !== "Witch") {
+                return false;
+              }
+              return voter.vote.target === cardPlayer.user._id;
+            })}
           />
         ))}
       </div>
@@ -51,6 +52,6 @@ function ActiveRoom({ room, createGameActionHandler }) {
       </ActionsBar>
     </div>
   );
-}
+};
 
 export default ActiveRoom;
