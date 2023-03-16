@@ -123,66 +123,86 @@ function GameRoom() {
     };
   }
 
+  /*background image based on room active or not + day or night*/
+  let background = "";
+  function bgImage() {
+    if (room) {
+      if (room.state.status === "Lobby") {
+        background = `url("/images/village-gradient.png")`
+      } else {
+        background = room.state.mode === "Daytime" ? `url("/images/day.png")` : `url("/images/night.png")`
+      }
+    }
+    return background;
+  }
+
+
   return (
-    <section className="GameRoom">
-      {errors.length > 0 && (
-        <ErrorList messages={errors} closeAction={() => {
-          if (!room) {
-            navigate('/home');
-          } else {
-            dispatchErrors(null);
-          }
-        }} />
-      )}
+    <section className="GameRoom" style={{
+      backgroundImage: bgImage()
+    }}>
+      {
+        errors.length > 0 && (
+          <ErrorList messages={errors} closeAction={() => {
+            if (!room) {
+              navigate('/home');
+            } else {
+              dispatchErrors(null);
+            }
+          }} />
+        )
+      }
 
 
-      {!room ? (<Loader />) : (
-        <>
-          {story && (
-            <Storytime story={story} time={time} status={room.state.status} />
-          )}
-          <div id="game">
-            {room.state.status === "Lobby" && (
-              <WaitingRoom
-                room={room}
-                createGameActionHandler={createGameActionHandler}
-                displaySettings={displaySettings}
-                setDisplaySettings={setDisplaySettings}
-                dispatchErrors={dispatchErrors}
-                socket={socket}
-              />
+      {
+        !room ? (<Loader />) : (
+          <>
+            {story && (
+              <Storytime story={story} time={time} status={room.state.status} />
             )}
-            {room.state.status === "Started" && (
-              <ActiveRoom
+            <div id="game">
+              {room.state.status === "Lobby" && (
+                <WaitingRoom
+                  room={room}
+                  createGameActionHandler={createGameActionHandler}
+                  displaySettings={displaySettings}
+                  setDisplaySettings={setDisplaySettings}
+                  dispatchErrors={dispatchErrors}
+                  socket={socket}
+                />
+              )}
+              {room.state.status === "Started" && (
+                <ActiveRoom
+                  room={room}
+                  createGameActionHandler={createGameActionHandler}
+                  displaySettings={displaySettings}
+                  setDisplaySettings={setDisplaySettings}
+                />
+              )}
+              {room.state.status === "Completed" && (
+                <GameCompletedroom
+                  room={room}
+                  createGameActionHandler={createGameActionHandler}
+                  displaySettings={displaySettings}
+                  setDisplaySettings={setDisplaySettings}
+                />
+              )}
+            </div>
+            <div id="messenger">
+              <Messenger
                 room={room}
-                createGameActionHandler={createGameActionHandler}
-                displaySettings={displaySettings}
-                setDisplaySettings={setDisplaySettings}
+                className={messengerVisibility ? "visible" : "hidden"}
+                sendMessage={sendMessage}
+                handleErrors={dispatchErrors}
+                messages={messages}
+                setVisibility={setMessengerVisibility}
+                chat={messengerVisibility}
               />
-            )}
-            {room.state.status === "Completed" && (
-              <GameCompletedroom
-                room={room}
-                createGameActionHandler={createGameActionHandler}
-                displaySettings={displaySettings}
-                setDisplaySettings={setDisplaySettings}
-              />
-            )}
-          </div>
-          <div id="messenger">
-            <Messenger
-              room={room}
-              className={messengerVisibility ? "visible" : "hidden"}
-              sendMessage={sendMessage}
-              handleErrors={dispatchErrors}
-              messages={messages}
-              setVisibility={setMessengerVisibility}
-              chat={messengerVisibility}
-            />
-          </div>
-        </>
-      )}
-    </section>
+            </div>
+          </>
+        )
+      }
+    </section >
   );
 }
 

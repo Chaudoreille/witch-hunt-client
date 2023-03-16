@@ -2,7 +2,6 @@ import React from 'react';
 import "./Storytime.css";
 
 const Storytime = ({ story, time, status }) => {
-  console.log(status)
   return (
     <div className='Storytime'>
       <p className='story'>

@@ -3,9 +3,3 @@
   flex-wrap: wrap;
   gap: 2rem;
 }
-
-.ActiveRoom .owner-options {
-  background-color: blueviolet;
-  color: white;
-  text-align: center;
-}
