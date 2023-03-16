@@ -22,19 +22,16 @@
 
 .PlayerCard {
   position: relative;
-  width: 10rem;
+  width: 15vh;
   aspect-ratio: 182/270;
-  border-radius: 10px;
+  border-radius: 15px;
   color: var(--white);
+  cursor: pointer;
 }
 
-.PlayerCard .content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  padding: 0.2rem;
+.PlayerCard.disabled,
+.PlayerCard.dead {
+  cursor: default;
 }
 
 
@@ -47,24 +44,50 @@
   height: 100%;
 }
 
-.PlayerCard img {
-  border-radius: 100%;
-  margin: 0.2rem;
-  width: 8rem;
+.PlayerCard .content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0.6rem;
 }
 
-.PlayerCard img.vote {
-  width: 2.5rem;
-  border: 3px solid;
+.PlayerCard .content .user-info {
+  display: flex;
+  margin-top: 0.5vh;
+  flex-direction: column;
+  align-items: center;
+  gap: 1vh;
 }
 
-.PlayerCard img.locked {
-  border-color: red;
+.PlayerCard .content .votes {
+  display: flex;
+  flex-direction: column;
+  gap: 1vh;
+  margin-top: 5vh;
 }
 
-.PlayerCard img.cast {
-  border-color: green;
+
+.PlayerCard .content .votes .cast,
+.PlayerCard .content .votes .locked {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
+
+.PlayerCard .ProfilePicture.vote {
+  height: 1.5vh;
+  scale: 2;
+  outline: 1px solid white;
+}
+
+.PlayerCard .ProfilePicture.vote .inner-border {
+  height: 100%;
+}
+
+
 
 .PlayerCard.alive .card.back {
   background-image: url("/images/cards/card-back.png");
@@ -109,5 +132,17 @@
 
   .PlayerLobbyCard {
     padding: 0.7rem;
+  }
+}
+
+@media (max-width:750px) {
+  .PlayerCard .ProfilePicture {
+    scale: 0.9;
+  }
+
+  .PlayerCard .ProfilePicture.vote {}
+
+  .GameRoom .PlayerCard h6 {
+    font-size: 0.8rem;
   }
 }

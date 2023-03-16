@@ -19,23 +19,115 @@ function PlayerCard({ player, onClick, className, votes }) {
       <div className="card back" />
       <div className={`card front ${role}`} />
       <div className="content">
-        <ProfilePicture user={player.user} />
-
-        <h6>{player.user.username}</h6>
-        {votes && (
-          <div>
-            {votes.map((voter) => (
-              <img
-                src={voter.user.image}
-                title={voter.user.username}
-                alt={voter.user.username}
-                key={voter.user._id}
-                className={`vote ${voter.vote.state === "Cast" ? "cast" : "locked"
-                  }`}
-              />
-            ))}
-          </div>
-        )}
+        <div className="user-info">
+          <ProfilePicture user={player.user} />
+          <h6>{player.user.username}</h6>
+        </div>
+        <div className="votes">
+          {votes && (
+            <>
+              <p>Votes</p>
+              <div className="cast">
+                {votes.map((voter) => (
+                  voter.vote.state === "Cast" && (
+                    <>
+                      <ProfilePicture
+                        user={voter.user}
+                        title={voter.user.username}
+                        key={voter.user._id}
+                        className={`vote`}
+                      />
+                      <ProfilePicture
+                        user={voter.user}
+                        title={voter.user.username}
+                        key={voter.user._id}
+                        className={`vote`}
+                      />
+                      <ProfilePicture
+                        user={voter.user}
+                        title={voter.user.username}
+                        key={voter.user._id}
+                        className={`vote`}
+                      />
+                      <ProfilePicture
+                        user={voter.user}
+                        title={voter.user.username}
+                        key={voter.user._id}
+                        className={`vote`}
+                      />
+                      <ProfilePicture
+                        user={voter.user}
+                        title={voter.user.username}
+                        key={voter.user._id}
+                        className={`vote`}
+                      />
+                      <ProfilePicture
+                        user={voter.user}
+                        title={voter.user.username}
+                        key={voter.user._id}
+                        className={`vote`}
+                      />
+                      <ProfilePicture
+                        user={voter.user}
+                        title={voter.user.username}
+                        key={voter.user._id}
+                        className={`vote`}
+                      />
+                      <ProfilePicture
+                        user={voter.user}
+                        title={voter.user.username}
+                        key={voter.user._id}
+                        className={`vote`}
+                      />
+                      <ProfilePicture
+                        user={voter.user}
+                        title={voter.user.username}
+                        key={voter.user._id}
+                        className={`vote`}
+                      />
+                      <ProfilePicture
+                        user={voter.user}
+                        title={voter.user.username}
+                        key={voter.user._id}
+                        className={`vote`}
+                      />
+                      <ProfilePicture
+                        user={voter.user}
+                        title={voter.user.username}
+                        key={voter.user._id}
+                        className={`vote`}
+                      />
+                      <ProfilePicture
+                        user={voter.user}
+                        title={voter.user.username}
+                        key={voter.user._id}
+                        className={`vote`}
+                      />
+                      <ProfilePicture
+                        user={voter.user}
+                        title={voter.user.username}
+                        key={voter.user._id}
+                        className={`vote`}
+                      />
+                    </>
+                  )
+                ))}
+              </div>
+              <div className="locked">
+                {votes.map((voter) => (
+                  voter.vote.state === "Locked" && (
+                    <ProfilePicture
+                      user={voter.user}
+                      title={voter.user.username}
+                      key={voter.user._id}
+                      className={`vote`}
+                    />
+                  )
+                ))}
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </div >
   );
