@@ -4,14 +4,27 @@ import Input from "../../../../components/Input/Input";
 import Button from "../../../../components/Button/Button";
 import SendIcon from "@mui/icons-material/Send";
 import MessageCard from "../MessageCard/MessageCard";
-import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
-import QuestionAnswerOutlinedIcon from '@mui/icons-material/QuestionAnswerOutlined';
+import ExpandCircleDownIcon from "@mui/icons-material/ExpandCircleDown";
+import QuestionAnswerOutlinedIcon from "@mui/icons-material/QuestionAnswerOutlined";
 
-function Messenger({ room, handleErrors, sendMessage, messages, className, setVisibility, chat }) {
+/**
+ * Displays a chat window where the messages (which this component expects as part
+ * of the props) are displayed, and an input used to send new messages.
+ */
+function Messenger({
+  room,
+  handleErrors,
+  sendMessage,
+  messages,
+  className,
+  setVisibility,
+  chat,
+}) {
   const [currentInput, setCurrentInput] = useState("");
 
   function handleSubmit(event) {
     event.preventDefault();
+    if (currentInput === "") return;
     const message = { content: currentInput };
     sendMessage(message);
     setCurrentInput("");
@@ -22,7 +35,10 @@ function Messenger({ room, handleErrors, sendMessage, messages, className, setVi
       <div className={`Messenger ${className}`}>
         <div className="messenger-header">
           <p>Village Chat for {room.name}</p>
-          <div className="button-collapse" onClick={() => setVisibility(v => !v)}>
+          <div
+            className="button-collapse"
+            onClick={() => setVisibility((v) => !v)}
+          >
             <ExpandCircleDownIcon className="collapse-icon" />
           </div>
         </div>
@@ -31,10 +47,7 @@ function Messenger({ room, handleErrors, sendMessage, messages, className, setVi
             <MessageCard message={message} key={message._id} />
           ))}
         </div>
-        <form
-          className="messenger-form"
-          onSubmit={handleSubmit}
-        >
+        <form className="messenger-form" onSubmit={handleSubmit}>
           <Input
             value={currentInput}
             type="text"
@@ -47,11 +60,11 @@ function Messenger({ room, handleErrors, sendMessage, messages, className, setVi
           </Button>
         </form>
       </div>
-      {!chat &&
-        <div className="button-chat" onClick={() => setVisibility(v => !v)}>
+      {!chat && (
+        <div className="button-chat" onClick={() => setVisibility((v) => !v)}>
           <QuestionAnswerOutlinedIcon className="chat-icon" />
         </div>
-      }
+      )}
     </>
   );
 }
