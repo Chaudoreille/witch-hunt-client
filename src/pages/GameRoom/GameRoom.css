@@ -30,16 +30,36 @@
   z-index: 10;
 }
 
+.GameRoom .message-boxes {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  margin-bottom: 1rem;
+
+}
+
 .GameRoom .ErrorList {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 0;
+  width: 50vw;
+  align-self: start;
+  min-height: 3rem;
 }
+
+.GameRoom .Storytime {
+  width: 40vw;
+  min-height: 3rem;
+}
+
 
 .GameRoom #messenger {
   position: fixed;
-  width: 35vw;
+  width: 30vw;
   display: flex;
   flex-direction: column;
   right: 2rem;
@@ -65,6 +85,14 @@
 
   .GameRoom #game {
     width: calc(100vw - 4rem);
+  }
+
+  .GameRoom .message-boxes {
+    flex-direction: column;
+  }
+
+  .GameRoom .Storytime {
+    width: 100%;
   }
 
   .GameRoom #messenger {

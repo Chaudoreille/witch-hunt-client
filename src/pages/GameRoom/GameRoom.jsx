@@ -141,8 +141,8 @@ function GameRoom() {
     <section className="GameRoom" style={{
       backgroundImage: bgImage()
     }}>
-      {
-        errors.length > 0 && (
+      <div className="message-boxes">
+        {errors.length > 0 && (
           <ErrorList messages={errors} closeAction={() => {
             if (!room) {
               navigate('/home');
@@ -151,56 +151,55 @@ function GameRoom() {
             }
           }} />
         )
-      }
+        }
+        {room && story && (
+          <Storytime story={story} time={time} status={room.state.status} />
+        )}
+      </div>
+      {!room ? (<Loader />) : (
+        <>
 
-
-      {
-        !room ? (<Loader />) : (
-          <>
-            {story && (
-              <Storytime story={story} time={time} status={room.state.status} />
-            )}
-            <div id="game">
-              {room.state.status === "Lobby" && (
-                <WaitingRoom
-                  room={room}
-                  createGameActionHandler={createGameActionHandler}
-                  displaySettings={displaySettings}
-                  setDisplaySettings={setDisplaySettings}
-                  dispatchErrors={dispatchErrors}
-                  socket={socket}
-                />
-              )}
-              {room.state.status === "Started" && (
-                <ActiveRoom
-                  room={room}
-                  createGameActionHandler={createGameActionHandler}
-                  displaySettings={displaySettings}
-                  setDisplaySettings={setDisplaySettings}
-                />
-              )}
-              {room.state.status === "Completed" && (
-                <GameCompletedroom
-                  room={room}
-                  createGameActionHandler={createGameActionHandler}
-                  displaySettings={displaySettings}
-                  setDisplaySettings={setDisplaySettings}
-                />
-              )}
-            </div>
-            <div id="messenger">
-              <Messenger
+          <div id="game">
+            {room.state.status === "Lobby" && (
+              <WaitingRoom
                 room={room}
-                className={messengerVisibility ? "visible" : "hidden"}
-                sendMessage={sendMessage}
-                handleErrors={dispatchErrors}
-                messages={messages}
-                setVisibility={setMessengerVisibility}
-                chat={messengerVisibility}
+                createGameActionHandler={createGameActionHandler}
+                displaySettings={displaySettings}
+                setDisplaySettings={setDisplaySettings}
+                dispatchErrors={dispatchErrors}
+                socket={socket}
               />
-            </div>
-          </>
-        )
+            )}
+            {room.state.status === "Started" && (
+              <ActiveRoom
+                room={room}
+                createGameActionHandler={createGameActionHandler}
+                displaySettings={displaySettings}
+                setDisplaySettings={setDisplaySettings}
+              />
+            )}
+            {room.state.status === "Completed" && (
+              <GameCompletedroom
+                room={room}
+                createGameActionHandler={createGameActionHandler}
+                displaySettings={displaySettings}
+                setDisplaySettings={setDisplaySettings}
+              />
+            )}
+          </div>
+          <div id="messenger">
+            <Messenger
+              room={room}
+              className={messengerVisibility ? "visible" : "hidden"}
+              sendMessage={sendMessage}
+              handleErrors={dispatchErrors}
+              messages={messages}
+              setVisibility={setMessengerVisibility}
+              chat={messengerVisibility}
+            />
+          </div>
+        </>
+      )
       }
     </section >
   );

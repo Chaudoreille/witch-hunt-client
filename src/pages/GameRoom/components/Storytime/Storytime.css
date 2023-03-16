@@ -2,7 +2,6 @@
   width: 40%;
   color: var(--blue);
   padding: 0.8rem;
-  margin-bottom: 1rem;
   background-color: var(--white);
   border-radius: 12px;
   outline: 2px solid var(--blue);
@@ -27,10 +26,4 @@
 
 .Storytime .story span img {
   width: 100%;
-}
-
-@media(max-width:950px) {
-  .Storytime {
-    width: 100%;
-  }
 }
