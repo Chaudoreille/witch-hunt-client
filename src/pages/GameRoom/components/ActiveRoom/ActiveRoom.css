@@ -3,3 +3,14 @@
   flex-wrap: wrap;
   gap: 2rem;
 }
+
+.ActiveRoom .witches {
+  color: white;
+  display: flex;
+  justify-content: center;
+  gap: .5rem;
+}
+
+.ActiveRoom .witches img {
+  width: 15%;
+}

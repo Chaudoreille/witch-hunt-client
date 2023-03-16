@@ -24,7 +24,6 @@ function WaitingRoom({
   socket,
 }) {
   const { user } = useContext(AuthContext);
-  const [open, setOpen] = useState(false);
   const [roomEditFormValues, dispatchRoomEditFormValues] = useReducer(
     reducer,
     room
@@ -49,11 +48,10 @@ function WaitingRoom({
     setOpen(true);
   };
 
+
+
   return (
     <div className="WaitingRoom">
-
-
-
       <div className="waiting-section">
         <div className="room-header">
           {isOwner && (

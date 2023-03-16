@@ -7,7 +7,7 @@ import PlayerCard from "../PlayerCard/PlayerCard";
 import Button from "../../../../components/Button/Button";
 import ActionsBar from "../ActionsBar/ActionsBar";
 
-function ActiveRoom({ room, createGameActionHandler }) {
+function ActiveRoom({ room, createGameActionHandler, totalWitches, killed }) {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -41,6 +41,10 @@ function ActiveRoom({ room, createGameActionHandler }) {
       </div>
 
       <ActionsBar>
+        <div className="witches">
+          <img src="/images/witch.png" alt="witch hat" />
+          <p>{killed || 0}/{totalWitches}</p>
+        </div>
         {isAlive && isVoteCast && (
           <Button
             variant="primary"

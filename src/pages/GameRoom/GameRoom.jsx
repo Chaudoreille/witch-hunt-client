@@ -42,6 +42,7 @@ function GameRoom() {
   const [messages, setMessages] = useState([]);
   const [messengerVisibility, setMessengerVisibility] = useState(false);
   const [winners, setWinners] = useState("");
+  const [killedWitches, setKilledWitches] = useState(0)
 
   const { user, token } = useContext(AuthContext);
 
@@ -78,6 +79,7 @@ function GameRoom() {
       dispatchStory(room.state.storytime)
       dispatchTime(room.state.mode)
       setWinners(room.state.winners)
+      setKilledWitches(killed)
     });
 
     ioSocket.on("deleted-room", (message) => {
@@ -141,6 +143,11 @@ function GameRoom() {
     return background;
   }
 
+  /*Counting witches killed / total witches*/
+  const totalWitches = Math.floor((room?.state.players.length - 3) / 4 + 1)
+  const killed = room?.state.players.filter(player => player.status === "Dead" && player.role === "Witch").length;
+
+
   return (
     <section
       className="GameRoom"
@@ -182,6 +189,8 @@ function GameRoom() {
             )}
             {room.state.status === "Started" && (
               <ActiveRoom
+                totalWitches={totalWitches}
+                killedWitches={killed}
                 room={room}
                 createGameActionHandler={createGameActionHandler}
                 displaySettings={displaySettings}
