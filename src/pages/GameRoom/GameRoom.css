@@ -37,6 +37,8 @@
   justify-content: flex-end;
   height: 100%;
   margin-bottom: 1rem;
+  text-align: center;
+
 
 }
 
@@ -89,11 +91,15 @@
 
   .GameRoom .message-boxes {
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
-  .GameRoom .Storytime {
+  .GameRoom .message-boxes .Storytime,
+  .GameRoom .message-boxes .ErrorList {
     width: 100%;
   }
+
 
   .GameRoom #messenger {
     width: 100vw;

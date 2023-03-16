@@ -18,10 +18,11 @@
   align-items: center;
   font-family: "Acme";
   text-transform: uppercase;
+  gap: 1rem;
 }
 
 .Storytime .story span {
-  width: 10%;
+  width: 7%;
 }
 
 .Storytime .story span img {

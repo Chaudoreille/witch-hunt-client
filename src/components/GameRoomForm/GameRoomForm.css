@@ -18,10 +18,9 @@
 }
 
 .GameRoomForm .Input label,
-.Toggle {
+.GameRoomForm .Toggle {
   display: flex;
   flex-direction: column;
-  width: 20vmax;
   gap: .5rem;
   margin: 0;
 }
