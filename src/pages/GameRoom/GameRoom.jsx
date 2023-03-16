@@ -6,7 +6,7 @@ import ActiveRoom from "./components/ActiveRoom/ActiveRoom";
 import ErrorList from "../../components/ErrorList/ErrorList";
 import Storytime from "./components/Storytime/Storytime";
 import Loader from "../../components/Loader/Loader";
-import io from 'socket.io-client';
+import io from "socket.io-client";
 
 import "./GameRoom.css";
 import GameCompletedroom from "./components/GameCompletedRoom/GameCompletedroom";
@@ -36,7 +36,7 @@ function GameRoom() {
   const [room, setRoom] = useState(null);
   const [errors, dispatchErrors] = useReducer(errorReducer, []);
   const [story, dispatchStory] = useState(null);
-  const [time, dispatchTime] = useState("Daytime")
+  const [time, dispatchTime] = useState("Daytime");
   const [displaySettings, setDisplaySettings] = useState(false);
   const [socket, setSocket] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -74,8 +74,8 @@ function GameRoom() {
 
     ioSocket.on("update-room", (room) => {
       setRoom(room);
-      dispatchStory(room.state.storytime)
-      dispatchTime(room.state.mode)
+      dispatchStory(room.state.storytime);
+      dispatchTime(room.state.mode);
     });
 
     ioSocket.on("deleted-room", (message) => {
@@ -128,37 +128,45 @@ function GameRoom() {
   function bgImage() {
     if (room) {
       if (room.state.status === "Lobby") {
-        background = `url("/images/village-gradient.png")`
+        background = `url("/images/village-gradient.png")`;
       } else {
-        background = room.state.mode === "Daytime" ? `url("/images/day.png")` : `url("/images/night.png")`
+        background =
+          room.state.mode === "Daytime"
+            ? `url("/images/day.png")`
+            : `url("/images/night.png")`;
       }
     }
     return background;
   }
 
-
   return (
-    <section className="GameRoom" style={{
-      backgroundImage: bgImage()
-    }}>
+    <section
+      className="GameRoom"
+      style={{
+        backgroundImage: bgImage(),
+      }}
+    >
       <div className="message-boxes">
         {errors.length > 0 && (
-          <ErrorList messages={errors} closeAction={() => {
-            if (!room) {
-              navigate('/home');
-            } else {
-              dispatchErrors(null);
-            }
-          }} />
-        )
-        }
+          <ErrorList
+            messages={errors}
+            closeAction={() => {
+              if (!room) {
+                navigate("/home");
+              } else {
+                dispatchErrors(null);
+              }
+            }}
+          />
+        )}
         {room && story && (
           <Storytime story={story} time={time} status={room.state.status} />
         )}
       </div>
-      {!room ? (<Loader />) : (
+      {!room ? (
+        <Loader />
+      ) : (
         <>
-
           <div id="game">
             {room.state.status === "Lobby" && (
               <WaitingRoom
@@ -192,18 +200,15 @@ function GameRoom() {
               room={room}
               className={messengerVisibility ? "visible" : "hidden"}
               sendMessage={sendMessage}
-              handleErrors={dispatchErrors}
               messages={messages}
               setVisibility={setMessengerVisibility}
               chat={messengerVisibility}
             />
           </div>
         </>
-      )
-      }
-    </section >
+      )}
+    </section>
   );
 }
-
 
 export default GameRoom;

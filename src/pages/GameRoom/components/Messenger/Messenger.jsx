@@ -13,7 +13,6 @@ import QuestionAnswerOutlinedIcon from "@mui/icons-material/QuestionAnswerOutlin
  */
 function Messenger({
   room,
-  handleErrors,
   sendMessage,
   messages,
   className,
