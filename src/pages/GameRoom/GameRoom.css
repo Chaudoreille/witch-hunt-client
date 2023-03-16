@@ -67,9 +67,19 @@
 
 
 @media (max-width:950px) {
+<<<<<<< Updated upstream
   .GameRoom .ActionsBar {
     width: 100vw;
   }
+=======
+    .GameRoom .ActionsBar {
+        width: 100vw;
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding: 1rem 5rem;
+        height: max-content;
+    }
+>>>>>>> Stashed changes
 
   .GameRoom #game {
     width: calc(100vw - 4rem);

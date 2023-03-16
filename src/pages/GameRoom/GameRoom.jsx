@@ -129,6 +129,8 @@ function GameRoom() {
           }
         }} />
       )}
+
+
       {!room ? (<Loader />) : (
         <>
           <div id="game">

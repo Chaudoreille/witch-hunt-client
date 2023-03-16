@@ -101,3 +101,13 @@
 .PlayerCard.dead .card.front.witch.big {
   background-image: url("/images/cards/witch-card-death-2x.png");
 }
+
+@media (max-width:750px) {
+  .PlayerLobbyCard h6 {
+    font-size: 0.8rem;
+  }
+
+  .PlayerLobbyCard {
+    padding: 0.7rem;
+  }
+}
