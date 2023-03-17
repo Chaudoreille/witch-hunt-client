@@ -1,0 +1,2 @@
+# send all requests to / and let the app handle redirects
+/* /main.jsx 200
