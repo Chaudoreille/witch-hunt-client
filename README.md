@@ -18,7 +18,7 @@ The game is played in two phases - Daytime and Nighttime. During the day, everyo
 
 You can indicate your intention to vote for a person by clicking on their card. Once you are certain that you made the right choice, you can lock your vote.
 
-After all votes have been counted, if there is a clear winner of the vote, that person will be killed off (they cannot participate in the game any longer), and the Night begins. If there is a tie, no one dies, and the Night begins with the same amount of players as the previous round,
+After all votes have been counted, if there is a clear winner of the vote, that person will be killed off (they cannot participate in the game any longer), and the Night begins. If there is a tie, no one dies, and the Night begins with the same amount of players as the previous round.
 
 During the night, Witches can see which other players are also a Witch (if any), and they will be able to vote again. They will not be able to talk in the chat, but they can see who the other Witches are voting for (and whether their vote is locked in yet or not). After all witches have voted, the person with the most votes is killed off, and the day begins. Again, in the case of a tie, no one dies.
 
@@ -34,4 +34,9 @@ Witch Hunt was developed by
 
 ## Acknowledgements & Attributions
 
-...
+Free background images found online that were used in this application:
+
+https://best-wallpaper.net/Art-painting-Middle-Ages-ancient-city_wallpapers.html
+https://wallhere.com/en/wallpaper/546938
+
+Other art pieces created by [Delfina Marchetti](https://github.com/dolphinstreet)
