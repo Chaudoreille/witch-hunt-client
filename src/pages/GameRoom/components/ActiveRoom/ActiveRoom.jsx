@@ -18,7 +18,7 @@ function ActiveRoom({ room, createGameActionHandler, totalWitches, killed }) {
     if (opponent._id === player._id || opponent.status === "Dead") {
       return true;
     }
-    if (room.state.mode == "Nighttime") {
+    if (room.state.mode === "Nighttime") {
       if (opponent.role === "Witch" && canSeeWitchesAtNight.includes(player.role)) {
         return true;
       }
@@ -49,7 +49,7 @@ function ActiveRoom({ room, createGameActionHandler, totalWitches, killed }) {
               }
               return voter.vote.target === cardPlayer.user._id;
             })}
-            isRoleVisible={roleVisibility(player)}
+            isRoleVisible={roleVisibility(cardPlayer)}
           />
         ))}
       </div>
