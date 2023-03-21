@@ -166,6 +166,7 @@
   background-image: url("/images/cards/card-back.png");
 }
 
+/* Villager images */
 .PlayerCard .card .front.bg.villager.alive {
   background-image: url("/images/cards/villager-card-classic.png");
 }
@@ -174,20 +175,31 @@
   background-image: url("/images/cards/villager-card-death-.png");
 }
 
-.PlayerCard .card .front.bg.witch.alive {
-  background-image: url("/images/cards/witch-card-classic.png");
-}
-
-.PlayerCard .card .front.bg.witch.dead {
-  background-image: url("/images/cards/witch-card-death-.png");
-}
-
 .PlayerCard.big .card .front.bg.villager.alive {
   background-image: url("public//images/cards/villager-card-classic@2x.png");
 }
 
 .PlayerCard.big .card .front.bg.villager.dead {
   background-image: url("/images/cards/villager-card-death-2x.png");
+}
+
+/* Little Girl images */
+.PlayerCard .card .front.bg.girl.alive {
+  background-image: url("/images/cards/teddy.webp");
+}
+
+.PlayerCard .card .front.bg.girl.dead {
+  background-image: url("/images/cards/teddy.webp");
+  transform: rotate(180deg);
+}
+
+/* Witch images */
+.PlayerCard .card .front.bg.witch.alive {
+  background-image: url("/images/cards/witch-card-classic.png");
+}
+
+.PlayerCard .card .front.bg.witch.dead {
+  background-image: url("/images/cards/witch-card-death-.png");
 }
 
 .PlayerCard.big .card .front.bg.witch.alive {
