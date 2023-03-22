@@ -44,7 +44,7 @@ function ActiveRoom({ room, createGameActionHandler, totalWitches, killed }) {
             onClick={createGameActionHandler("castVote", [cardPlayer.user._id])}
             className={cardPlayer.status.toLowerCase()}
             votes={room.state.players.filter(voter => {
-              if (room.state.mode === "Nighttime" && player.role !== "Witch") {
+              if (room.state.mode === "Nighttime" && player.role !== voter.role) {
                 return false;
               }
               return voter.vote.target === cardPlayer.user._id;
