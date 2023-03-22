@@ -203,6 +203,15 @@
   background-image: url("/images/cards/girl-card-dead.png");
 }
 
+/* Priest images */
+.PlayerCard .card .front.bg.priest.alive {
+  background-image: url("/images/cards/priest-card-classic.png");
+}
+
+.PlayerCard .card .front.bg.priest.dead {
+  background-image: url("/images/cards/priest-card-dead.png");
+}
+
 /* Witch images */
 .PlayerCard .card .front.bg.witch.alive {
   background-image: url("/images/cards/witch-card-classic.png");
