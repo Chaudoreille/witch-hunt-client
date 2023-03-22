@@ -26,8 +26,7 @@
 
 .Button.secondary {
     background: transparent;
-    outline: 3px solid var(--borderButton);
-    outline-offset: -3px;
+    box-shadow: 0 0 0 3px var(--borderButton);
 }
 
 .Button.primary:hover,
@@ -36,8 +35,7 @@
 }
 
 .Button.secondary:hover {
-    outline: 3px solid var(--borderButtonHover);
-    outline-offset: -3px;
+    box-shadow: 0 0 0 3px var(--borderButtonHover);
 }
 
 .Button.small {

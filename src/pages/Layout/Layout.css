@@ -23,7 +23,7 @@ nav .Button.logout {
   width: max-content;
   margin-right: 1rem;
   padding: 0 1rem;
-  outline: 2px solid var(--borderButton);
+  box-shadow: 0 0 0 2px var(--borderButton);
 }
 
 nav .actions-nav {

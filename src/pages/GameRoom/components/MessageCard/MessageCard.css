@@ -22,7 +22,7 @@
 }
 
 .MessageCard.received .ProfilePicture {
-    outline: 2px solid var(--blue);
+    box-shadow: 0 0 0 2px var(--blue);
 }
 
 .MessageCard .column {

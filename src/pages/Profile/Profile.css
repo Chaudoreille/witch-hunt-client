@@ -34,7 +34,7 @@
 }
 
 .Profile .ProfilePicture {
-    outline: 3px solid var(--white);
+    box-shadow: 0 0 0 3px var(--white);
     transform: scale(3);
 }
 
@@ -70,7 +70,7 @@
     border-radius: 100vw;
     background-color: var(--grey);
     color: var(--white);
-    outline: 5px solid var(--white);
+    box-shadow: 0 0 0 5px var(--white);
     border: none;
 }
 

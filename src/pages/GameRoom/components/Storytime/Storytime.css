@@ -4,7 +4,7 @@
   padding: 0.8rem;
   background-color: var(--white);
   border-radius: 12px;
-  outline: 2px solid var(--blue);
+  box-shadow: 0 0 0 2px var(--blue);
   display: flex;
   align-self: end;
   justify-content: center;
