@@ -11,7 +11,7 @@
 }
 
 .PlayerLobbyCard .ProfilePicture {
-  outline: 2px solid var(--white);
+  box-shadow: 0 0 0 2px var(--white);
   scale: 0.8;
 }
 
@@ -51,7 +51,7 @@
   gap: 1vh;
   color: var(--white);
   border-radius: 15px;
-  outline: 4px solid var(--white);
+  box-shadow: 0 0 0 4px var(--white);
   width: 100%;
   padding: 0.5rem;
   background-color: var(--darkGrey);
@@ -59,7 +59,7 @@
 }
 
 .PlayerCard .user-info.me {
-  outline: 4px solid var(--blue);
+  box-shadow: 0 0 0 4px var(--blue);
   background-color: var(--white);
 }
 
@@ -117,11 +117,12 @@
 .PlayerCard .ProfilePicture.vote {
   height: 1.5vh;
   scale: 2;
-  outline: 1px solid white;
+  box-shadow: 0 0 0 1px var(--white);
 }
 
 .PlayerCard .locked .ProfilePicture.vote {
-  outline: 1px solid rgb(83, 77, 77);
+  box-shadow: 0 0 0 1px rgb(83, 77, 77);
+  ;
 }
 
 .PlayerCard .ProfilePicture.vote .inner-border {
@@ -223,8 +224,6 @@
   .PlayerCard .card .ProfilePicture {
     scale: 0.9;
   }
-
-  .PlayerCard .card .ProfilePicture.vote {}
 
   .PlayerCard .card h6 {
     font-size: 0.8rem;

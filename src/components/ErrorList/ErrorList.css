@@ -5,7 +5,7 @@
   margin-bottom: 1rem;
   background-color: var(--white);
   border-radius: 12px;
-  outline: 2px solid var(--errorsRed);
+  box-shadow: 0 0 0 2px var(--errorsRed);
   display: flex;
   flex-direction: column;
   justify-content: center;
