@@ -5,9 +5,10 @@ const ProfilePicture = ({ user, title, className }) => {
 
   return (
     <>
-      <div className={`ProfilePicture ${className || ""}`}>
+      <div className={`ProfilePicture ${className || ""} ${title && "tooltip"}`}>
+        <span className="tooltiptext">{title || ""}</span>
         <div className='inner-border'>
-          <img src={user.image} alt={user.username} title={title || ""} />
+          <img src={user.image} alt={user.username} />
         </div>
       </div>
     </>
