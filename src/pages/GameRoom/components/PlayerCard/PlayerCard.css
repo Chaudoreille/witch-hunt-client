@@ -58,7 +58,11 @@
   padding: 0.4rem;
   background-color: var(--darkGrey);
   position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: fade(100%);
 }
+
 
 .PlayerCard .user-info.me {
   background-color: var(--white);
@@ -67,8 +71,6 @@
 
 .PlayerCard .user-info h6 {
   font-size: clamp(11px, 1vw, 2vw);
-  word-break: break-all;
-
 }
 
 .PlayerCard .card-wrapper .content {
