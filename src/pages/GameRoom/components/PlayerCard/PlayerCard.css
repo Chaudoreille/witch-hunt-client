@@ -185,12 +185,11 @@
 
 /* Little Girl images */
 .PlayerCard .card .front.bg.girl.alive {
-  background-image: url("/images/cards/teddy.webp");
+  background-image: url("/images/cards/girl-card-classic.png");
 }
 
 .PlayerCard .card .front.bg.girl.dead {
-  background-image: url("/images/cards/teddy.webp");
-  transform: rotate(180deg);
+  background-image: url("/images/cards/girl-card-dead.png");
 }
 
 /* Witch images */
