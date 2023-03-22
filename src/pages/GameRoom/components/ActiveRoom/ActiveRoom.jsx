@@ -10,8 +10,21 @@ import ActionsBar from "../ActionsBar/ActionsBar";
 function ActiveRoom({ room, createGameActionHandler, totalWitches, killed }) {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-
   const player = room.state.players.find(player => player.user._id === user._id);
+
+  function roleVisibility(opponent) {
+    const canSeeWitchesAtNight = ["Witch", "Girl"];
+
+    if (opponent._id === player._id || opponent.status === "Dead") {
+      return true;
+    }
+    if (room.state.mode === "Nighttime") {
+      if (opponent.role === "Witch" && canSeeWitchesAtNight.includes(player.role)) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   // People that are not participating in the game cannot view the games actions
   if (!player) return navigate("/home");
@@ -36,7 +49,7 @@ function ActiveRoom({ room, createGameActionHandler, totalWitches, killed }) {
               }
               return voter.vote.target === cardPlayer.user._id;
             })}
-            isRoleVisible={room.state.mode === "Nighttime" && cardPlayer.role === "Witch" && player.role === "Witch"}
+            isRoleVisible={roleVisibility(cardPlayer)}
           />
         ))}
       </div>

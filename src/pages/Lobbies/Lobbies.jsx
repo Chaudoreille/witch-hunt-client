@@ -6,7 +6,6 @@ import "./Lobbies.css";
 import debounce from "../../utils/debounce";
 import GameCardList from "../../components/GameCardList/GameCardList";
 import Input from "../../components/Input/Input";
-import Button from "../../components/Button/Button";
 import ButtonLink from "../../components/Button/ButtonLink";
 import ErrorList from "../../components/ErrorList/ErrorList";
 import Toggle from "../../components/Toggle/Toggle";
@@ -22,8 +21,8 @@ function Lobbies() {
   const [errors, setErrors] = useState([]);
 
   function handleFilter(event) {
-    const { name } = event.target;
-    setFilters((oldFilters) => ({ ...oldFilters, [name]: event.target.value }));
+    const { name, value } = event.target;
+    setFilters((oldFilters) => ({ ...oldFilters, [name]: value }));
   }
 
   const toggleOwner = useCallback(() => {

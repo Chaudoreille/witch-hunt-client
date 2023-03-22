@@ -13,8 +13,6 @@ function PlayerCard({ player, onClick, className, votes, isRoleVisible }) {
   useEffect(() => {
     if (isRoleVisible) {
       setRole(player.role.toLowerCase());
-    } else if (player.user._id === user._id || player.status === "Dead") {
-      setRole(player.role.toLowerCase());
     } else {
       setRole("hidden");
     }
