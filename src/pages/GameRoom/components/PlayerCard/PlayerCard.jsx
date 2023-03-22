@@ -3,7 +3,7 @@ import { AuthContext } from "../../../../context/AuthContext";
 import "./PlayerCard.css";
 import LockIcon from "@mui/icons-material/Lock";
 import ProfilePicture from "../../../../components/ProfilePicture/ProfilePicture";
-
+import PlayerLobbyCard from "../../components/PlayerCard/PlayerLobbyCard"
 
 function PlayerCard({ player, onClick, className, votes, isRoleVisible }) {
   const { user } = useContext(AuthContext);
@@ -26,9 +26,10 @@ function PlayerCard({ player, onClick, className, votes, isRoleVisible }) {
       if (!onClick) return;
       onClick(event);
     }}>
-      <div className={`user-info ${player.user._id === user._id ? "me" : ""}`}>
+      {/* <div className={`user-info ${player.user._id === user._id ? "me" : ""}`}>
         <ProfilePicture user={player.user} title={player.user.username} />
-      </div>
+      </div> */}
+      <PlayerLobbyCard player={player} className={`user-info ${player.user._id === user._id ? "me" : ""}`} />
       <div className="card-wrapper">
         <div className="card">
           <div className={`bg back`} />

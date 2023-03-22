@@ -20,6 +20,8 @@
   font-size: 1rem;
 }
 
+
+
 .PlayerCard {
   display: flex;
   flex-direction: column;
@@ -31,7 +33,7 @@
 }
 
 .PlayerCard .card-wrapper {
-  width: 15vh !important;
+  width: 18vh !important;
   aspect-ratio: 182/270 !important;
   display: flex;
   flex-direction: column;
@@ -43,24 +45,30 @@
   cursor: default;
 }
 
+.PlayerCard .ProfilePicture {
+  scale: 0.6
+}
+
 .PlayerCard .user-info {
-  display: flex;
   margin-top: 0.5vh;
-  flex-direction: column;
-  align-items: center;
-  gap: 1vh;
   color: var(--white);
   border-radius: 15px;
-  box-shadow: 0 0 0 4px var(--white);
-  width: 100%;
-  padding: 0.5rem;
+  width: 18vh;
+  gap: 0.2rem;
+  padding: 0.4rem;
   background-color: var(--darkGrey);
   position: relative;
 }
 
 .PlayerCard .user-info.me {
-  box-shadow: 0 0 0 4px var(--blue);
   background-color: var(--white);
+  color: var(--darkGrey);
+}
+
+.PlayerCard .user-info h6 {
+  font-size: clamp(11px, 1vw, 2vw);
+  word-break: break-all;
+
 }
 
 .PlayerCard .card-wrapper .content {
