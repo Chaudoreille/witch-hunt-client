@@ -67,7 +67,7 @@
   flex-direction: column;
   right: 2rem;
   bottom: 1rem;
-  z-index: 10
+  z-index: 9;
 }
 
 .GameRoom .row {
