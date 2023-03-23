@@ -15,11 +15,15 @@
   scale: 0.8;
 }
 
+
+
 .PlayerLobbyCard h6 {
   font-weight: 400;
   font-size: 1rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100%;
 }
-
 
 
 .PlayerCard {
@@ -54,13 +58,10 @@
   color: var(--white);
   border-radius: 15px;
   width: 18vh;
-  gap: 0.2rem;
+  gap: 3px;
   padding: 0.4rem;
   background-color: var(--darkGrey);
   position: relative;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: fade(100%);
 }
 
 
@@ -70,7 +71,7 @@
 }
 
 .PlayerCard .user-info h6 {
-  font-size: clamp(11px, 1vw, 2vw);
+  font-size: clamp(11px, 0.8vw, 1.3vw);
 }
 
 .PlayerCard .card-wrapper .content {
