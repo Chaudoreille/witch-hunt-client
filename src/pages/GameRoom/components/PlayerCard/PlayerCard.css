@@ -11,7 +11,7 @@
 }
 
 .PlayerLobbyCard .ProfilePicture {
-  box-shadow: 0 0 0 2px var(--white);
+  box-shadow: 0 0 0 1px var(--white);
   scale: 0.8;
 }
 
@@ -50,15 +50,20 @@
 }
 
 .PlayerCard .ProfilePicture {
-  scale: 0.6
+  scale: 1;
+  height: 85%;
+  margin-left: 2px;
 }
+
+
+
 
 .PlayerCard .user-info {
   margin-top: 0.5vh;
   color: var(--white);
   border-radius: 15px;
   width: 18vh;
-  gap: 3px;
+  gap: 0.5rem;
   padding: 0.4rem;
   background-color: var(--darkGrey);
   position: relative;
