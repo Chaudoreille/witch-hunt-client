@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Chaudoreille/witch-hunt-client/main/public/images/witch-run_logo.png" alt="witch hunt logo" />
+</div>
+
 # 🧙🏻 Witch Hunt
 
 Witch hunt was developed within 1.5 weeks as the final project for the [Ironhack](https://www.ironhack.com/) web development bootcamp.
