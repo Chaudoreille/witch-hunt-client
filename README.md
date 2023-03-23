@@ -1,4 +1,4 @@
-# Witch Hunt
+# 🧙🏻 Witch Hunt
 
 Witch hunt was developed within 1.5 weeks as the final project for the [Ironhack](https://www.ironhack.com/) web development bootcamp.
 
