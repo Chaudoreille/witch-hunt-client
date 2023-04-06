@@ -11,30 +11,26 @@ import io from "socket.io-client";
 import "./GameRoom.css";
 import GameCompletedroom from "./components/GameCompletedRoom/GameCompletedroom";
 import Messenger from "./components/Messenger/Messenger";
-
-/**
- * Adds errorMessage to the list of errors.
- * Handing it null instead of a String will
- * reset the error list to an empty list
- * @param {Array} existingErrors
- * @param {String} errorMessage
- * @returns
- */
-function errorReducer(existingErrors, errorMessage) {
-  if (errorMessage === null) return [];
-
-  if (!existingErrors.includes(errorMessage))
-    return [...existingErrors, errorMessage];
-  return existingErrors;
-}
+import { SoundManagerContext } from "../../context/SoundManagerContext";
 
 /**
  * Will get the room data and then display either the active gameroom or the waiting room, depending on
  * the current state of the game
  */
 function GameRoom() {
+  const { playSoundEffect, stopMusic } = useContext(SoundManagerContext);
   const [room, setRoom] = useState(null);
-  const [errors, dispatchErrors] = useReducer(errorReducer, []);
+  const [errors, dispatchErrors] = useReducer(
+    (existingErrors, errorMessage) => {
+      if (errorMessage === null) return [];
+
+      playSoundEffect("error");
+      if (!existingErrors.includes(errorMessage))
+        return [...existingErrors, errorMessage];
+      return existingErrors;
+    },
+    []
+  );
   const [story, dispatchStory] = useState(null);
   const [time, dispatchTime] = useState("Daytime");
   const [displaySettings, setDisplaySettings] = useState(false);
@@ -48,6 +44,7 @@ function GameRoom() {
 
   const { roomId } = useParams();
   const navigate = useNavigate();
+
   /**
    * Create Socket for real-time communication
    */
@@ -72,6 +69,11 @@ function GameRoom() {
 
     ioSocket.on("message", (message) => {
       setMessages((oldMessages) => [...oldMessages, message]);
+      if (message.author._id === user._id) {
+        playSoundEffect("messageSent");
+      } else {
+        playSoundEffect("messageReceived");
+      }
     });
 
     ioSocket.on("update-room", (room) => {
@@ -97,6 +99,12 @@ function GameRoom() {
       ioSocket.emit("end");
     };
   }, [roomId]);
+
+  useEffect(() => {
+    return () => {
+      stopMusic();
+    };
+  }, []);
 
   function sendMessage(message) {
     socket.emit("message", message);
@@ -145,8 +153,9 @@ function GameRoom() {
 
   /*Counting witches killed / total witches*/
   const totalWitches = Math.floor((room?.state.players.length - 3) / 4 + 1);
-  const killed = room?.state.players.filter(player => player.status === "Dead" && player.role === "Witch").length;
-
+  const killed = room?.state.players.filter(
+    (player) => player.status === "Dead" && player.role === "Witch"
+  ).length;
 
   return (
     <section
@@ -187,7 +196,8 @@ function GameRoom() {
                 socket={socket}
               />
             )}
-            {(room.state.status === "Started" || room.state.status === "Completed") && (
+            {(room.state.status === "Started" ||
+              room.state.status === "Completed") && (
               <ActiveRoom
                 totalWitches={totalWitches}
                 killedWitches={killed}
@@ -195,6 +205,7 @@ function GameRoom() {
                 createGameActionHandler={createGameActionHandler}
                 displaySettings={displaySettings}
                 setDisplaySettings={setDisplaySettings}
+                dispatchErrors={dispatchErrors}
               />
             )}
             {room.state.status === "Completed" && (

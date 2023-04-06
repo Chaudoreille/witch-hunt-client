@@ -1,16 +1,32 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../../context/AuthContext";
+import { SoundManagerContext } from "../../../../context/SoundManagerContext";
+
 import "./ActiveRoom.css";
 
 import PlayerCard from "../PlayerCard/PlayerCard";
 import Button from "../../../../components/Button/Button";
 import ActionsBar from "../ActionsBar/ActionsBar";
 
-function ActiveRoom({ room, createGameActionHandler, totalWitches, killed }) {
+function ActiveRoom({
+  room,
+  createGameActionHandler,
+  totalWitches,
+  killed,
+  dispatchErrors,
+}) {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-  const player = room.state.players.find(player => player.user._id === user._id);
+  const { playSoundEffect, playMusicTrack } = useContext(SoundManagerContext);
+
+  useEffect(() => {
+    playMusicTrack(room.state.mode.toLowerCase());
+  }, [room.state.mode]);
+
+  const player = room.state.players.find(
+    (player) => player.user._id === user._id
+  );
 
   function roleVisibility(opponent) {
     const canSeeWitchesAtNight = ["Witch", "Girl"];
@@ -19,7 +35,10 @@ function ActiveRoom({ room, createGameActionHandler, totalWitches, killed }) {
       return true;
     }
     if (room.state.mode === "Nighttime") {
-      if (opponent.role === "Witch" && canSeeWitchesAtNight.includes(player.role)) {
+      if (
+        opponent.role === "Witch" &&
+        canSeeWitchesAtNight.includes(player.role)
+      ) {
         return true;
       }
     }
@@ -41,10 +60,23 @@ function ActiveRoom({ room, createGameActionHandler, totalWitches, killed }) {
           <PlayerCard
             key={`PlayerCard-${cardPlayer.user._id}`}
             player={cardPlayer}
-            onClick={createGameActionHandler("castVote", [cardPlayer.user._id])}
+            onClick={createGameActionHandler(
+              "castVote",
+              [cardPlayer.user._id],
+              (error) => {
+                if (error) {
+                  dispatchErrors(error);
+                } else {
+                  playSoundEffect("castVote");
+                }
+              }
+            )}
             className={cardPlayer.status.toLowerCase()}
-            votes={room.state.players.filter(voter => {
-              if (room.state.mode === "Nighttime" && player.role !== voter.role) {
+            votes={room.state.players.filter((voter) => {
+              if (
+                room.state.mode === "Nighttime" &&
+                player.role !== voter.role
+              ) {
                 return false;
               }
               return voter.vote.target === cardPlayer.user._id;
@@ -57,12 +89,20 @@ function ActiveRoom({ room, createGameActionHandler, totalWitches, killed }) {
       <ActionsBar>
         <div className="witches">
           <img src="/images/witch.png" alt="witch hat" />
-          <p>{killed || 0}/{totalWitches}</p>
+          <p>
+            {killed || 0}/{totalWitches}
+          </p>
         </div>
         {isAlive && isVoteCast && (
           <Button
             variant="primary"
-            action={createGameActionHandler("lockVote")}
+            action={createGameActionHandler("lockVote", [], (error) => {
+              if (error) {
+                dispatchErrors(error);
+              } else {
+                playSoundEffect("lockVote");
+              }
+            })}
           >
             Lock Your Vote
           </Button>
@@ -70,6 +110,6 @@ function ActiveRoom({ room, createGameActionHandler, totalWitches, killed }) {
       </ActionsBar>
     </div>
   );
-};
+}
 
 export default ActiveRoom;
