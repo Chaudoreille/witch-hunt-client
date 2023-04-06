@@ -14,22 +14,6 @@ import Messenger from "./components/Messenger/Messenger";
 import { SoundManagerContext } from "../../context/SoundManagerContext";
 
 /**
- * Adds errorMessage to the list of errors.
- * Handing it null instead of a String will
- * reset the error list to an empty list
- * @param {Array} existingErrors
- * @param {String} errorMessage
- * @returns
- */
-function errorReducer(existingErrors, errorMessage) {
-  if (errorMessage === null) return [];
-
-  if (!existingErrors.includes(errorMessage))
-    return [...existingErrors, errorMessage];
-  return existingErrors;
-}
-
-/**
  * Will get the room data and then display either the active gameroom or the waiting room, depending on
  * the current state of the game
  */
